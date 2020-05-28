@@ -1,0 +1,27 @@
+project:
+  name: quickstart-qingcloud-kubesphere
+  owner: quickstart-eng@amazon.com
+  regions:
+  - us-east-1
+  - ap-east-1
+  - ap-northeast-1
+  - ap-south-1
+  - ap-southeast-1
+  - eu-west-1
+  - eu-west-2
+  - eu-west-3
+  - me-south-1
+  - sa-east-1
+  template: templates/kubesphere-master.template.yaml
+  parameters:
+    RemoteAccessCIDR: 0.0.0.0/0
+    QSS3BucketName: qs-testing-ameighta
+    QSS3BucketRegion: $[taskcat_current_region]
+    #KubeSphereLicenseKey: OVERRIDE
+tests:
+  defaults:
+    parameters:
+      AvailabilityZones: $[taskcat_genaz_3]
+    regions:
+    - us-east-1
+    - us-west-2
