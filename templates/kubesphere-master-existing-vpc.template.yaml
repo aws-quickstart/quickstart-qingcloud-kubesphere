@@ -43,6 +43,7 @@ Metadata:
       - Servicemesh
       - Notification
       - Alerting
+      - Logging
     ParameterLabels:
       KeyPairName:
         default: SSH key name
@@ -96,6 +97,8 @@ Metadata:
         default: Notification
       Alerting:
         default: Alerting
+      Logging:
+        default: Logging
 Parameters:
   KeyPairName:
     Description: The name of an existing public/private key pair, which allows you
@@ -263,6 +266,11 @@ Parameters:
     AllowedValues: [true, false]
     Default: false
     Description: '[OPTIONAL] Triggers alerts for any abnormal status of resources or workloads in multi-tenant Kubernetes environment.'
+  Logging:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] The KubeSphere logging system is comprised of many components that work together to achieve unified log management.'  
 Resources:
   EKSStack:
     Type: AWS::CloudFormation::Stack
@@ -300,7 +308,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.amazonaws.com/ks/templates/kubesphere.template.yaml'
+        - 'https://${S3Bucket}.s3.${S3Region}.amazonaws.com/${QSS3KeyPrefix}templates/kubesphere.template.yaml'
         - S3Region: !Ref QSS3BucketRegion
           S3Bucket: !Ref QSS3BucketName
       Parameters:
@@ -314,6 +322,7 @@ Resources:
         Servicemesh: !Ref Servicemesh
         Notification: !Ref Notification
         Alerting: !Ref Alerting
+        Logging: !Ref Logging
    #     KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 Outputs:
   KubeConfigPath:
