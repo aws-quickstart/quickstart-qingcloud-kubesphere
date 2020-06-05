@@ -22,6 +22,8 @@ Parameters:
     Type: String
   Alerting:
     Type: String
+  logging:
+    Type: String
   #KubeSphereLicenseKey:
   # Type: String
   #NoEcho: true
@@ -86,7 +88,7 @@ Resources:
               grafana:
                 enabled: False
             logging:
-              enabled: False
+              enabled: ${Logging}
               elasticsearchMasterReplicas: 1
               elasticsearchDataReplicas: 1
               logsidecarReplicas: 2

@@ -44,6 +44,7 @@ Metadata:
       - Servicemesh
       - Notification
       - Alerting
+      - Logging
     ParameterLabels:
       AvailabilityZones:
         default: Availability Zones
@@ -99,6 +100,8 @@ Metadata:
         default: Notification
       Alerting:
         default: Alerting
+      Logging:
+        default: Logging
 Parameters:
   AvailabilityZones:
     Description: List of Availability Zones to use for the subnets in the VPC. Three
@@ -264,29 +267,34 @@ Parameters:
     Description: The Kubernetes control plane version.
   Openpitrix:
     Type: String
-    AllowedValues: ["true", "false"]
-    Default: "false"
+    AllowedValues: [true, false]
+    Default: false
     Description: '[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.'
   Devops:
     Type: String
-    AllowedValues: ["true", "false"]
-    Default: "false"
+    AllowedValues: [true, false]
+    Default: false
     Description: '[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).'
   Servicemesh:
     Type: String
-    AllowedValues: ["true", "false"]
-    Default: "false"
+    AllowedValues: [true, false]
+    Default: false
     Description: '[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.'
   Notification:
     Type: String
-    AllowedValues: ["true", "false"]
-    Default: "false"
+    AllowedValues: [true, false]
+    Default: false
     Description: '[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.'
   Alerting:
     Type: String
-    AllowedValues: ["true", "false"]
-    Default: "false"
+    AllowedValues: [true, false]
+    Default: false
     Description: '[OPTIONAL] Triggers alerts for any abnormal status of resources or workloads in multi-tenant Kubernetes environment.'
+  Logging:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] The KubeSphere logging system is comprised of many components that work together to achieve unified log management.'
   #KubeSphereLicenseKey:
   #  Type: String
   #  NoEcho: true
@@ -349,7 +357,7 @@ Resources:
     Properties:
       TemplateURL:
         !Sub
-          - 'https://${S3Bucket}.s3.${S3Region}.amazonaws.com/ks/templates/kubesphere.template.yaml'
+          - 'https://${S3Bucket}.s3.${S3Region}.amazonaws.com/${QSS3KeyPrefix}templates/kubesphere.template.yaml'
           - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
             S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
@@ -363,6 +371,7 @@ Resources:
         Servicemesh: !Ref Servicemesh
         Notification: !Ref Notification
         Alerting: !Ref Alerting
+        Logging: !Ref Logging
         #KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 
 Outputs:
