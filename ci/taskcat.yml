@@ -1,0 +1,16 @@
+global:
+  marketplace-ami: false
+  owner: quickstart-eng@amazon.com
+  qsname: quickstart-qingcloud-kubesphere
+  lambda_source_path: functions/source
+  lambda_zip_path: functions/packages
+  regions:
+    - eu-west-1
+    - us-east-2
+    - us-west-2
+  reporting: true
+
+tests:
+  qingcloud-kubesphere-defaults:
+    parameter_input: defaults.json
+    template_file: kubesphere-master.template.yaml
