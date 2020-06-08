@@ -18,5 +18,33 @@
     {
         "ParameterKey": "KubeSphereLicenseKey",
         "ParameterValue": "OVERRIDE"
-    }
+    },
+    {
+        "ParameterKey": "NodeInstanceType",
+        "ParameterValue": "t3.xlarge"
+    },
+    {
+        "ParameterKey": "Openpitrix",
+        "ParameterValue": false
+    },
+    {
+        "ParameterKey": "Devops",
+        "ParameterValue": false
+    },
+    {
+        "ParameterKey": "Servicemesh",
+        "ParameterValue": false
+    },  
+    {
+        "ParameterKey": "Notification",
+        "ParameterValue": false
+    },
+    {
+        "ParameterKey": "Alerting",
+        "ParameterValue": false
+    },
+    {
+        "ParameterKey": "Logging",
+        "ParameterValue": false
+    }       
 ]
