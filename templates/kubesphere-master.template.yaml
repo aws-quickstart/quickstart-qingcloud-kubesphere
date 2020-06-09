@@ -316,7 +316,10 @@ Resources:
         PrivateSubnet1ACIDR: !Ref 'PrivateSubnet1CIDR'
         PrivateSubnet2ACIDR: !Ref 'PrivateSubnet2CIDR'
         PrivateSubnet3ACIDR: !Ref 'PrivateSubnet3CIDR'
-        PrivateSubnetATag2: !Sub "kubernetes.io/cluster/${AWS::StackName}-${AWS::Region}=owned"
+        #PrivateSubnetATag2: !Sub "kubernetes.io/cluster/${AWS::StackName}-${AWS::Region}=owned"
+        PrivateSubnetATag2: !Sub
+          - 'kubernetes.io/cluster/${X}-${AWS::Region}=owned'
+          - X: !Select [2, !Split ["/", !Ref 'AWS::StackId' ]]
         PublicSubnet1CIDR: !Ref 'PublicSubnet1CIDR'
         PublicSubnet2CIDR: !Ref 'PublicSubnet2CIDR'
         PublicSubnet3CIDR: !Ref 'PublicSubnet3CIDR'
