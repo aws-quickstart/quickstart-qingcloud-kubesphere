@@ -22,7 +22,7 @@ Parameters:
     Type: String
   Alerting:
     Type: String
-  logging:
+  Logging:
     Type: String
   #KubeSphereLicenseKey:
   # Type: String
