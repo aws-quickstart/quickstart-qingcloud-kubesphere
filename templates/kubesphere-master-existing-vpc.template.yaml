@@ -312,11 +312,9 @@ Resources:
         - S3Region: !Ref QSS3BucketRegion
           S3Bucket: !Ref QSS3BucketName
       Parameters:
-        KubeManifestLambdaArn: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
         KubeConfigPath: !GetAtt EKSStack.Outputs.KubeConfigPath
         KubeConfigKmsContext: "EKSQuickStart"
-        KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
-        KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
+        ClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
         Openpitrix: !Ref Openpitrix
         Devops: !Ref Devops
         Servicemesh: !Ref Servicemesh

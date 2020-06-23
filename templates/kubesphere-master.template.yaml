@@ -319,7 +319,7 @@ Resources:
         #PrivateSubnetATag2: !Sub "kubernetes.io/cluster/${AWS::StackName}-${AWS::Region}=owned"
         PrivateSubnetATag2: !Sub
           - 'kubernetes.io/cluster/${X}-${AWS::Region}=owned'
-          - X: !Select [2, !Split ["/", !Ref 'AWS::StackId' ]]
+          - X: !Select [1, !Split ["-", !Ref 'AWS::StackName' ]]
         PublicSubnet1CIDR: !Ref 'PublicSubnet1CIDR'
         PublicSubnet2CIDR: !Ref 'PublicSubnet2CIDR'
         PublicSubnet3CIDR: !Ref 'PublicSubnet3CIDR'
@@ -364,10 +364,8 @@ Resources:
           - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
             S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
-        KubeManifestLambdaArn: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
-        EKSClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
+        ClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
         KubeConfigKmsContext: "EKSQuickStart"
-        KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
         Openpitrix: !Ref Openpitrix
         Devops: !Ref Devops
         Servicemesh: !Ref Servicemesh

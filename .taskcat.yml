@@ -1,12 +1,22 @@
 project:
   name: quickstart-qingcloud-kubesphere
   owner: quickstart-eng@amazon.com
-  package_lambda: false
+  build_submodules: true
+  package_lambda: true
   regions:
   - eu-west-1
   - us-east-2
   - us-west-2
+  - us-east-1
+  - cn-north-1
+  - cn-northwest-1
   s3_bucket: ''
+  parameters:
+    RemoteAccessCIDR: 10.0.0.0/16
+    QSS3BucketName: $[taskcat_autobucket]
+    QSS3BucketRegion: $[taskcat_current_region]
+  lambda_source_path: functions/source
+  lambda_zip_path: functions/packages
 tests:
   qingcloud-kubesphere-defaults:
     parameters:
@@ -19,13 +29,49 @@ tests:
       NodeInstanceType: t3.xlarge
       Notification: 'false'
       Openpitrix: 'false'
-      QSS3BucketName: $[taskcat_autobucket]
       QSS3BucketRegion: $[taskcat_current_region]
-      RemoteAccessCIDR: 10.0.0.0/16
       Servicemesh: 'false'
     regions:
     - eu-west-1
+    - ap-south-1
+    - ap-east-1
     - us-east-2
     - us-west-2
+    - us-east-1
+    - sa-east-1
+    s3_bucket: ''
+    template: templates/kubesphere-master.template.yaml
+  qingcloud-kubesphere-china-nw:
+    parameters:
+      Alerting: 'false'
+      AvailabilityZones: $[taskcat_genaz_3]
+      Devops: 'false'
+      KeyPairName: override
+      KubeSphereLicenseKey: OVERRIDE
+      Logging: 'false'
+      NodeInstanceType: t3.xlarge
+      Notification: 'false'
+      Openpitrix: 'false'
+      Servicemesh: 'false'
+    regions:
+    - cn-northwest-1
+    s3_bucket: ''
+    template: templates/kubesphere-master.template.yaml
+  qingcloud-kubesphere-2AZ:
+    parameters:
+      Alerting: 'false'
+      AvailabilityZones: $[taskcat_genaz_2]
+      Devops: 'false'
+      KeyPairName: override
+      KubeSphereLicenseKey: OVERRIDE
+      Logging: 'false'
+      NodeInstanceType: t3.xlarge
+      Notification: 'false'
+      Openpitrix: 'false'
+      Servicemesh: 'false'
+    regions:
+    - cn-north-1
+    - ca-central-1
+    - eu-west-1
     s3_bucket: ''
     template: templates/kubesphere-master.template.yaml
