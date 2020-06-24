@@ -39,6 +39,8 @@ tests:
     - us-west-2
     - us-east-1
     - sa-east-1
+    - ca-central-1
+    - eu-west-1
     s3_bucket: ''
     template: templates/kubesphere-master.template.yaml
   qingcloud-kubesphere-china-nw:
@@ -57,21 +59,4 @@ tests:
     - cn-northwest-1
     s3_bucket: ''
     template: templates/kubesphere-master.template.yaml
-  qingcloud-kubesphere-2AZ:
-    parameters:
-      Alerting: 'false'
-      AvailabilityZones: $[taskcat_genaz_2]
-      Devops: 'false'
-      KeyPairName: override
-      KubeSphereLicenseKey: OVERRIDE
-      Logging: 'false'
-      NodeInstanceType: t3.xlarge
-      Notification: 'false'
-      Openpitrix: 'false'
-      Servicemesh: 'false'
-    regions:
-    - cn-north-1
-    - ca-central-1
-    - eu-west-1
-    s3_bucket: ''
-    template: templates/kubesphere-master.template.yaml
+

@@ -124,8 +124,8 @@ Parameters:
       forward slash (/).
     Type: String
   QSS3BucketRegion:
-    Default: 'us-east-2'
-    Description: "The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value."
+    Default: 'us-east-1'
+    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
     Type: String
   RemoteAccessCIDR:
     Default: "139.198.0.0/16"
@@ -271,14 +271,40 @@ Parameters:
     AllowedValues: [true, false]
     Default: false
     Description: '[OPTIONAL] The KubeSphere logging system is comprised of many components that work together to achieve unified log management.'  
+Conditions:
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
+Rules:
+  KubeSphereSupport:
+    Assertions:
+      - AssertDescription: KubeSphere is currently only supported in a 3 AZ deployment.
+        Assert: !Contains
+          -  - us-west-2
+             - us-east-1
+             - us-east-2
+             - sa-east-1
+             - eu-west-1
+             - eu-west-2
+             - eu-west-3
+             - eu-north-1
+             - eu-central-1
+             - ap-southeast-1
+             - ap-southeast-2
+             - ap-northeast-1
+             - ap-northeast-2
+             - ap-south-1
+             - ca-central-1
+             - ap-east-1
+             - me-south-1
+             - cn-northwast-1
+          - !Ref 'AWS::Region'
 Resources:
   EKSStack:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks.template.yaml'
-        - S3Region: !Ref QSS3BucketRegion
-          S3Bucket: !Ref QSS3BucketName
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks.template.yaml'
+        - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+          S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
         PublicSubnet1ID: !Ref PublicSubnet1ID
         PublicSubnet2ID: !Ref PublicSubnet2ID
@@ -308,9 +334,9 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.amazonaws.com/${QSS3KeyPrefix}templates/kubesphere.template.yaml'
-        - S3Region: !Ref QSS3BucketRegion
-          S3Bucket: !Ref QSS3BucketName
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/kubesphere.template.yaml'
+        - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+          S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
         KubeConfigPath: !GetAtt EKSStack.Outputs.KubeConfigPath
         KubeConfigKmsContext: "EKSQuickStart"
