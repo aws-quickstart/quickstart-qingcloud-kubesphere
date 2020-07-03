@@ -112,9 +112,8 @@ Parameters:
     Default: "3"
     Description: Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.
   AvailabilityZones:
-    Description: List of Availability Zones to use for the subnets in the VPC. Three
-      Availability Zones are used for this deployment, and the logical order of your.
-      selections is preserved.
+    Description: List of Availability Zones to use for the subnets in the VPC. Two or Three Availability Zones are used for this deployment,
+      and it should match what you have selected in the NumberOfAZs parameter. The logical order of your selections are preserved.
     Type: List<AWS::EC2::AvailabilityZone::Name>
   KeyPairName:
     Description: The name of an existing public/private key pair, which allows you
@@ -331,7 +330,7 @@ Resources:
         #PrivateSubnetATag2: !Sub "kubernetes.io/cluster/${AWS::StackName}-${AWS::Region}=owned"
         PrivateSubnetATag2: !Sub
           - 'kubernetes.io/cluster/${X}-${AWS::Region}=owned'
-          - X: !Select [ 0, !Split ["/", !Ref 'AWS::StackId' ]]
+          - X: !Select [ 2, !Split ["/", !Ref 'AWS::StackId' ]]
         PublicSubnet1CIDR: !Ref 'PublicSubnet1CIDR'
         PublicSubnet2CIDR: !Ref 'PublicSubnet2CIDR'
         PublicSubnet3CIDR: !Ref 'PublicSubnet3CIDR'
@@ -388,7 +387,7 @@ Resources:
           - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
             S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
-        ClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
+        KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
         KubeConfigKmsContext: "EKSQuickStart"
         Openpitrix: !Ref Openpitrix
         Devops: !Ref Devops
@@ -396,6 +395,8 @@ Resources:
         Notification: !Ref Notification
         Alerting: !Ref Alerting
         Logging: !Ref Logging
+        KubeManifestLambdaArn: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
+        KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
         #KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 
 Outputs:
@@ -405,5 +406,9 @@ Outputs:
     Value: !GetAtt EKSStack.Outputs.BastionIP
   KubeSphereConsoleEndpoint:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
+  KubeManifestLambdaArn:
+    Value: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
+  KubeGetLambdaArn:
+    Value: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
 
 

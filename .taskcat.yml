@@ -45,15 +45,8 @@ tests:
       QSS3BucketRegion: $[taskcat_current_region]
       Servicemesh: 'false'
     regions:
-    - eu-west-1
-    - ap-south-1
-    - ap-east-1
-    - us-east-2
-    - us-west-2
     - us-east-1
-    - sa-east-1
     - ca-central-1
-    - eu-west-1
     s3_bucket: ''
     template: templates/kubesphere-master.template.yaml
   qingcloud-kubesphere-china-nw:
