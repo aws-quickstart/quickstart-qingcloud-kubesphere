@@ -361,7 +361,7 @@ Resources:
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
       # Kubernetes manifest
-      Manifest:
+      Manifest: !Sub |
         apiVersion: installer.kubesphere.io/v1alpha1
         kind: ClusterConfiguration
         metadata:
