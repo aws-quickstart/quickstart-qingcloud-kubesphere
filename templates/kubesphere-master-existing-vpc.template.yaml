@@ -43,7 +43,12 @@ Metadata:
       - Servicemesh
       - Notification
       - Alerting
+      - Auditing
       - Logging
+      - Events
+      - Multicluster
+      - Networkpolicy
+      - MetricServer
     ParameterLabels:
       KeyPairName:
         default: SSH key name
@@ -88,7 +93,7 @@ Metadata:
       #KubeSphereKey:
       #  default: KubeSphere license key
       Openpitrix:
-        default: Openpitrix  
+        default: Openpitrix
       Devops:
         default: Devops
       Servicemesh:
@@ -99,6 +104,16 @@ Metadata:
         default: Alerting
       Logging:
         default: Logging
+      Auditing:
+        default: Auditing
+      Events:
+        default: Events
+      Multicluster:
+        default: Multicluster
+      Networkpolicy:
+        default: Networkpolicy
+      MetricServer:
+        default: MetricServer
 Parameters:
   KeyPairName:
     Description: The name of an existing public/private key pair, which allows you
@@ -265,12 +280,37 @@ Parameters:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Triggers alerts for any abnormal status of resources or workloads in multi-tenant Kubernetes environment.'
+    Description: '[OPTIONAL] Users can customize alerting policies to send messages to users in time with different time intervals and alerting levels to choose from.'
+  Events:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Events that happen inside a cluster are recorded, such as container running status, image pulling failures and node scheduling activities.'
   Logging:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] The KubeSphere logging system is comprised of many components that work together to achieve unified log management.'  
+    Description: '[OPTIONAL] Flexible logging functions are provided for query, collection and management. Additional log collectors can be added, such as Elasticsearch, Kafka and Fluentd.'
+  Multicluster:
+    Type: String
+    AllowedValues: [none, host, member]
+    Default: none
+    Description: '[OPTIONAL] Users can create projects to run across clusters, building a container environment for rapid iteration of applications and achieve high availability.'
+  Networkpolicy:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain instances (Pods).'
+  Auditing:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.'
+  MetricServer:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or statefulsets based on observed CPU utilization.'
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
 Resources:
@@ -323,6 +363,11 @@ Resources:
         Notification: !Ref Notification
         Alerting: !Ref Alerting
         Logging: !Ref Logging
+        Alerting: !Ref Alerting
+        Auditing: !Ref Auditing
+        Events: !Ref Events
+        MetricServer: !Ref MetricServer
+        Multicluster: !Ref Multicluster
    #     KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 Outputs:
   KubeConfigPath:
