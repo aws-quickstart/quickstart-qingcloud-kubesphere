@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Deploy Kubesphere into an existing Kubernetes Cluster (qs-1pipr93dp)
+Description: Deploy Kubesphere into an existing Kubernetes Cluster (qs-1qtdad8na)
 Parameters:
 #  KubeConfigPath:
 #    Type: String
