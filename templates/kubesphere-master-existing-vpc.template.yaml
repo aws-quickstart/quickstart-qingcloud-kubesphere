@@ -116,8 +116,8 @@ Metadata:
         default: MetricServer
 Parameters:
   KeyPairName:
-    Description: The name of an existing public/private key pair, which allows you
-      to securely connect to your instance after it launches
+    Description: Enter the public/private key pair you created in your preferred AWS Region; see the Technical requirements section of the deployment guide.
+      to securely connect to your instance after it launches.
     Type: AWS::EC2::KeyPair::KeyName
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
@@ -216,11 +216,11 @@ Parameters:
     Type: Number
   NodeGroupName:
     Default: Default
-    Description: The name for EKS node group.
+    Description: The name for Amazon EKS node group.
     Type: String
   NodeVolumeSize:
     Default: 100
-    Description: The size for the node's root EBS volumes.
+    Description: The size for the node's root EBS volume.
     Type: String
   LambdaZipsBucketName:
     Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
