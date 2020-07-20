@@ -132,8 +132,8 @@ Parameters:
       and it should match what you have selected in the NumberOfAZs parameter. The logical order of your selections are preserved.
     Type: List<AWS::EC2::AvailabilityZone::Name>
   KeyPairName:
-    Description: The name of an existing public/private key pair, which allows you
-      to securely connect to your instance after it launches
+    Description: Enter the public/private key pair you created in your preferred AWS Region; see the Technical requirements section of the deployment guide.
+      to securely connect to your instance after it launches.
     Type: AWS::EC2::KeyPair::KeyName
   PrivateSubnet1CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
@@ -157,21 +157,21 @@ Parameters:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
     Default: 10.0.128.0/20
-    Description: CIDR block for the public (DMZ) subnet 1 located in Availability
+    Description: CIDR block for the public DMZ subnet 1 located in Availability Zone
       Zone 1
     Type: String
   PublicSubnet2CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
     Default: 10.0.144.0/20
-    Description: CIDR block for the public (DMZ) subnet 2 located in Availability
+    Description: CIDR block for the public DMZ subnet 2 located in Availability Zone
       Zone 2
     Type: String
   PublicSubnet3CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
     Default: 10.0.160.0/20
-    Description: CIDR block for the public (DMZ) subnet 2 located in Availability
+    Description: CIDR block for the public DMZ subnet 3 located in Availability Zone
       Zone 3
     Type: String
   QSS3BucketName:
@@ -273,11 +273,11 @@ Parameters:
     Type: Number
   NodeGroupName:
     Default: Default
-    Description: The name for EKS node group.
+    Description: The name for Amazon EKS node group.
     Type: String
   NodeVolumeSize:
     Default: 100
-    Description: The size for the node's root EBS volumes.
+    Description: The size for the node's root EBS volume.
     Type: String
   LambdaZipsBucketName:
     Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
@@ -290,8 +290,8 @@ Parameters:
     Description: The Kubernetes control plane version.
   Openpitrix:
     Type: String
-    AllowedValues: [true, false]
-    Default: false
+    AllowedValues: ['true', 'false']
+    Default: 'false'
     Description: '[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.'
   Devops:
     Type: String
@@ -436,7 +436,6 @@ Resources:
         Notification: !Ref Notification
         Alerting: !Ref Alerting
         Logging: !Ref Logging
-        Alerting: !Ref Alerting
         Auditing: !Ref Auditing
         Events: !Ref Events
         MetricServer: !Ref MetricServer
