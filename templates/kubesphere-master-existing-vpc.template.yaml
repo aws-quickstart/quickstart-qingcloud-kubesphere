@@ -300,7 +300,7 @@ Parameters:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain instances (Pods).'
+    Description: '[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain Pods.'
   Auditing:
     Type: String
     AllowedValues: [true, false]
@@ -310,7 +310,7 @@ Parameters:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or statefulsets based on observed CPU utilization.'
+    Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
 Resources:
