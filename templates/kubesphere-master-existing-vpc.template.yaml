@@ -249,7 +249,7 @@ Parameters:
     Description: The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)
   KubernetesVersion:
     Type: String
-    AllowedValues: [ "1.16", "1.15", "1.14" ]
+    AllowedValues: [ "1.16", "1.15" ]
     Default: "1.16"
     Description: The Kubernetes control plane version.
   #KubeSphereLicenseKey:

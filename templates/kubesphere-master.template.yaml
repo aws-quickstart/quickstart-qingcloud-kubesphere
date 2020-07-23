@@ -285,7 +285,7 @@ Parameters:
     Default: ''
   KubernetesVersion:
     Type: String
-    AllowedValues: [ "1.16", "1.15", "1.14" ]
+    AllowedValues: [ "1.16", "1.15" ]
     Default: "1.16"
     Description: The Kubernetes control plane version.
   Openpitrix:
