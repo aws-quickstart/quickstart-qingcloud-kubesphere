@@ -366,6 +366,7 @@ Resources:
         Alerting: !Ref Alerting
         Auditing: !Ref Auditing
         Events: !Ref Events
+        Networkpolicy: !Ref Networkpolicy
         MetricServer: !Ref MetricServer
         Multicluster: !Ref Multicluster
    #     KubeSphereLicenseKey: !Ref KubeSphereLicenseKey

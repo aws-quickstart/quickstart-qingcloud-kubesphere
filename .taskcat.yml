@@ -44,6 +44,11 @@ tests:
       Openpitrix: 'false'
       QSS3BucketRegion: $[taskcat_current_region]
       Servicemesh: 'false'
+      Networkpolicy: 'false'
+      Multicluster: 'none'
+      MetricServer: 'false'
+      Events: 'false'
+      Auditing: 'false'
     regions:
     - us-east-1
     - ca-central-1
@@ -61,6 +66,11 @@ tests:
       Notification: 'false'
       Openpitrix: 'false'
       Servicemesh: 'false'
+      etworkpolicy: 'false'
+      Multicluster: 'none'
+      MetricServer: 'false'
+      Events: 'false'
+      Auditing: 'false'
     regions:
     - cn-northwest-1
     s3_bucket: ''
@@ -78,6 +88,11 @@ tests:
       Notification: 'false'
       Openpitrix: 'false'
       Servicemesh: 'false'
+      etworkpolicy: 'false'
+      Multicluster: 'none'
+      MetricServer: 'false'
+      Events: 'false'
+      Auditing: 'false'
     regions:
     - cn-north-1
     - sa-east-1
