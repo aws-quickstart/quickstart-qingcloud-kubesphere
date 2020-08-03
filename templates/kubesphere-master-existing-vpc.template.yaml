@@ -36,8 +36,9 @@ Metadata:
       - QSS3BucketRegion
       - LambdaZipsBucketName
     - Label:
-        default: KubeSphere Quick Start True/False configuration
+        default: KubeSphere System and Pluggable Components Configuration
       Parameters:
+      - KubeSphereConsolePassword
       - Openpitrix  
       - Devops
       - Servicemesh
@@ -48,7 +49,7 @@ Metadata:
       - Events
       - Multicluster
       - Networkpolicy
-      - MetricServer
+      - MetricsServer
     ParameterLabels:
       KeyPairName:
         default: SSH key name
@@ -92,6 +93,8 @@ Metadata:
         default: Kubernetes version
       #KubeSphereKey:
       #  default: KubeSphere license key
+      KubeSphereConsolePassword:
+        default: KubeSphereConsolePassword
       Openpitrix:
         default: Openpitrix
       Devops:
@@ -112,8 +115,8 @@ Metadata:
         default: Multicluster
       Networkpolicy:
         default: Networkpolicy
-      MetricServer:
-        default: MetricServer
+      MetricsServer:
+        default: MetricsServer
 Parameters:
   KeyPairName:
     Description: Enter the public/private key pair you created in your preferred AWS Region; see the Technical requirements section of the deployment guide.
@@ -133,7 +136,7 @@ Parameters:
     AllowedPattern: ^[0-9a-zA-Z-/]*$
     ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
       uppercase letters, hyphens (-), and forward slash (/).
-    Default: ks/
+    Default: quickstart-qingcloud-kubesphere/
     Description: S3 key prefix for the Quick Start assets. Quick Start key prefix
       can include numbers, lowercase letters, uppercase letters, hyphens (-), and
       forward slash (/).
@@ -143,7 +146,7 @@ Parameters:
     Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
     Type: String
   RemoteAccessCIDR:
-    Default: "139.198.0.0/16"
+    Default: "0.0.0.0/0"
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
     Description: The CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
@@ -249,13 +252,17 @@ Parameters:
     Description: The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)
   KubernetesVersion:
     Type: String
-    AllowedValues: [ "1.16", "1.15", "1.14" ]
+    AllowedValues: [ "1.16", "1.15" ]
     Default: "1.16"
     Description: The Kubernetes control plane version.
   #KubeSphereLicenseKey:
    # Type: String
    # NoEcho: true
    # Description: The KubeSphere license key to use.
+  KubeSphereConsolePassword:
+    Type: String
+    AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
+    Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
   Openpitrix:
     Type: String
     AllowedValues: [true, false]
@@ -306,7 +313,7 @@ Parameters:
     AllowedValues: [true, false]
     Default: false
     Description: '[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.'
-  MetricServer:
+  MetricsServer:
     Type: String
     AllowedValues: [true, false]
     Default: false
@@ -358,6 +365,7 @@ Resources:
       Parameters:
         KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
         KubeConfigKmsContext: "EKSQuickStart"
+        KubeSphereConsolePassword: !Ref KubeSphereConsolePassword
         Openpitrix: !Ref Openpitrix
         Devops: !Ref Devops
         Servicemesh: !Ref Servicemesh
@@ -367,13 +375,23 @@ Resources:
         Auditing: !Ref Auditing
         Events: !Ref Events
         Networkpolicy: !Ref Networkpolicy
-        MetricServer: !Ref MetricServer
+        MetricsServer: !Ref MetricsServer
         Multicluster: !Ref Multicluster
         KubeManifestLambdaArn: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
         KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
         #KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 Outputs:
-  KubeConfigPath:
-    Value: !GetAtt EKSStack.Outputs.KubeConfigPath
+  EKSClusterName:
+    Value: !GetAtt EKSStack.Outputs.EKSClusterName
   BastionIP:
     Value: !GetAtt EKSStack.Outputs.BastionIP
+  KubeSphereConsoleEndpoint:
+    Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
+  KubeSphereConsoleLoginUser:
+    Value: admin
+  KubeSphereConsoleLoginPassword:
+    Value: !Sub ${KubeSphereConsolePassword}
+  KubeManifestLambdaArn:
+    Value: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
+  KubeGetLambdaArn:
+    Value: !GetAtt EKSStack.Outputs.KubeGetLambdaArn

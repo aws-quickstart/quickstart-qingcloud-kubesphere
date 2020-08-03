@@ -38,8 +38,9 @@ Metadata:
       - QSS3BucketRegion
       - LambdaZipsBucketName
     - Label:
-        default: KubeSphere Quick Start True/False configuration
+        default: KubeSphere System and Pluggable Components Configuration
       Parameters:
+      - KubeSphereConsolePassword
       - Openpitrix
       - Devops
       - Servicemesh
@@ -50,7 +51,7 @@ Metadata:
       - Events
       - Multicluster
       - Networkpolicy
-      - MetricServer
+      - MetricsServer
     ParameterLabels:
       AvailabilityZones:
         default: Availability Zones
@@ -98,6 +99,8 @@ Metadata:
         default: Node group name
       NodeVolumeSize:
         default: Node volume size
+      KubeSphereConsolePassword:
+        default: KubeSphereConsolePassword
       Openpitrix:
         default: Openpitrix  
       Devops:
@@ -118,8 +121,8 @@ Metadata:
         default: Multicluster
       Networkpolicy:
         default: Networkpolicy
-      MetricServer:
-        default: MetricServer
+      MetricsServer:
+        default: MetricsServer
       
 Parameters:
   NumberOfAZs:
@@ -285,9 +288,13 @@ Parameters:
     Default: ''
   KubernetesVersion:
     Type: String
-    AllowedValues: [ "1.16", "1.15", "1.14" ]
+    AllowedValues: [ "1.16", "1.15" ]
     Default: "1.16"
     Description: The Kubernetes control plane version.
+  KubeSphereConsolePassword:
+    Type: String
+    AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
+    Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
   Openpitrix:
     Type: String
     AllowedValues: ['true', 'false']
@@ -338,7 +345,7 @@ Parameters:
     AllowedValues: [true, false]
     Default: false
     Description: '[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.'
-  MetricServer:
+  MetricsServer:
     Type: String
     AllowedValues: [true, false]
     Default: true
@@ -430,6 +437,7 @@ Resources:
       Parameters:
         KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
         KubeConfigKmsContext: "EKSQuickStart"
+        KubeSphereConsolePassword: !Ref KubeSphereConsolePassword
         Openpitrix: !Ref Openpitrix
         Devops: !Ref Devops
         Servicemesh: !Ref Servicemesh
@@ -439,7 +447,7 @@ Resources:
         Auditing: !Ref Auditing
         Events: !Ref Events
         Networkpolicy: !Ref Networkpolicy
-        MetricServer: !Ref MetricServer
+        MetricsServer: !Ref MetricsServer
         Multicluster: !Ref Multicluster
         KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
         #KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
@@ -451,6 +459,10 @@ Outputs:
     Value: !GetAtt EKSStack.Outputs.BastionIP
   KubeSphereConsoleEndpoint:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
+  KubeSphereConsoleLoginUser:
+    Value: admin
+  KubeSphereConsoleLoginPassword:
+    Value: !Sub ${KubeSphereConsolePassword}
   KubeManifestLambdaArn:
     Value: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
   KubeGetLambdaArn:
