@@ -12,6 +12,8 @@ Parameters:
   #  Type: String
   KubeGetLambdaArn:
     Type: String
+  KubeSphereConsolePassword:
+    Type: String
   Openpitrix:
     Type: String
   Devops:
@@ -28,7 +30,7 @@ Parameters:
     Type: String
   Events:
     Type: String
-  MetricServer:
+  MetricsServer:
     Type: String
   Multicluster:
     Type: String
@@ -338,7 +340,7 @@ Resources:
               serviceAccountName: ks-installer
               containers:
               - name: installer
-                image: kubespheredev/ks-installer:v3.0.0-dev
+                image: kubespheredev/ks-installer:latest
                 imagePullPolicy: "Always"   
                 volumeMounts:
                 - mountPath: /etc/localtime
@@ -373,6 +375,8 @@ Resources:
         spec:
           persistence:
             storageClass: ""
+          authentication:
+            jwtSecret: "" 
           etcd:
             monitoring: false
             endpointIps: localhost
@@ -384,6 +388,13 @@ Resources:
             etcdVolumeSize: 20Gi
             openldapVolumeSize: 2Gi
             redisVolumSize: 2Gi
+            es:   # Storage backend for logging, events and auditing.
+              elasticsearchMasterReplicas: 1   # total number of master nodes, it's not allowed to use even number
+              elasticsearchDataReplicas: 1     # total number of data nodes.
+              elasticsearchMasterVolumeSize: 4Gi   # Volume size of Elasticsearch master nodes.
+              elasticsearchDataVolumeSize: 20Gi    # Volume size of Elasticsearch data nodes.
+              logMaxAge: 7                     # Log retention time in built-in Elasticsearch, it is 7 days by default.
+              elkPrefix: logstash 
           console:
             enableMultiLogin: true  # enable/disable multi login
             port: 30880
@@ -401,17 +412,14 @@ Resources:
             jenkinsJavaOpts_MaxRAM: 2g
           events:
             enabled: ${Events}
+            ruler:
+              enabled: true
+              replicas: 2
           logging:
             enabled: ${Logging}
-            elasticsearchMasterReplicas: 1
-            elasticsearchDataReplicas: 1
             logsidecarReplicas: 2
-            elasticsearchMasterVolumeSize: 4Gi
-            elasticsearchDataVolumeSize: 20Gi
-            logMaxAge: 7
-            elkPrefix: logstash
           metrics_server:
-            enabled: ${MetricServer}
+            enabled: ${MetricsServer}
           monitoring:
             prometheusReplicas: 1
             prometheusMemoryRequest: 400Mi
@@ -475,6 +483,141 @@ Resources:
       Namespace: kubesphere-system
       Name: 'svc/ks-console'
       JsonPath: '{.status.loadBalancer.ingress[0].hostname}'  
+  KubeSphereUser:
+    DependsOn: KubeSphereNamespace
+    Type: "Custom::KubeManifest"
+    Version: '1.0'
+    Properties:
+      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
+      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
+      #KubeConfigPath: !Ref KubeConfigPath
+      # context for KMS to use when decrypting the file
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      ClusterName: !Ref KubeClusterName
+      Manifest:
+        apiVersion: apiextensions.k8s.io/v1beta1
+        kind: CustomResourceDefinition
+        metadata:
+          annotations:
+            controller-gen.kubebuilder.io/version: (devel)
+          name: users.iam.kubesphere.io
+        spec:
+          additionalPrinterColumns:
+          - JSONPath: .spec.email
+            name: Email
+            type: string
+          - JSONPath: .status.state
+            name: Status
+            type: string
+          group: iam.kubesphere.io
+          names:
+            categories:
+            - iam
+            kind: User
+            listKind: UserList
+            plural: users
+            singular: user
+          scope: Cluster
+          subresources: {}
+          validation:
+            openAPIV3Schema:
+              description: User is the Schema for the users API
+              properties:
+                apiVersion:
+                  description: 'APIVersion defines the versioned schema of this representation
+                    of an object. Servers should convert recognized schemas to the latest
+                    internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+                  type: string
+                kind:
+                  description: 'Kind is a string value representing the REST resource this
+                    object represents. Servers may infer this from the endpoint the client
+                    submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+                  type: string
+                metadata:
+                  description: Standard object's metadata.
+                  type: object
+                spec:
+                  description: UserSpec defines the desired state of User
+                  properties:
+                    description:
+                      description: Description of the user.
+                      type: string
+                    displayName:
+                      type: string
+                    email:
+                      description: Unique email address(https://www.ietf.org/rfc/rfc5322.txt).
+                      type: string
+                    groups:
+                      items:
+                        type: string
+                      type: array
+                    lang:
+                      description: The preferred written or spoken language for the user.
+                      type: string
+                    password:
+                      description: password will be encrypted by mutating admission webhook
+                      type: string
+                  required:
+                  - email
+                  type: object
+                status:
+                  description: UserStatus defines the observed state of User
+                  properties:
+                    lastLoginTime:
+                      description: Last login attempt timestamp
+                      format: date-time
+                      type: string
+                    lastTransitionTime:
+                      format: date-time
+                      type: string
+                    reason:
+                      type: string
+                    state:
+                      description: The user status
+                      type: string
+                  type: object
+              required:
+              - spec
+              type: object
+          version: v1alpha2
+          versions:
+          - name: v1alpha2
+            served: true
+            storage: true
+        status:
+          acceptedNames:
+            kind: ""
+            plural: ""
+          conditions: []
+          storedVersions: []
+
+  KubeSphereUpdatePassword:
+    DependsOn: KubeSphereUser
+    Type: "Custom::KubeManifest"
+    Version: '1.0'
+    Properties:
+      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
+      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
+      #KubeConfigPath: !Ref KubeConfigPath
+      # context for KMS to use when decrypting the file
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      ClusterName: !Ref KubeClusterName
+      # Kubernetes manifest
+      Manifest: !Sub |
+        apiVersion: iam.kubesphere.io/v1alpha2
+        kind: User
+        metadata:
+          name: admin
+        spec:
+          email: admin@kubesphere.io
+          lang: zh
+          password: ${KubeSphereConsolePassword}
 Outputs:
   KubeSphereConsole:
     Value: !Sub "http://${KubeSphereConsole}"
+  KubeSphereConsoleLoginUser:
+    Value: admin
+  KubeSphereConsoleLoginPassword:
+    Value: !Sub ${KubeSphereConsolePassword}
