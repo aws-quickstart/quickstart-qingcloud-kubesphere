@@ -280,6 +280,13 @@ Resources:
           - '*'
           verbs:
           - '*'
+        - apiGroups:
+          - storage.kubesphere.io
+          resources:
+          - '*'
+          verbs:
+          - '*'  
+      
   KubeSphereClusterRoleBinding:
     DependsOn: KubeSphereClusterRole
     Type: "Custom::KubeManifest"
