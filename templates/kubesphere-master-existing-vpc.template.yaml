@@ -391,7 +391,7 @@ Outputs:
     Value: admin
   KubeSphereConsoleLoginPassword:
     Value: !Sub ${KubeSphereConsolePassword}
-  KubeManifestLambdaArn:
-    Value: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
-  KubeGetLambdaArn:
-    Value: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
+  #KubeManifestLambdaArn:
+  #  Value: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
+  #KubeGetLambdaArn:
+  #  Value: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
