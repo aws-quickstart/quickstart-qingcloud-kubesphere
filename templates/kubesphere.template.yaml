@@ -10,8 +10,8 @@ Parameters:
     Type: String
   #KubeManifestLambdaArn:
   #  Type: String
-  KubeGetLambdaArn:
-    Type: String
+  #KubeGetLambdaArn:
+  #  Type: String
   KubeSphereConsolePassword:
     Type: String
   Openpitrix:
@@ -483,7 +483,7 @@ Resources:
     Type: "Custom::KubeGet"
     Version: '1.0'
     Properties:
-      ServiceToken: !Ref KubeGetLambdaArn
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeGet-${KubeClusterName}"
       #KubeConfigPath: !Ref KubeConfigPath
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName

@@ -449,7 +449,7 @@ Resources:
         Networkpolicy: !Ref Networkpolicy
         MetricsServer: !Ref MetricsServer
         Multicluster: !Ref Multicluster
-        KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
+        #KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
         #KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 
 Outputs:
