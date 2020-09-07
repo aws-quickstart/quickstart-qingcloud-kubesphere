@@ -10,8 +10,8 @@ Parameters:
     Type: String
   #KubeManifestLambdaArn:
   #  Type: String
-  KubeGetLambdaArn:
-    Type: String
+  #KubeGetLambdaArn:
+  #  Type: String
   KubeSphereConsolePassword:
     Type: String
   Openpitrix:
@@ -79,7 +79,7 @@ Resources:
     Properties:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       #ServiceToken: !Ref KubeManifestLambdaArn
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${ClusterName}"
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
       #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
@@ -98,7 +98,7 @@ Resources:
     Properties:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       #ServiceToken: !Ref KubeManifestLambdaArn
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${ClusterName}"
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
       #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
@@ -347,7 +347,7 @@ Resources:
               serviceAccountName: ks-installer
               containers:
               - name: installer
-                image: kubespheredev/ks-installer:latest
+                image: kubesphere/ks-installer:v3.0.0
                 imagePullPolicy: "Always"   
                 volumeMounts:
                 - mountPath: /etc/localtime
@@ -483,7 +483,7 @@ Resources:
     Type: "Custom::KubeGet"
     Version: '1.0'
     Properties:
-      ServiceToken: !Ref KubeGetLambdaArn
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeGet-${KubeClusterName}"
       #KubeConfigPath: !Ref KubeConfigPath
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
