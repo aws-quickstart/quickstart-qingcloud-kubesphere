@@ -65,8 +65,6 @@ Metadata:
         default: Lambda zips bucket name
       KubernetesVersion:
         default: Kubernetes version
-      #KubeSphereLicenseKey:
-      #  default: KubeSphere license key
       KeyPairName:
         default: SSH key name
       QSS3BucketRegion:
@@ -350,10 +348,6 @@ Parameters:
     AllowedValues: [true, false]
     Default: true
     Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
-  #KubeSphereLicenseKey:
-  #  Type: String
-  #  NoEcho: true
-   # Description: The KubeSphere license key to use.
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
   3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
@@ -375,7 +369,6 @@ Resources:
         PrivateSubnet1ACIDR: !Ref 'PrivateSubnet1CIDR'
         PrivateSubnet2ACIDR: !Ref 'PrivateSubnet2CIDR'
         PrivateSubnet3ACIDR: !Ref 'PrivateSubnet3CIDR'
-        #PrivateSubnetATag2: !Sub "kubernetes.io/cluster/${AWS::StackName}-${AWS::Region}=owned"
         PrivateSubnetATag2: !Sub
           - 'kubernetes.io/cluster/${X}-${AWS::Region}=owned'
           - X: !Select [ 2, !Split ["/", !Ref 'AWS::StackId' ]]
@@ -449,8 +442,6 @@ Resources:
         Networkpolicy: !Ref Networkpolicy
         MetricsServer: !Ref MetricsServer
         Multicluster: !Ref Multicluster
-        #KubeGetLambdaArn: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
-        #KubeSphereLicenseKey: !Ref KubeSphereLicenseKey
 
 Outputs:
   EKSClusterName:
@@ -463,9 +454,6 @@ Outputs:
     Value: admin
   KubeSphereConsoleLoginPassword:
     Value: !Sub ${KubeSphereConsolePassword}
-  #KubeManifestLambdaArn:
-  #  Value: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
-  #KubeGetLambdaArn:
-  #  Value: !GetAtt EKSStack.Outputs.KubeGetLambdaArn
+
 
 

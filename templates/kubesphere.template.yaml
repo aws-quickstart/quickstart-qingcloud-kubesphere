@@ -1,17 +1,11 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Deploy Kubesphere into an existing Kubernetes Cluster (qs-1qtdde8cd)
 Parameters:
-#  KubeConfigPath:
-#    Type: String
   KubeConfigKmsContext:
     Type: String
     Default: "EKSQuickStart"
   KubeClusterName:
     Type: String
-  #KubeManifestLambdaArn:
-  #  Type: String
-  #KubeGetLambdaArn:
-  #  Type: String
   KubeSphereConsolePassword:
     Type: String
   Openpitrix:
@@ -36,10 +30,6 @@ Parameters:
     Type: String
   Networkpolicy:
     Type: String
- 
-  #KubeSphereLicenseKey:
-  # Type: String
-  #NoEcho: true
 Resources:
   KubeSphereCRD:
     Type: "Custom::KubeManifest"
@@ -47,9 +37,7 @@ Resources:
     Properties:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      #ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${ClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -78,10 +66,8 @@ Resources:
     Version: '1.0'
     Properties:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      #ServiceToken: !Ref KubeManifestLambdaArn
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -97,10 +83,8 @@ Resources:
     Version: '1.0'
     Properties:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      #ServiceToken: !Ref KubeManifestLambdaArn
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -119,7 +103,6 @@ Resources:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -295,7 +278,6 @@ Resources:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -321,7 +303,6 @@ Resources:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -364,9 +345,7 @@ Resources:
     Properties:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      #ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${ClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -450,7 +429,6 @@ Resources:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -484,7 +462,6 @@ Resources:
     Version: '1.0'
     Properties:
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeGet-${KubeClusterName}"
-      #KubeConfigPath: !Ref KubeConfigPath
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
       Namespace: kubesphere-system
@@ -498,7 +475,6 @@ Resources:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
@@ -607,7 +583,6 @@ Resources:
       # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
       ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
       # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      #KubeConfigPath: !Ref KubeConfigPath
       # context for KMS to use when decrypting the file
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName

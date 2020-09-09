@@ -28,6 +28,7 @@ project:
     RemoteAccessCIDR: 10.0.0.0/16
     QSS3BucketName: $[taskcat_autobucket]
     QSS3BucketRegion: $[taskcat_current_region]
+    KubeSphereConsolePassword: override
   lambda_source_path: functions/source
   lambda_zip_path: functions/packages
 tests:
@@ -46,7 +47,7 @@ tests:
       Servicemesh: 'false'
       Events: 'false'
       Auditing: 'false'
-      MetricServer: 'true'
+      MetricsServer: 'true'
       Networkpolicy: 'false'
     regions:
     - us-east-1
@@ -67,7 +68,7 @@ tests:
       Servicemesh: 'false'
       Events: 'false'
       Auditing: 'false'
-      MetricServer: 'true'
+      MetricsServer: 'true'
       Networkpolicy: 'false'
     regions:
     - cn-northwest-1
@@ -88,7 +89,7 @@ tests:
       Servicemesh: 'false'
       Events: 'false'
       Auditing: 'false'
-      MetricServer: 'true'
+      MetricsServer: 'true'
       Networkpolicy: 'false'
     regions:
     - cn-north-1
