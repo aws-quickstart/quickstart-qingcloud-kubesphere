@@ -42,7 +42,7 @@
 |===
 |Parameter label (name) |Default value|Description|KubeSphereConsolePassword
 (`KubeSphereConsolePassword`)|`**__Requires input__**`|The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).|Openpitrix
-(`Openpitrix`)|`false`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
+(`Openpitrix`)|`False`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
 (`Devops`)|`False`|[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).|Servicemesh
 (`Servicemesh`)|`False`|[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.|Notification
 (`Notification`)|`False`|[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.|Alerting
