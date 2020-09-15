@@ -1,1 +1,7 @@
-// placeholder
+
+:template_aws_cloudformation_stack:
+:template_cloudformation:
+:template_custom_kubeget:
+:template_custom_kubemanifest:
+:template_kubeget:
+:template_kubemanifest:

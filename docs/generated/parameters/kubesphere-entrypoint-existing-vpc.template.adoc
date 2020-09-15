@@ -1,0 +1,56 @@
+
+.Network configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|VPC ID
+(`VPCID`)|`**__Requires input__**`|The ID of your existing VPC (e.g., vpc-0343606e)|Private subnet 1 ID
+(`PrivateSubnet1ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 1 in your existing VPC (e.g., subnet-fe9a8b32)|Private subnet 2 ID
+(`PrivateSubnet2ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 2 in your existing VPC (e.g., subnet-be8b01ea)|Private subnet 3 ID
+(`PrivateSubnet3ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)|Public subnet 1 ID
+(`PublicSubnet1ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 1 in your existing VPC (e.g., subnet-a0246dcd)|Public subnet 2 ID
+(`PublicSubnet2ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 2 in your existing VPC (e.g., subnet-b1236eea)|Public subnet 3 ID
+(`PublicSubnet3ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 3 in your existing VPC (e.g., subnet-c3456aba)|Allowed external access CIDR
+(`RemoteAccessCIDR`)|`**__Requires input__**`|The CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
+|===
+.Amazon EC2 configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|SSH key name
+(`KeyPairName`)|`**__Requires input__**`|Enter the public/private key pair you created in your preferred AWS Region; see the "Technical requirements" section of the deployment guide. to securely connect to your instance after it launches.
+|===
+.EKS configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Nodes instance type
+(`NodeInstanceType`)|`t3.xlarge`|The type of EC2 instance for the node instances.|Number of nodes
+(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.|Node group name
+(`NodeGroupName`)|`Default`|The name for Amazon EKS node group.|Node volume size
+(`NodeVolumeSize`)|`100`|The size for the node's root EBS volume.|Kubernetes version
+(`KubernetesVersion`)|`1.16`|The Kubernetes control plane version.
+|===
+.AWS Quick Start configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Quick Start S3 bucket name
+(`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 key prefix
+(`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and forward slash (/).|Quick Start S3 bucket region
+(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Lambda zips bucket name
+(`LambdaZipsBucketName`)|`**__Blank string__**`|[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.
+|===
+.KubeSphere System and Pluggable Components Configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|KubeSphereConsolePassword
+(`KubeSphereConsolePassword`)|`**__Requires input__**`|The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).|Openpitrix
+(`Openpitrix`)|`false`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
+(`Devops`)|`False`|[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).|Servicemesh
+(`Servicemesh`)|`False`|[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.|Notification
+(`Notification`)|`False`|[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.|Alerting
+(`Alerting`)|`False`|[OPTIONAL] Users can customize alerting policies to send messages to users in time with different time intervals and alerting levels to choose from.|Auditing
+(`Auditing`)|`False`|[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.|Logging
+(`Logging`)|`False`|[OPTIONAL] Flexible logging functions are provided for query, collection and management. Additional log collectors can be added, such as Elasticsearch, Kafka and Fluentd.|Events
+(`Events`)|`False`|[OPTIONAL] Events that happen inside a cluster are recorded, such as container running status, image pulling failures and node scheduling activities.|Multicluster
+(`Multicluster`)|`none`|[OPTIONAL] Users can create projects to run across clusters, building a container environment for rapid iteration of applications and achieve high availability.|Networkpolicy
+(`Networkpolicy`)|`False`|[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain Pods.|MetricsServer
+(`MetricsServer`)|`True`|[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.
+|===

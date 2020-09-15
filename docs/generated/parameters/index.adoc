@@ -1,1 +1,6 @@
-// placeholder
+
+=== Launch into New VPC
+include::kubesphere-entrypoint-new-vpc.template.adoc[]
+
+=== Launch into Existing VPC
+include::kubesphere-entrypoint-existing-vpc.template.adoc[]
