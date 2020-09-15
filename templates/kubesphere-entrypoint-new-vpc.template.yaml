@@ -3,6 +3,19 @@ Description: Deploy KubeSphere into a new EKS cluster in a new VPC (qs-1qtdde8a5
 Metadata:
   QuickStartDocumentation:
     EntrypointName: "Launch into New VPC"
+    Order: 1
+    OptionalParameters:
+      - Openpitrix
+      - Devops
+      - Servicemesh
+      - Notification
+      - Alerting
+      - Auditing
+      - Logging
+      - Events
+      - Multicluster
+      - Networkpolicy
+      - MetricsServer
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
