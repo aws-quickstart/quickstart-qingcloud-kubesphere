@@ -1,6 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Deploy KubeSphere into a new EKS cluster in an existing VPC (qs-1qtdde8ck).
 Metadata:
+  QuickStartDocumentation:
+    EntrypointName: "Launch into Existing VPC"
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
