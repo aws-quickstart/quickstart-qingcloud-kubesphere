@@ -361,6 +361,16 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for
+  PerAccountSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.
+  PerRegionSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
 Conditions:
     UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
     3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
