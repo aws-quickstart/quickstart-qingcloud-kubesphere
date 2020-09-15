@@ -29,8 +29,6 @@ Metadata:
       - NumberOfNodes
       - NodeGroupName
       - NodeVolumeSize
-      - AdditionalEKSAdminUserArn
-      - AdditionalEKSAdminRoleArn
       - KubernetesVersion
     - Label:
         default: AWS Quick Start configuration
@@ -61,10 +59,6 @@ Metadata:
         default: Availability Zones
       NumberOfAZs:
         default: Number of Availability Zones
-      AdditionalEKSAdminUserArn:
-        Default: ""
-      AdditionalEKSAdminRoleArn:
-        Default: ""
       LambdaZipsBucketName:
         default: Lambda zips bucket name
       KubernetesVersion:
@@ -181,6 +175,24 @@ Parameters:
     Default: 10.0.160.0/20
     Description: CIDR block for the public DMZ subnet 3 located in Availability Zone 3.
     Type: String
+  PublicSubnet1ID:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: The ID of the public subnet in Availability Zone 1 in your existing VPC (e.g., subnet-a0246dcd)
+  PublicSubnet2ID:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: The ID of the public subnet in Availability Zone 2 in your existing VPC (e.g., subnet-b1236eea)
+  PublicSubnet3ID:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: The ID of the public subnet in Availability Zone 3 in your existing VPC (e.g., subnet-c3456aba)
+  PrivateSubnet1ID:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: The ID of the private subnet in Availability Zone 1 in your existing VPC (e.g., subnet-fe9a8b32)
+  PrivateSubnet2ID:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: The ID of the private subnet in Availability Zone 2 in your existing VPC (e.g., subnet-be8b01ea)
+  PrivateSubnet3ID:
+    Type: "AWS::EC2::Subnet::Id"
+    Description: The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
@@ -216,10 +228,6 @@ Parameters:
     Default: 10.0.0.0/16
     Description: CIDR block for the VPC
     Type: String
-  AdditionalEKSAdminUserArn:
-    Default: ""
-    Description: "[OPTIONAL] Comma separated list of IAM users to be granted admin access to the Amazon EKS cluster"
-    Type: CommaDelimitedList
   NodeInstanceType:
     Default: t3.xlarge
     AllowedValues:
@@ -413,7 +421,6 @@ Resources:
         NumberOfNodes: !Ref NumberOfNodes
         NodeInstanceType: !Ref NodeInstanceType
         RemoteAccessCIDR: !Ref RemoteAccessCIDR
-        AdditionalEKSAdminUserArn: !Join [ ',', !Ref 'AdditionalEKSAdminUserArn' ]
         PerRegionSharedResources: !Ref PerRegionSharedResources
         PerAccountSharedResources: !Ref PerAccountSharedResources
         ConfigSetName: !Ref 'ConfigSetName'
