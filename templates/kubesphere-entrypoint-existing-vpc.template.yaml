@@ -181,6 +181,9 @@ Parameters:
     Default: 10.0.160.0/20
     Description: CIDR block for the public DMZ subnet 3 located in Availability Zone 3.
     Type: String
+  VPCID:
+    Type: "AWS::EC2::VPC::Id"
+    Description: The ID of your existing VPC (e.g., vpc-0343606e)
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
@@ -358,6 +361,16 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for
+  PerAccountSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.
+  PerRegionSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
 Conditions:
     UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
     3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
