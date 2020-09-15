@@ -56,8 +56,6 @@ image::../images/image4.png[Architecture,width=648,height=439]
 [link=images/image5.png]
 image::../images/image5.png[Architecture,width=648,height=439]
 
-== Post deployment steps
-// If Post-deployment steps are required, add them here. If not, remove the heading
 
 == Best practices for using {partner-product-short-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.

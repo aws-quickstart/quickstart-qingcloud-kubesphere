@@ -40,11 +40,5 @@ Each deployment takes about {deployment_time} to complete.
 //* Parameters for deploying {partner-product-short-name} into a new VPC
 //* Parameters for deploying {partner-product-short-name} into an existing VPC
 
-[start=5]
-. Monitor the status of the stack. When the status is *CREATE_COMPLETE*, the KubeSphere cluster is ready.
-. Use the URLs displayed in the *Outputs* tab for the stack, as shown in following figure, to view the resources that were created.
 
-[#outputs2]
-.Quick Start Outputs from stack creation
-[link=images/image3.png]
-image::../images/image3.png[Architecture,width=648,height=439]
+
