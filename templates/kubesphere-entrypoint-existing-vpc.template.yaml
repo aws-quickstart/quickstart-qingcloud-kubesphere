@@ -1,0 +1,408 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Deploy KubeSphere into a new EKS cluster in an existing VPC (qs-1qtdde8ck).
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+    - Label:
+        default: Network configuration
+      Parameters:
+        - VPCID
+        - PrivateSubnet1ID
+        - PrivateSubnet2ID
+        - PrivateSubnet3ID
+        - PublicSubnet1ID
+        - PublicSubnet2ID
+        - PublicSubnet3ID
+        - RemoteAccessCIDR
+    - Label:
+        default: Amazon EC2 configuration
+      Parameters:
+      - KeyPairName
+    - Label:
+        default: EKS configuration
+      Parameters:
+      - NodeInstanceType
+      - NumberOfNodes
+      - NodeGroupName
+      - NodeVolumeSize
+      - KubernetesVersion
+      - AdditionalEKSAdminUserArn
+      - AdditionalEKSAdminRoleArn
+    - Label:
+        default: AWS Quick Start configuration
+      Parameters:
+      - QSS3BucketName
+      - QSS3KeyPrefix
+      - QSS3BucketRegion
+      - LambdaZipsBucketName
+    - Label:
+        default: KubeSphere System and Pluggable Components Configuration
+      Parameters:
+      - KubeSphereConsolePassword
+      - Openpitrix  
+      - Devops
+      - Servicemesh
+      - Notification
+      - Alerting
+      - Auditing
+      - Logging
+      - Events
+      - Multicluster
+      - Networkpolicy
+      - MetricsServer
+    ParameterLabels:
+      KeyPairName:
+        default: SSH key name
+      QSS3BucketName:
+        default: Quick Start S3 bucket name
+      QSS3KeyPrefix:
+        default: Quick Start S3 key prefix
+      QSS3BucketRegion:
+        default: Quick Start S3 bucket region
+      RemoteAccessCIDR:
+        default: Allowed external access CIDR
+      NodeInstanceType:
+        default: Nodes instance type
+      NumberOfNodes:
+        default: Number of nodes
+      NodeGroupName:
+        default: Node group name
+      NodeVolumeSize:
+        default: Node volume size
+      AdditionalEKSAdminUserArn:
+        Default: ""
+      AdditionalEKSAdminRoleArn:
+        Default: ""
+      LambdaZipsBucketName:
+        default: Lambda zips bucket name
+      PublicSubnet1ID:
+        default: Public subnet 1 ID
+      PublicSubnet2ID:
+        default: Public subnet 2 ID
+      PublicSubnet3ID:
+        default: Public subnet 3 ID
+      PrivateSubnet1ID:
+        default: Private subnet 1 ID
+      PrivateSubnet2ID:
+        default: Private subnet 2 ID
+      PrivateSubnet3ID:
+        default: Private subnet 3 ID
+      VPCID:
+        default: VPC ID
+      KubernetesVersion:
+        default: Kubernetes version
+      KubeSphereConsolePassword:
+        default: KubeSphereConsolePassword
+      Openpitrix:
+        default: Openpitrix
+      Devops:
+        default: Devops
+      Servicemesh:
+        default: Servicemesh
+      Notification:
+        default: Notification
+      Alerting:
+        default: Alerting
+      Logging:
+        default: Logging
+      Auditing:
+        default: Auditing
+      Events:
+        default: Events
+      Multicluster:
+        default: Multicluster
+      Networkpolicy:
+        default: Networkpolicy
+      MetricsServer:
+        default: MetricsServer
+Parameters:
+  NumberOfAZs:
+    Type: String
+    AllowedValues: ["2", "3"]
+    Default: "3"
+    Description: Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.
+  AvailabilityZones:
+    Description: List of Availability Zones to use for the subnets in the VPC. Two or Three Availability Zones are used for this deployment,
+      and it should match what you have selected in the NumberOfAZs parameter. The logical order of your selections are preserved.
+    Type: List<AWS::EC2::AvailabilityZone::Name>
+  KeyPairName:
+    Description: Enter the public/private key pair you created in your preferred AWS Region; see the "Technical requirements" section of the deployment guide.
+      to securely connect to your instance after it launches.
+    Type: AWS::EC2::KeyPair::KeyName
+  PrivateSubnet1CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.0.0/19
+    Description: CIDR block for private subnet 1 located in Availability Zone 1.
+    Type: String
+  PrivateSubnet2CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.32.0/19
+    Description: CIDR block for private subnet 2 located in Availability Zone 2.
+    Type: String
+  PrivateSubnet3CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.64.0/19
+    Description: CIDR block for private subnet 3 located in Availability Zone 3.
+    Type: String
+  PublicSubnet1CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.128.0/20
+    Description: CIDR block for the public DMZ subnet 1 located in Availability Zone 1.
+    Type: String
+  PublicSubnet2CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.144.0/20
+    Description: CIDR block for the public DMZ subnet 2 located in Availability Zone 2.
+    Type: String
+  PublicSubnet3CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.160.0/20
+    Description: CIDR block for the public DMZ subnet 3 located in Availability Zone 3.
+    Type: String
+  QSS3BucketName:
+    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
+    ConstraintDescription: Quick Start bucket name can include numbers, lowercase
+      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
+      (-).
+    Default: aws-quickstart
+    Description: S3 bucket name for the Quick Start assets. This string can include
+      numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
+      or end with a hyphen (-).
+    Type: String
+  QSS3KeyPrefix:
+    AllowedPattern: ^[0-9a-zA-Z-/.]*$
+    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
+      uppercase letters, hyphens (-), dots(.) and forward slash (/).
+    Default: quickstart-qingcloud-kubesphere/
+    Description: The S3 key prefix for the Quick Start assets. Quick Start key prefix
+      can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and
+      forward slash (/).
+    Type: String
+  QSS3BucketRegion:
+    Default: 'us-east-1'
+    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Type: String
+  RemoteAccessCIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
+    Description: The CIDR IP range that is permitted to access the instances. We recommend
+      that you set this value to a trusted IP range.
+    Type: String
+  VPCCIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.0.0/16
+    Description: CIDR block for the VPC
+    Type: String
+  AdditionalEKSAdminUserArn:
+    Default: ""
+    Description: "[OPTIONAL] Comma separated list of IAM users to be granted admin access to the Amazon EKS cluster"
+    Type: CommaDelimitedList
+  NodeInstanceType:
+    Default: t3.xlarge
+    AllowedValues:
+      - t3.nano
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+      - m5.large
+      - m5.xlarge
+      - m5.2xlarge
+      - m5.4xlarge
+      - m5.12xlarge
+      - m5.24xlarge
+      - c5.large
+      - c5.xlarge
+      - c5.2xlarge
+      - c5.4xlarge
+      - c5.9xlarge
+      - c5.18xlarge
+      - i3.large
+      - i3.xlarge
+      - i3.2xlarge
+      - i3.4xlarge
+      - i3.8xlarge
+      - i3.16xlarge
+      - x1.16xlarge
+      - x1.32xlarge
+      - p3.2xlarge
+      - p3.8xlarge
+      - p3.16xlarge
+      - r5.large
+      - r5.xlarge
+      - r5.2xlarge
+      - r5.4xlarge
+      - r5.12xlarge
+      - r5.24xlarge
+      - r5d.large
+      - r5d.xlarge
+      - r5d.2xlarge
+      - r5d.4xlarge
+      - r5d.12xlarge
+      - r5d.24xlarge
+      - z1d.large
+      - z1d.xlarge
+      - z1d.2xlarge
+      - z1d.3xlarge
+      - z1d.6xlarge
+      - z1d.12xlarge
+    ConstraintDescription: Must be a valid EC2 instance type
+    Description: The type of EC2 instance for the node instances.
+    Type: String
+  NumberOfNodes:
+    Default: 1
+    Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
+    Type: Number
+  NodeGroupName:
+    Default: Default
+    Description: The name for Amazon EKS node group.
+    Type: String
+  NodeVolumeSize:
+    Default: 100
+    Description: The size for the node's root EBS volume.
+    Type: String
+  LambdaZipsBucketName:
+    Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
+    Type: String
+    Default: ''
+  KubernetesVersion:
+    Type: String
+    AllowedValues: [ "1.16", "1.15" ]
+    Default: "1.16"
+    Description: The Kubernetes control plane version.
+  KubeSphereConsolePassword:
+    Type: String
+    AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
+    Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
+  Openpitrix:
+    Type: String
+    AllowedValues: ['true', 'false']
+    Default: 'false'
+    Description: '[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.'
+  Devops:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).'
+  Servicemesh:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.'
+  Notification:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.'
+  Alerting:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Users can customize alerting policies to send messages to users in time with different time intervals and alerting levels to choose from.'
+  Events:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Events that happen inside a cluster are recorded, such as container running status, image pulling failures and node scheduling activities.'
+  Logging:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] Flexible logging functions are provided for query, collection and management. Additional log collectors can be added, such as Elasticsearch, Kafka and Fluentd.'
+  Multicluster:
+    Type: String
+    AllowedValues: [none, host, member]
+    Default: none
+    Description: '[OPTIONAL] Users can create projects to run across clusters, building a container environment for rapid iteration of applications and achieve high availability.'
+  Networkpolicy:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain Pods.'
+  Auditing:
+    Type: String
+    AllowedValues: [true, false]
+    Default: false
+    Description: '[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.'
+  MetricsServer:
+    Type: String
+    AllowedValues: [true, false]
+    Default: true
+    Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
+Conditions:
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
+Resources:
+  EKSStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks.template.yaml'
+        - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+          S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
+      Parameters:
+        PublicSubnet1ID: !Ref PublicSubnet1ID
+        PublicSubnet2ID: !Ref PublicSubnet2ID
+        PublicSubnet3ID: !Ref PublicSubnet3ID
+        KeyPairName: !Ref KeyPairName
+        QSS3BucketName: !Ref QSS3BucketName
+        QSS3BucketRegion: !Ref QSS3BucketRegion
+        QSS3KeyPrefix: !Sub "${QSS3KeyPrefix}submodules/quickstart-amazon-eks/"
+        PrivateSubnet1ID: !Ref PrivateSubnet1ID
+        PrivateSubnet2ID: !Ref PrivateSubnet2ID
+        PrivateSubnet3ID: !Ref PrivateSubnet3ID
+        NumberOfNodes: !Ref NumberOfNodes
+        NodeGroupName: !Ref NodeGroupName
+        NodeVolumeSize: !Ref NodeVolumeSize
+        LambdaZipsBucketName: !Ref LambdaZipsBucketName
+        NodeInstanceType: !Ref NodeInstanceType
+        RemoteAccessCIDR: !Ref RemoteAccessCIDR
+        AdditionalEKSAdminUserArn: !Ref AdditionalEKSAdminUserArn
+        AdditionalEKSAdminRoleArn: !Ref AdditionalEKSAdminRoleArn
+        VPCID: !Ref VPCID
+        KubernetesVersion: !Ref KubernetesVersion
+  KubeSphereStack:
+    DependsOn: EKSStack
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL:
+        !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/kubesphere.template.yaml'
+        - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+          S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
+      Parameters:
+        KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
+        KubeConfigKmsContext: "EKSQuickStart"
+        KubeSphereConsolePassword: !Ref KubeSphereConsolePassword
+        Openpitrix: !Ref Openpitrix
+        Devops: !Ref Devops
+        Servicemesh: !Ref Servicemesh
+        Notification: !Ref Notification
+        Alerting: !Ref Alerting
+        Logging: !Ref Logging
+        Auditing: !Ref Auditing
+        Events: !Ref Events
+        Networkpolicy: !Ref Networkpolicy
+        MetricsServer: !Ref MetricsServer
+        Multicluster: !Ref Multicluster
+        KubeManifestLambdaArn: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
+Outputs:
+  EKSClusterName:
+    Value: !GetAtt EKSStack.Outputs.EKSClusterName
+  BastionIP:
+    Value: !GetAtt EKSStack.Outputs.BastionIP
+  KubeSphereConsoleEndpoint:
+    Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
+  KubeSphereConsoleLoginUser:
+    Value: admin
+  KubeSphereConsoleLoginPassword:
+    Value: !Sub ${KubeSphereConsolePassword}
+

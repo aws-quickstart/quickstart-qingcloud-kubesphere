@@ -28,7 +28,7 @@ project:
     RemoteAccessCIDR: 10.0.0.0/16
     QSS3BucketName: $[taskcat_autobucket]
     QSS3BucketRegion: $[taskcat_current_region]
-    KubeSphereConsolePassword: override
+    KubeSphereConsolePassword: P!$[taskcat_genpass_12A]
   lambda_source_path: functions/source
   lambda_zip_path: functions/packages
 tests:
@@ -53,7 +53,7 @@ tests:
     - us-east-1
     - ca-central-1
     s3_bucket: ''
-    template: templates/kubesphere-master.template.yaml
+    template: templates/kubesphere-entrypoint-new-vpc.template.yaml
   qingcloud-kubesphere-china-nw:
     parameters:
       Alerting: 'false'
@@ -73,7 +73,7 @@ tests:
     regions:
     - cn-northwest-1
     s3_bucket: ''
-    template: templates/kubesphere-master.template.yaml
+    template: templates/kubesphere-entrypoint-new-vpc.template.yaml
   qingcloud-kubesphere-2az:
     parameters:
       Alerting: 'false'
@@ -95,4 +95,4 @@ tests:
     - cn-north-1
     - sa-east-1
     s3_bucket: ''
-    template: templates/kubesphere-master.template.yaml
+    template: templates/kubesphere-entrypoint-new-vpc.template.yaml
