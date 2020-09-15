@@ -181,6 +181,9 @@ Parameters:
     Default: 10.0.160.0/20
     Description: CIDR block for the public DMZ subnet 3 located in Availability Zone 3.
     Type: String
+  VPCID:
+    Type: "AWS::EC2::VPC::Id"
+    Description: The ID of your existing VPC (e.g., vpc-0343606e)
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
