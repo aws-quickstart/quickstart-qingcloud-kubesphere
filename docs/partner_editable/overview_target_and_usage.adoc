@@ -2,6 +2,29 @@
 // Identify your target audience and explain how/why they would use this Quick Start.
 //Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
 
-This Quick Start reference deployment guide provides step-by-step instructions for deploying {partner-product-short-name} on the AWS Cloud.
 
-This Quick Start is for users who <target audience and usage scenario>
+This Quick Start reference deployment guide provides step-by-step instructions for deploying KubeSphere packaged with Amazon EKS on the AWS Cloud.
+
+This Quick Start is for users who are going to use Amazon EKS, and also looking for an easy-to-use but also powerful web console to manage daily complicated workloads related to Kubernetes.
+
+*Please know that we may share who uses AWS Quick Starts with the AWS Partner Network (APN) Partner that collaborated with AWS on the content of the Quick Start.*
+
+=== KubeSphere on AWS
+
+KubeSphere is a multi-tenant enterprise-grade container platform with full-stack operation and streamlined DevOps workflows. It provides developer-friendly web interfaces, helping enterprises to build out a more robust and feature-rich platform, which includes the most common functionalities needed for enterprise Kubernetes strategies.
+
+This Quick Start is powered by AWS CloudFormation templates that will help end-users to provision an Amazon EKS environment on new or existing VPC automatically, KubeSphere Amazon EKS environment. end-users manage their EKS cluster through KubeSphere console, capabilities
+
+* Kubernetes Resource Management
+* Multi-cloud and multi-cluster Management
+* DevOps (CI/CD based on https://www.jenkins.io/[Jenkins])
+* Application Lifecycle Management
+* App Store
+* Rich Observability: monitoring, logging, auditing, events, alerting and notification
+* Service Mesh for distributed microservices (Based on https://istio.io/[Istio] and https://www.jaegertracing.io/[Jaeger])
+* Enterprise Multi-tenancy
+* Storage and Networking Management
+* Autoscaling
+* Role-Based Access Control
+* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Network Policy]
+* Registry Management
