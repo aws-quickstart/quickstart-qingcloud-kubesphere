@@ -1,6 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Deploy KubeSphere into a new EKS cluster in a new VPC (qs-1qtdde8a5)
 Metadata:
+  QuickStartDocumentation:
+    EntrypointName: "Launch into New VPC"
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
@@ -36,7 +38,9 @@ Metadata:
       - QSS3BucketName
       - QSS3KeyPrefix
       - QSS3BucketRegion
-      - LambdaZipsBucketName
+      - ConfigSetName
+      - PerAccountSharedResources
+      - PerRegionSharedResources
     - Label:
         default: KubeSphere System and Pluggable Components Configuration
       Parameters:
@@ -121,7 +125,12 @@ Metadata:
         default: Networkpolicy
       MetricsServer:
         default: MetricsServer
-      
+      ConfigSetName:
+        default: ConfigSetName
+      PerAccountSharedResources:
+        default: Per account shared resources
+      PerRegionSharedResources:
+        default: Per region shared resources
 Parameters:
   NumberOfAZs:
     Type: String
@@ -198,6 +207,16 @@ Parameters:
     Default: 'us-east-1'
     Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
     Type: String
+  PerAccountSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose No if you have already deployed another EKS Quick Start stack in this AWS account.
+  PerRegionSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose No if you have already deployed another EKS Quick Start stack in this region.
   RemoteAccessCIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
@@ -284,11 +303,6 @@ Parameters:
     Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
     Type: String
     Default: ''
-  KubernetesVersion:
-    Type: String
-    AllowedValues: [ "1.16", "1.15" ]
-    Default: "1.16"
-    Description: The Kubernetes control plane version.
   KubeSphereConsolePassword:
     Type: String
     AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
@@ -348,6 +362,10 @@ Parameters:
     AllowedValues: [true, false]
     Default: true
     Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
+  ConfigSetName:
+    Type: String
+    Default: ""
+    Description: Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
   3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
@@ -377,30 +395,29 @@ Resources:
         PublicSubnet3CIDR: !Ref 'PublicSubnet3CIDR'
         PublicSubnetTag2: "kubernetes.io/role/elb="
         VPCCIDR: !Ref 'VPCCIDR'
-  EKSStack:
+  EKSClusterStack:
     DependsOn: VPCStack
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL:
         !Sub
-          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks.template.yaml'
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks-entrypoint-existing-vpc.template.yaml'
           - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
             S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
-        PublicSubnet1ID: !GetAtt VPCStack.Outputs.PublicSubnet1ID
-        PublicSubnet2ID: !If
-          - 2AZDeployment
-          - !GetAtt VPCStack.Outputs.PublicSubnet2ID
-          - !Ref AWS::NoValue
-        PublicSubnet3ID: !If
-          - 3AZDeployment
-          - !GetAtt VPCStack.Outputs.PublicSubnet3ID
-          - !Ref AWS::NoValue
-        KeyPairName: !Ref KeyPairName
         QSS3BucketName: !Ref QSS3BucketName
         QSS3BucketRegion: !Ref QSS3BucketRegion
         QSS3KeyPrefix: !Sub "${QSS3KeyPrefix}submodules/quickstart-amazon-eks/"
+        NumberOfNodes: !Ref NumberOfNodes
+        NodeInstanceType: !Ref NodeInstanceType
+        RemoteAccessCIDR: !Ref RemoteAccessCIDR
+        AdditionalEKSAdminUserArn: !Join [ ',', !Ref 'AdditionalEKSAdminUserArn' ]
+        PerRegionSharedResources: !Ref PerRegionSharedResources
+        PerAccountSharedResources: !Ref PerAccountSharedResources
+        ConfigSetName: !Ref 'ConfigSetName'
+        KeyPairName: !Ref 'KeyPairName'
         PrivateSubnet1ID: !GetAtt VPCStack.Outputs.PrivateSubnet1AID
+        PublicSubnet1ID: !GetAtt VPCStack.Outputs.PublicSubnet1ID
         PrivateSubnet2ID: !If
           - 2AZDeployment
           - !GetAtt VPCStack.Outputs.PrivateSubnet2AID
@@ -409,17 +426,17 @@ Resources:
           - 3AZDeployment
           - !GetAtt VPCStack.Outputs.PrivateSubnet3AID
           - !Ref AWS::NoValue
-        NumberOfNodes: !Ref NumberOfNodes
-        NodeGroupName: !Ref NodeGroupName
-        NodeVolumeSize: !Ref NodeVolumeSize
-        LambdaZipsBucketName: !Ref LambdaZipsBucketName
-        NodeInstanceType: !Ref NodeInstanceType
-        RemoteAccessCIDR: !Ref RemoteAccessCIDR
-        AdditionalEKSAdminUserArn: !Join [ ',', !Ref 'AdditionalEKSAdminUserArn' ]
+        PublicSubnet2ID: !If
+          - 2AZDeployment
+          - !GetAtt VPCStack.Outputs.PublicSubnet2ID
+          - !Ref AWS::NoValue
+        PublicSubnet3ID: !If
+          - 3AZDeployment
+          - !GetAtt VPCStack.Outputs.PublicSubnet3ID
+          - !Ref AWS::NoValue
         VPCID: !GetAtt VPCStack.Outputs.VPCID
-        KubernetesVersion: !Ref KubernetesVersion
   KubeSphereStack:
-    DependsOn: EKSStack
+    DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL:
@@ -428,7 +445,7 @@ Resources:
           - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
             S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
-        KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
+        KubeClusterName: !GetAtt EKSClusterStack.Outputs.EKSClusterName
         KubeConfigKmsContext: "EKSQuickStart"
         KubeSphereConsolePassword: !Ref KubeSphereConsolePassword
         Openpitrix: !Ref Openpitrix
@@ -442,12 +459,11 @@ Resources:
         Networkpolicy: !Ref Networkpolicy
         MetricsServer: !Ref MetricsServer
         Multicluster: !Ref Multicluster
-
 Outputs:
   EKSClusterName:
-    Value: !GetAtt EKSStack.Outputs.EKSClusterName
+    Value: !GetAtt EKSClusterStack.Outputs.EKSClusterName
   BastionIP:
-    Value: !GetAtt EKSStack.Outputs.BastionIP
+    Value: !GetAtt EKSClusterStack.Outputs.BastionIP
   KubeSphereConsoleEndpoint:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
   KubeSphereConsoleLoginUser:
