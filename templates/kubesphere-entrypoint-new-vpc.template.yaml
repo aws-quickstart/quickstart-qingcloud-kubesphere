@@ -121,7 +121,6 @@ Metadata:
         default: Networkpolicy
       MetricsServer:
         default: MetricsServer
-      
 Parameters:
   NumberOfAZs:
     Type: String

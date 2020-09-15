@@ -39,7 +39,7 @@ Metadata:
         default: KubeSphere System and Pluggable Components Configuration
       Parameters:
       - KubeSphereConsolePassword
-      - Openpitrix  
+      - Openpitrix
       - Devops
       - Servicemesh
       - Notification
@@ -379,4 +379,3 @@ Outputs:
     Value: admin
   KubeSphereConsoleLoginPassword:
     Value: !Sub ${KubeSphereConsolePassword}
-
