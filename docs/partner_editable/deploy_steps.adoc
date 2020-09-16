@@ -13,11 +13,11 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 
 [cols=2*]
 |===
-^|https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-new-vpc.template.yaml?token=ANE5JYX4RNN2UANY5A2KRGS7NI3RU[Deploy {partner-product-short-name} into a new VPC on AWS^]
-^|https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-new-vpc.template.yaml?token=ANE5JYX4RNN2UANY5A2KRGS7NI3RU[View Template^]
+^|https://fwd.aws/vW77e[Deploy {partner-product-short-name} into a new VPC on AWS^]
+^|https://aws-quickstart-us-east-1.s3.amazonaws.com/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[View Template^]
 
-^|https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-existing-vpc.template.yaml?token=ANE5JYT235R74KCWEMTKP7C7NI3YE[Deploy {partner-product-short-name} into an existing VPC on AWS^]
-^|https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-existing-vpc.template.yaml?token=ANE5JYT235R74KCWEMTKP7C7NI3YE[View template^]
+^|https://fwd.aws/XJaW5[Deploy {partner-product-short-name} into an existing VPC on AWS^]
+^|https://aws-quickstart-us-east-1.s3.amazonaws.com/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-existing-vpc.template.yaml[View template^]
 |===
 
 WARNING: If you’re deploying {partner-product-short-name} into an existing VPC, make sure that your VPC has three private subnets in different Availability Zones for the workload instances, and that the subnets aren’t shared. This Quick Start doesn’t support https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html[shared subnets^]. These subnets require https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html[NAT gateways^] in their route tables, to allow the instances to download packages and software without exposing them to the internet.
