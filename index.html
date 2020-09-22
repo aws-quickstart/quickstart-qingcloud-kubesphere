@@ -768,14 +768,14 @@ a img {
     border: 1px solid #A4A4A4;
 }
 
-.preview_mode {
+#preview_mode {
 	border-color:#e0e0dc;
 	-webkit-box-shadow:0 1px 4px #e0e0dc;
 	box-shadow:0 1px 4px #e0e0dc;
   background:#ffffb3;
   padding-bottom: 2rem;
 }
-.preview_mode .tableblock {
+#preview_mode .tableblock {
   background:#ffffb3;
 }
 </style>
@@ -800,23 +800,17 @@ a img {
 </li>
 <li><a href="#_deployment_steps">Deployment steps</a>
 <ul class="sectlevel2">
-<li><a href="#_sign_in_to_your_aws_account">Sign in to your AWS account</a></li>
-<li><a href="#_launch_the_quick_start">Launch the Quick Start</a></li>
 <li><a href="#_launch_into_new_vpc">Launch into New VPC</a></li>
 <li><a href="#_launch_into_existing_vpc">Launch into Existing VPC</a></li>
 </ul>
 </li>
-<li><a href="#_test_the_deployment">Test the deployment</a></li>
-<li><a href="#_best_practices_for_using_kubesphere_on_aws">Best practices for using KubeSphere on AWS</a></li>
-<li><a href="#_security">Security</a></li>
-<li><a href="#_getting_started_with_kubesphere">Getting Started with KubeSphere</a></li>
-<li><a href="#_central_control_plane_for_multi_cloud_and_multi_cluster_management">Central Control Plane for Multi-cloud and Multi-cluster Management</a></li>
-<li><a href="#_additional_resources">Additional resources</a></li>
-<li><a href="#_faq">FAQ</a></li>
 <li><a href="#_send_us_feedback">Send us feedback</a></li>
 <li><a href="#_quick_start_reference_deployments">Quick Start reference deployments</a></li>
-<li><a href="#_github_repository">GitHub repository</a></li>
+<li><a href="#_github_repository">GitHub repository</a>
+<ul class="sectlevel3">
 <li><a href="#_notices">Notices</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -827,15 +821,28 @@ a img {
 <h2 id="_quick_start_reference_deployment" class="discrete text-left text-center">Quick Start Reference Deployment</h2>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/aws-quickstart-graphic.png" alt="QS" width="80" height="80">
+<img src="https://aws-quickstart.s3.amazonaws.com/quickstart-qingcloud-kubesphere/docs/boilerplate/.images/aws-quickstart-graphic.png" alt="QS" width="80" height="80">
 </div>
 </div>
-<div class="paragraph text-center">
+<h3 id="_draft_document_unofficial_guidance" class="discrete text-center">DRAFT DOCUMENT / UNOFFICIAL GUIDANCE</h3>
+<div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/__settings</em>.adoc</code></strong>_</p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph text-center">
 <p><strong>Sept, 2020</strong><br>
 <em>Xiaosi Zhou, Pengfei Zhou, Shuang Yu, Sherlock Xu - {QingCloud}</em><br>
 <em>Troy Ameigh - AWS Global Sr. Partner SA, AWS</em></p>
-</div>
-<div class="admonitionblock tip text-left">
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
@@ -857,6 +864,15 @@ report bugs, or submit feature ideas for this Quick Start.
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/overview_target_and_usage.adoc</code></strong></em></p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>This Quick Start reference deployment guide provides step-by-step instructions for deploying KubeSphere packaged with Amazon EKS on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
@@ -864,7 +880,10 @@ report bugs, or submit feature ideas for this Quick Start.
 </div>
 <div class="paragraph">
 <p><strong>Please know that we may share who uses AWS Quick Starts with the AWS Partner Network (APN) Partner that collaborated with AWS on the content of the Quick Start.</strong></p>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -885,10 +904,19 @@ collaborated with AWS on the content of the Quick Start.
 <h2 id="_qingcloud_kubesphere_on_aws">QingCloud KubeSphere on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>KubeSphere is a multi-tenant enterprise-grade container platform with full-stack operation and streamlined DevOps workflows. It provides developer-friendly web interfaces, helping enterprises to build out a more robust and feature-rich platform, which includes the most common functionalities needed for enterprise Kubernetes strategies.</p>
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/product_description.adoc</code></strong></em></p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>KubeSphere is a multi-tenant enterprise-grade container platform with full-stack automation, operation and streamlined DevOps workflows. It provides developer-friendly web interfaces, helping enterprises to build out a more robust and feature-rich platform, which includes the most common functionality needed for enterprise Kubernetes strategies.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start is powered by AWS CloudFormation templates that will help end-users to provision an Amazon EKS environment on new or existing VPC automatically, KubeSphere Amazon EKS environment. end-users manage their EKS cluster through KubeSphere console, capabilities</p>
+<p>This Quick Start is powered by AWS CloudFormation templates that will help end-users to provision an Amazon EKS environment on new or existing VPC automatically, along with the  deployment and enabling of KubeSphere with in this newly created Amazon EKS environment. This gives end-users the ability to manage their Amazon EKS cluster through the KubeSphere console, which gives them the following capabilities</p>
 </div>
 <div class="ulist">
 <ul>
@@ -932,7 +960,10 @@ collaborated with AWS on the content of the Quick Start.
 <p>Registry Management</p>
 </li>
 </ul>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -967,26 +998,47 @@ After you deploy the Quick Start, enable the <a href="https://docs.aws.amazon.co
 <h2 id="_software_licenses">Software licenses</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/licenses.adoc</code></strong></em></p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>These two paragraphs provide an example of the details you can provide. Provide links as appropriate.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start doesn’t require a license for KubeSphere because KubeSphere is 100% open source, which is free to use for all users of EKS. issues related to KubeSphere, go to <a href="https://github.com/kubesphere/kubesphere">KubeSphere community</a> and raise an issue, or contact the community through <a href="https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE">Slack</a> or <a href="https://groups.google.com/forum/#!forum/kubesphere">mailing list</a> channels.</p>
+<p>This Quick Start doesn’t require a license for KubeSphere because KubeSphere is 100% open source, which is free to use for all users of Amazon EKS. For any issues related to KubeSphere, go to <a href="https://github.com/kubesphere/kubesphere">KubeSphere community</a> and raise an issue, or contact the community through <a href="https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE">Slack</a> or <a href="https://groups.google.com/forum/#!forum/kubesphere">mailing list</a> channels.</p>
 </div>
 <div class="paragraph">
-<p>For users, who are using KubeSphere for production environments and to get technical support have a support subscription. To get started, contact your account executive or fill out the form on the KubeSphere website.</p>
+<p>For those users, who are using KubeSphere for production environments and want to get technical support. You will need to have a support subscription. To get started, contact your account executive or fill out the <a href="https://jinshuju.net/f/bDS8me">Request a Sales Call</a> form on the KubeSphere website.</p>
 </div>
 <div class="paragraph">
-<p>If you don’t have a subscription, the Quick Start runs in trial mode, which allows free usage in a non-production environment with no technical support. For more information about proof-of-concept environments, contact &lt;???&gt;.</p>
+<p>You are responsible for the cost of the AWS infrastructure, storage, and data services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.</p>
 </div>
 <div class="paragraph">
 <p>QingCloud is <strong>AWS Partner Network (APN) Partner, and also the main KubeSphere project sponsor and maintainer, which means they can provide certified support related to KubeSphere.</strong></p>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_architecture">Architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/architecture.adoc</code></strong></em></p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Deploying this Quick Start for a new virtual private cloud (VPC) with <strong>default parameters</strong> builds the following KubeSphere environment in the AWS Cloud.</p>
 </div>
 <div id="architecture1" class="imageblock">
@@ -1040,7 +1092,10 @@ After you deploy the Quick Start, enable the <a href="https://docs.aws.amazon.co
 </div>
 <div class="paragraph">
 <p>*The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.</p>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -1058,8 +1113,20 @@ deploy, and operate your infrastructure and applications on the AWS
 Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start assumes you have basic knowledge with <a href="https://www.docker.com//">Docker</a> and <a href="https://www.kubernetes.io/">Kubernetes</a>.</p>
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/specialized_knowledge.adoc</code></strong></em></p>
 </div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This Quick Start assumes you have basic knowledge with <a href="https://www.docker.com//">Docker</a> and <a href="https://www.kubernetes.io/">Kubernetes</a>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_aws_account">AWS account</h3>
@@ -1080,6 +1147,10 @@ Cloud.</p>
 <div class="paragraph">
 <p>If necessary, request <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/" target="_blank" rel="noopener">service quota increases</a> for the following resources. You might need to request increases if your existing deployment currently uses these resources, and this Quick Start deployment could result in exceeding the default quotas. The <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/" target="_blank" rel="noopener">Service Quotas console</a> displays your usage and quotas for some aspects of some services. For more information, see the <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html" target="_blank" rel="noopener">AWS documentation</a>.</p>
 </div>
+<div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/service_limits.adoc</code></strong></em></p>
+</div>
+<div id="preview_mode">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -1135,10 +1206,16 @@ Cloud.</p>
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect3">
 <h4 id="_supported_regions">Supported Regions</h4>
 <div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/regions.adoc</code></strong></em></p>
+</div>
+<div id="preview_mode">
+<div class="paragraph">
 <p>This deployment includes Amazon EKS, which may not be supported in all AWS Regions. For a current list of supported Regions, see <a href="https://docs.aws.amazon.com/general/latest/gr/eks.html" target="_blank" rel="noopener">AWS Regions and Endpoints</a> in the AWS documentation.</p>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1161,10 +1238,32 @@ Certain Regions are available on an opt-in basis. Refer to the AWS Documentation
 <div class="paragraph">
 <p>The <em>AdministratorAccess</em> managed policy within IAM provides sufficient permissions, although your organization may choose to use a custom policy with more restrictions.</p>
 </div>
+<div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/pre-reqs.adoc</code></strong></em></p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_deployment_options">Deployment options</h4>
 <div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/deployment_options.adoc</code></strong></em></p>
+</div>
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>This Quick Start provides two deployment options:</p>
 </div>
 <div class="ulist">
@@ -1173,13 +1272,16 @@ Certain Regions are available on an opt-in basis. Refer to the AWS Documentation
 <p><strong>Deploy KubeSphere into a new VPC (end-to-end deployment)</strong>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys KubeSphere into this new VPC.</p>
 </li>
 <li>
-<p><strong>Deploy KubeSphere into an existing VPC</strong>. This option provisions KubeSphere in your existing AWS infrastructure.</p>
+<p><strong>Deploy KubeSphere into an existing VPC</strong>. This option provisions Amazon EKS and KubeSphere in your existing AWS infrastructure.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and KubeSphere settings, as discussed later in this guide.</p>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1187,8 +1289,14 @@ Certain Regions are available on an opt-in basis. Refer to the AWS Documentation
 <div class="sect1">
 <h2 id="_deployment_steps">Deployment steps</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_sign_in_to_your_aws_account">Sign in to your AWS account</h3>
+<div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/deploy_steps.adoc</code></strong></em></p>
+</div>
+<div id="preview_mode" class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>=== Sign in to your AWS account</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1199,9 +1307,9 @@ Certain Regions are available on an opt-in basis. Refer to the AWS Documentation
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Launch the Quick Start</p>
 </div>
-<div class="sect2">
-<h3 id="_launch_the_quick_start">Launch the Quick Start</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1228,12 +1336,12 @@ You are responsible for the cost of the AWS services used while running this Qui
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-new-vpc.template.yaml?token=ANE5JYX4RNN2UANY5A2KRGS7NI3RU" target="_blank" rel="noopener">Deploy KubeSphere into a new VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-new-vpc.template.yaml?token=ANE5JYX4RNN2UANY5A2KRGS7NI3RU" target="_blank" rel="noopener">View Template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/vW77e" target="_blank" rel="noopener">Deploy KubeSphere into a new VPC on AWS</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-us-east-1.s3.amazonaws.com/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">View Template</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-existing-vpc.template.yaml?token=ANE5JYT235R74KCWEMTKP7C7NI3YE" target="_blank" rel="noopener">Deploy KubeSphere into an existing VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://raw.githubusercontent.com/aws-quickstart/quickstart-qingcloud-kubesphere/main/templates/kubesphere-entrypoint-existing-vpc.template.yaml?token=ANE5JYT235R74KCWEMTKP7C7NI3YE" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/XJaW5" target="_blank" rel="noopener">Deploy KubeSphere into an existing VPC on AWS</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-us-east-1.s3.amazonaws.com/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-existing-vpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1268,12 +1376,14 @@ If you’re deploying KubeSphere into an existing VPC, make sure that your VPC h
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>On the <strong>Create stack</strong> page, keep the default setting for the template URL, and then choose <strong>Next</strong>.</p>
+<p>On the <strong>Create stack</strong> page, keep the default setting for the template, and then choose <strong>Next</strong>.</p>
 </li>
 <li>
 <p>On the <strong>Specify stack details</strong> page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary.</p>
 </li>
 </ol>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>In the following tables, parameters are listed by category and described separately for the deployment options. When you finish reviewing and customizing the parameters, choose <strong>Next</strong>.</p>
@@ -1290,7 +1400,6 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </td>
 </tr>
 </table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_launch_into_new_vpc">Launch into New VPC</h3>
@@ -1477,7 +1586,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lambda zips bucket name
 (<code>LambdaZipsBucketName</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Blank string</em></strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.</p></td>
 </tr>
 </tbody>
@@ -1745,7 +1854,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lambda zips bucket name
 (<code>LambdaZipsBucketName</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Blank string</em></strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.</p></td>
 </tr>
 </tbody>
@@ -1864,10 +1973,16 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </div>
 <div class="title">Figure 2. KubeSphere outputs after successful deployment</div>
 </div>
+<div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/additional_info.adoc</code></strong></em></p>
 </div>
-</div>
-</div>
-<div class="sect1">
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="sect1">
 <h2 id="_test_the_deployment">Test the deployment</h2>
 <div class="sectionbody">
 <div class="olist arabic">
@@ -1963,7 +2078,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>Retrieve the generated URL of KubeSphere Console from the Outputs list, access it in your browser, and log in the KubeSphere console using <strong>admin/P@88w0rd</strong>.</p>
+<p>Retrieve the generated URL of KubeSphere Console from the Outputs list, access it in your browser, and log in the KubeSphere console using <strong>admin</strong> account and the password you defined in KubeSphereConsolePassword .</p>
 </li>
 </ol>
 </div>
@@ -1988,7 +2103,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <p>KubeSphere has eleven pluggable components as we mentioned in the table <em>KubeSphere System and Pluggable Configuration of <a href="#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc">Step3</a></em>. By default, KubeSphere will be started with a minimal installation if you do not enable them. You can enable any of them according to your demands. Each component’s resource consumption has been described in <a href="https://kubesphere.io/docs/pluggable-components/overview/">KubeSphere Documentation</a>, make sure there are sufficient CPU and memory in your cluster.</p>
 </div>
 <div class="paragraph">
-<p>The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node with at least 16 GiB RAM and 4 vGPU. It is highly recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the Cluster Configuration as follows:</p>
+<p>The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node with at least 16 GiB RAM and 4 CPUs. It is highly recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the Cluster Configuration as follows:</p>
 </div>
 <div class="paragraph">
 <p>At first, please use an admin account to enter into <strong>Cluster Management</strong> and choose the EKS cluster. Select <strong>CRDs</strong> from the left menu, search the keyword <strong>ClusterConfiguration</strong> in the box.</p>
@@ -2023,7 +2138,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </div>
 </div>
 <div class="paragraph">
-<p>When you see the information outputs in the logs, it means the pluggable components are ready to use.</p>
+<p>When you see the welcome information outputs in the logs, it means the pluggable components are ready to use.</p>
 </div>
 </div>
 </div>
@@ -2031,7 +2146,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <h2 id="_security">Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Set up the TLS</strong>: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere cluster. We recommend you to set up the TLS for you Network Load Balancer to establish a secure connection between a client and a server and ensures that all data passed between the client and your load balancer is private, see <a href="file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer">TLS listeners for your Network Load Balancer</a> for more details.</p>
+<p><strong>Set up the TLS</strong>: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend you to set up the TLS for you Network Load Balancer to establish a secure connection between a client and a server and ensures that all data passed between the client and your load balancer is private, see <a href="file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer">TLS listeners for your Network Load Balancer</a> for more details.</p>
 </div>
 <div class="paragraph">
 <p><strong>Keep the Secret privately</strong>: KubeSphere supports multi-cluster management in a unified control plane. Please properly save the secrets used to connect to the external cluster, see <a href="https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/">KubeSphere Documentation</a> for more details.</p>
@@ -2040,7 +2155,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <p><strong>Create proper multi-tenant management policies:</strong> KubeSphere is a multi-tenant platform, multi-tenancy in KubeSphere refers to one or more clusters that are shared between different tenants. Please make sure you set the proper roles, rights, and projects for tenants, see <a href="https://kubesphere.io/docs/quick-start/create-workspace-and-project/">KubeSphere Documentation</a> for more details.</p>
 </div>
 <div class="paragraph">
-<p><strong>Create proper network policies:</strong> KubeSphere allows administrator to set network policy for different projects (namespaces) and workspaces. To control network communication between in each of your cluster&#8217;s projects and workspaces, create <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy">network policies</a> based on your tenants' requirements. As an initial recommendation, you should block traffic between projects that host different tenants' applications, denying all ingress traffic to avoid Pods from one project accidentally sending traffic to Services or databases in other projects.</p>
+<p><strong>Create proper network policies:</strong> KubeSphere allows administrator to set network policy for different projects (namespaces) and workspaces. To control network communication between pods in each of your cluster&#8217;s projects and workspaces, create <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy">network policies</a> based on your tenants' requirements. As an initial recommendation, you should block traffic between projects that host different tenants' applications, denying all ingress traffic to avoid Pods from one project accidentally sending traffic to Services or databases in other projects.</p>
 </div>
 </div>
 </div>
@@ -2127,8 +2242,20 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </ul>
 </div>
 </div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em><strong>This portion of the deployment guide is located at <code>docs/partner_editable/faq_troubleshooting.adoc</code></strong></em></p>
 </div>
-<div class="sect1">
+<table id="preview_mode" class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="sect1">
 <h2 id="_faq">FAQ</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2165,6 +2292,12 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <p><strong>A.</strong> Click the username at the top right corner of the console, select <strong>User Settings</strong>, and you can find the language option. KubeSphere Console supports English, Simplified Chinese, Spanish, and Traditional Chinese.</p>
 </div>
 </div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_send_us_feedback">Send us feedback</h2>
@@ -2194,11 +2327,8 @@ and to share your customizations with others.</p>
 <div class="paragraph">
 <p>© 2020, Amazon Web Services Inc., or its affiliates, and QingCloud. All rights reserved.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_notices">Notices</h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="_notices">Notices</h4>
 <div class="paragraph">
 <p>This document is provided for informational purposes only. It represents AWS’s current product offerings and practices as of the date of issue of this document, which are subject to change without notice. Customers are responsible for making their own independent assessment of the information in this document and any use of AWS’s products or services, each of which is provided “as is” without warranty of any kind, whether expressed or implied. This document does not create any warranties, representations, contractual commitments, conditions, or assurances from AWS, its affiliates, suppliers, or licensors. The responsibilities and liabilities of AWS to its customers are controlled by AWS agreements, and this document is not part of, nor does it modify, any agreement between AWS and its customers.</p>
 </div>
@@ -2208,9 +2338,10 @@ and to share your customizations with others.</p>
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-09-15 23:30:03 UTC
+Last updated 2020-09-22 05:13:46 UTC
 </div>
 </div>
 </body>

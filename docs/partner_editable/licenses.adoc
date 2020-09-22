@@ -3,10 +3,10 @@
 These two paragraphs provide an example of the details you can provide. Provide links as appropriate.
 
 
-This Quick Start doesn’t require a license for KubeSphere because KubeSphere is 100% open source, which is free to use for all users of EKS. issues related to KubeSphere, go to https://github.com/kubesphere/kubesphere[KubeSphere community] and raise an issue, or contact the community through https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE[Slack] or https://groups.google.com/forum/#!forum/kubesphere[mailing list] channels.
+This Quick Start doesn’t require a license for KubeSphere because KubeSphere is 100% open source, which is free to use for all users of Amazon EKS. For any issues related to KubeSphere, go to https://github.com/kubesphere/kubesphere[KubeSphere community] and raise an issue, or contact the community through https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE[Slack] or https://groups.google.com/forum/#!forum/kubesphere[mailing list] channels.
 
-For users, who are using KubeSphere for production environments and to get technical support have a support subscription. To get started, contact your account executive or fill out the form on the KubeSphere website.
+For those users, who are using KubeSphere for production environments and want to get technical support. You will need to have a support subscription. To get started, contact your account executive or fill out the https://jinshuju.net/f/bDS8me[Request a Sales Call] form on the KubeSphere website.
 
-If you don’t have a subscription, the Quick Start runs in trial mode, which allows free usage in a non-production environment with no technical support. For more information about proof-of-concept environments, contact <???>.
+You are responsible for the cost of the AWS infrastructure, storage, and data services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.
 
 QingCloud is *AWS Partner Network (APN) Partner, and also the main KubeSphere project sponsor and maintainer, which means they can provide certified support related to KubeSphere.*

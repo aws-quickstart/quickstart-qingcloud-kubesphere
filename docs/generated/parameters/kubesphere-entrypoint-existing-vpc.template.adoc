@@ -35,7 +35,7 @@
 (`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 key prefix
 (`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and forward slash (/).|Quick Start S3 bucket region
 (`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Lambda zips bucket name
-(`LambdaZipsBucketName`)|`**__Blank string__**`|[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.
+(`LambdaZipsBucketName`)|`**__Requires input__**`|[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.
 |===
 .KubeSphere System and Pluggable Components Configuration
 [width="100%",cols="16%,11%,73%",options="header",]
