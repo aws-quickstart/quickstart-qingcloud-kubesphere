@@ -3,6 +3,19 @@ Description: Deploy KubeSphere into a new EKS cluster in a new VPC (qs-1qtdde8a5
 Metadata:
   QuickStartDocumentation:
     EntrypointName: "Launch into New VPC"
+    Order: 1
+    OptionalParameters:
+      - Openpitrix
+      - Devops
+      - Servicemesh
+      - Notification
+      - Alerting
+      - Auditing
+      - Logging
+      - Events
+      - Multicluster
+      - Networkpolicy
+      - MetricsServer
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
@@ -268,23 +281,23 @@ Parameters:
     Default: 1
     Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
     Type: Number
-  NodeGroupName:
-    Default: Default
-    Description: The name for Amazon EKS node group.
-    Type: String
-  NodeVolumeSize:
-    Default: 100
-    Description: The size for the node's root EBS volume.
-    Type: String
-  LambdaZipsBucketName:
-    Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
-    Type: String
-    Default: ''
-  KubernetesVersion:
-    Type: String
-    AllowedValues: [ "1.16", "1.15" ]
-    Default: "1.16"
-    Description: The Kubernetes control plane version.
+  #NodeGroupName:
+  #  Default: Default
+  #  Description: The name for Amazon EKS node group.
+  #  Type: String
+#  NodeVolumeSize:
+#    Default: 100
+#    Description: The size for the node's root EBS volume.
+#   Type: String
+ # LambdaZipsBucketName:
+#    Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
+#    Type: String
+#    Default: ''
+# KubernetesVersion:
+#    Type: String
+#    AllowedValues: [ "1.16", "1.15" ]
+#    Default: "1.16"
+#    Description: The Kubernetes control plane version.
   KubeSphereConsolePassword:
     Type: String
     AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
@@ -379,7 +392,8 @@ Resources:
         PrivateSubnet1ACIDR: !Ref 'PrivateSubnet1CIDR'
         PrivateSubnet2ACIDR: !Ref 'PrivateSubnet2CIDR'
         PrivateSubnet3ACIDR: !Ref 'PrivateSubnet3CIDR'
-        PrivateSubnetATag2: !Sub
+        PrivateSubnetATag2: "kubernetes.io/role/internal-elb="
+        PrivateSubnetATag3: !Sub
           - 'kubernetes.io/cluster/${X}-${AWS::Region}=owned'
           - X: !Select [ 2, !Split ["/", !Ref 'AWS::StackId' ]]
         PublicSubnet1CIDR: !Ref 'PublicSubnet1CIDR'
