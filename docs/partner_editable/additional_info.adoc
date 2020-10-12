@@ -4,35 +4,35 @@
 == Test the deployment
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
-. Log in to the bastion host with the configured key pair and the user name ec2-user. You can get the IP address of the bastion host from the Outputs tab of the AWS CloudFormation console.
+. Log in to the bastion host using your configured key pair and the user name `ec2-user`. You can get the IP address of the bastion host from the *Outputs* tab of the AWS CloudFormation console.
 
  ssh -i "~/.ssh/cap.pem" ec2-user@12.23.34.45
 
 [start=2]
 . Verify that the client software was installed through the bastion host:
 
-* Kubectl Version:
+* Kubectl version:
 
- $ kubectl vesion
+ $ kubectl version
 
-* Helm Version:
+* Helm version:
 
  $ helm version
 
-* AWS CLI Version:
+* AWS CLI version:
 
  $ aws -version
 
-* Cf Version:
+* Cf version:
 
  $ cf -version
 
-* Git Version
+* Git version
 
  $ git version
 
 [start=3]
-. Verify the health of the Amazon EKS cluster through the bastion host. Use the installed kubectl and helm commands to verify access to the environment and the running state of the cluster and packages. When you see the welcome information outputs in the log, and all Pods are running, it means the installation is successful.
+. Verify the health of the Amazon EKS cluster through the bastion host. Use the installed `kubectl` and `helm` commands to verify access to the environment and the running state of the cluster and packages. The installation was successful if you see the welcome-information outputs in the log.
 
     $ kubectl cluster-info
 
@@ -43,7 +43,7 @@
     $ kubectl get pod –all-namespaces
 
 [start=4]
-. Retrieve the generated URL of KubeSphere Console from the Outputs list, access it in your browser, and log in the KubeSphere console using *admin* account and the password you defined in KubeSphereConsolePassword .
+. Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the *admin* account and password you defined in `KubeSphereConsolePassword`.
 
 
 [#KubeSphereLogin1]
@@ -60,51 +60,53 @@ image::../images/image5.png[Architecture,width=648,height=439]
 == Best practices for using {partner-product-short-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-KubeSphere has eleven pluggable components as we mentioned in the table _KubeSphere System and Pluggable Configuration of link:#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc[Step3]_. By default, KubeSphere will be started with a minimal installation if you do not enable them. You can enable any of them according to your demands. Each component’s resource consumption has been described in https://kubesphere.io/docs/pluggable-components/overview/[KubeSphere Documentation], make sure there are sufficient CPU and memory in your cluster.
+As mentioned in the table _KubeSphere System and Pluggable Configuration of link:#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc[Step3]_, KubeSphere has 11 pluggable components, which can be enabled individually. If you don't enable them, KubeSphere starts with a minimal installation by default. Ensure that you have the necessary CPU and memory requirements in your cluster. For more information, see the https://kubesphere.io/docs/pluggable-components/overview/[KubeSphere documentation].
 
-The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node with at least 16 GiB RAM and 4 CPUs. It is highly recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the Cluster Configuration as follows:
+The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node that has at least 16 GiB RAM and 4 CPUs. We recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the cluster's configuration as follows:
 
-At first, please use an admin account to enter into *Cluster Management* and choose the EKS cluster. Select *CRDs* from the left menu, search the keyword *ClusterConfiguration* in the box.
+Use an administrative account to access *Cluster Management*. Choose the EKS cluster, and select *CRDs* from the left-hand menu. Search for *ClusterConfiguration*.
 
 
 image::../images/image6.png[Architecture,width=648,height=439]
 
-Then you can click into the *ClusterConfiguration* resource page, click *···* from the list and select *Edit YAML.*
+Choose the *ClusterConfiguration* resource page. Choose *···* from the list, and select *Edit YAML*.
 
 image::../images/image7.png[Architecture,width=648,height=439]
 
 
-Scroll down to the *spec* section, and change the pluggable components from false to true to enable the features as you want. Finally, click *Update* to save the changes and the installation will be started at the backend automatically.
+Scroll down to the *spec* section, and change the pluggable components from *false* to *true* for the features you want. Finally, choose *Update* to save your changes. The installation automatically starts at the backend.
 
 image::../images/image8.png[Architecture,width=648,height=439]
 
-Open the *Web kubectl* from *Toolbox* at the right bottom, then inspect the logs of installation:
+Open the *Web kubectl* from *Toolbox* (**bottom right**), and inspect the installation logs:
 
  $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
 
-When you see the welcome information outputs in the logs, it means the pluggable components are ready to use.
+When you see welcome information in the output logs, it means the pluggable components are ready to use.
 
 == Security
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-*Set up the TLS*: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend you to set up the TLS for you Network Load Balancer to establish a secure connection between a client and a server and ensures that all data passed between the client and your load balancer is private, see file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer[TLS listeners for your Network Load Balancer] for more details.
+*Set up the TLS*: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend that you set up the TLS for you Network Load Balancer to establish a secure connection between the client and server. This helps to ensure that all data passed between the client and your load balancer is private, for more information, see file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer[TLS listeners for your Network Load Balancer].
 
-*Keep the Secret privately*: KubeSphere supports multi-cluster management in a unified control plane. Please properly save the secrets used to connect to the external cluster, see https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/[KubeSphere Documentation] for more details.
+*Keep the secret private*: KubeSphere supports multicluster management in a unified control plane. Please properly save the secrets used to connect to the external cluster, see https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/[KubeSphere Documentation] for more details.
 
-*Create proper multi-tenant management policies:* KubeSphere is a multi-tenant platform, multi-tenancy in KubeSphere refers to one or more clusters that are shared between different tenants. Please make sure you set the proper roles, rights, and projects for tenants, see https://kubesphere.io/docs/quick-start/create-workspace-and-project/[KubeSphere Documentation] for more details.
+*Create proper multitenant management policies:* KubeSphere is a multitenant platform. Multitenancy in KubeSphere refers to one or more clusters that are shared between tenants. Ensure that you set the proper roles, permissions, and projects for tenants. For more information, see https://kubesphere.io/docs/quick-start/create-workspace-and-project/[Create Workspace, Project, Account and Role].
 
-*Create proper network policies:* KubeSphere allows administrator to set network policy for different projects (namespaces) and workspaces. To control network communication between pods in each of your cluster's projects and workspaces, create https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[network policies] based on your tenants' requirements. As an initial recommendation, you should block traffic between projects that host different tenants' applications, denying all ingress traffic to avoid Pods from one project accidentally sending traffic to Services or databases in other projects.
+*Create proper network policies:* KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster's projects and workspaces, create https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[network policies] based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all ingress traffic to avoid pods from one project mistakenly sending traffic to another project's services or databases.
 
 //== Other useful information
 //Provide any other information of interest to users, especially focusing on areas where AWS or cloud usage differs from on-premises usage.
 
-== Getting Started with KubeSphere
+== Get started with KubeSphere
 
-When you finish the deployment of this Quick Start, you can refer to https://kubesphere.io/docs/quick-start/admin-quick-start/[Getting Started Guide] from KubeSphere website. There are some hands-on labs and tutorials that can help you to get started with KubeSphere.
+When you finish deploying this Quick Start, refer to the
+//TODO This link doesn't seem to resolve:
+ https://kubesphere.io/docs/quick-start/admin-quick-start/[KubeSphere Getting Started Guide]. It has hands-on labs and tutorials that can help you get started with KubeSphere.
 
-== Central Control Plane for Multi-cloud and Multi-cluster Management
+== Central control plane for multicloud and multicluster management
 
-If you want to build a hybrid cloud strategy for multi-cloud and multi-cluster management, you can enable the Kubernetes federation to set up a central control plane using KubeSphere. KubeSphere supports application distribution across multiple clusters and cloud providers. It also provides disaster recovery solutions and cross-cluster observability. Please refer to file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphere/How%20to%20Enable%20the%20Multi-cluster%20Feature[How to Enable Multi-cluster feature] for more details.
+If you want to build a hybrid cloud strategy for multicloud and multicluster management, enable Kubernetes federation to set up a central control plane using KubeSphere. KubeSphere supports application distribution across multiple clusters and cloud providers. It also provides disaster-recovery solutions and cross-cluster observability. For more information, see file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphere/How%20to%20Enable%20the%20Multi-cluster%20Feature[How to enable a multicluster feature].
 
 == Additional resources
 
@@ -123,9 +125,8 @@ If you want to build a hybrid cloud strategy for multi-cloud and multi-cluster m
 * https://docs.aws.amazon.com/iam/[IAM]
 * https://docs.aws.amazon.com/vpc/[Amazon VPC]
 
-*KubeSphere Documentation*
+*KubeSphere documentation*
 
-* https://kubesphere.io/[KubeSphere Website]
 * https://kubesphere.io/docs/introduction/what-is-kubesphere/[What is KubeSphere]
 * https://kubesphere.io/docs/installation/intro/[Installation Guide]
 * https://kubesphere.io/docs/installation/pluggable-components/[Introduction to Pluggable Components]
