@@ -50,7 +50,7 @@ tests:
       MetricsServer: 'true'
       Networkpolicy: 'false'
       PerAccountSharedResources: 'No'
-      PerRegionSharedResources: 'No'
+      PerRegionSharedResources: 'Yes'
     regions:
     - us-east-1
     - us-west-2
@@ -74,7 +74,7 @@ tests:
       Networkpolicy: 'false'
       ALBIngressController: Disabled
       PerAccountSharedResources: 'No'
-      PerRegionSharedResources: 'Yes'
+      PerRegionSharedResources: 'No'
     regions:
     - cn-northwest-1
     template: templates/kubesphere-entrypoint-new-vpc.template.yaml
