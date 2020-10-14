@@ -475,6 +475,3 @@ Outputs:
     Value: admin
   KubeSphereConsoleLoginPassword:
     Value: !Sub ${KubeSphereConsolePassword}
-
-
-

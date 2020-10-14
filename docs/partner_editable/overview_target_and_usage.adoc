@@ -2,6 +2,11 @@
 // Identify your target audience and explain how/why they would use this Quick Start.
 //Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
 
-This Quick Start reference deployment guide provides step-by-step instructions for deploying {partner-product-short-name} on the AWS Cloud.
 
-This Quick Start is for users who <target audience and usage scenario>
+This Quick Start reference deployment guide provides step-by-step instructions for deploying KubeSphere packaged with Amazon EKS on the AWS Cloud.
+
+This Quick Start is for users who are going to use Amazon EKS, and also looking for an easy-to-use but also powerful web console to manage daily complicated workloads related to Kubernetes.
+
+*Please know that we may share who uses AWS Quick Starts with the AWS Partner Network (APN) Partner that collaborated with AWS on the content of the Quick Start.*
+
+

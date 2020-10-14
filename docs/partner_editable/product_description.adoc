@@ -2,4 +2,20 @@
 // Briefly describe the software. Use consistent and clear branding. 
 // Include the benefits of using the software on AWS, and provide details on usage scenarios.
 
-<Describe how the software works on AWS.>
+KubeSphere is a multi-tenant enterprise-grade container platform with full-stack automation, operation and streamlined DevOps workflows. It provides developer-friendly web interfaces, helping enterprises to build out a more robust and feature-rich platform, which includes the most common functionality needed for enterprise Kubernetes strategies.
+
+This Quick Start is powered by AWS CloudFormation templates that will help end-users to provision an Amazon EKS environment on new or existing VPC automatically, along with the  deployment and enabling of KubeSphere with in this newly created Amazon EKS environment. This gives end-users the ability to manage their Amazon EKS cluster through the KubeSphere console, which gives them the following capabilities
+
+* Kubernetes Resource Management
+* Multi-cloud and multi-cluster Management
+* DevOps (CI/CD based on https://www.jenkins.io/[Jenkins])
+* Application Lifecycle Management
+* App Store
+* Rich Observability: monitoring, logging, auditing, events, alerting and notification
+* Service Mesh for distributed microservices (Based on https://istio.io/[Istio] and https://www.jaegertracing.io/[Jaeger])
+* Enterprise Multi-tenancy
+* Storage and Networking Management
+* Autoscaling
+* Role-Based Access Control
+* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Network Policy]
+* Registry Management

@@ -53,11 +53,12 @@ Metadata:
       - ConfigSetName
       - PerAccountSharedResources
       - PerRegionSharedResources
+      - LambdaZipsBucketName
     - Label:
         default: KubeSphere System and Pluggable Components Configuration
       Parameters:
       - KubeSphereConsolePassword
-      - Openpitrix
+      - Openpitrix 
       - Devops
       - Servicemesh
       - Notification
@@ -93,6 +94,8 @@ Metadata:
         default: Public subnet 2 CIDR
       PublicSubnet3CIDR:
         default: Public subnet 3 CIDR
+      KeyPairName:
+        default: SSH key name
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3KeyPrefix:
@@ -103,6 +106,10 @@ Metadata:
         default: VPC ID
       VPCCIDR:
         default: VPC CIDR
+      QSS3BucketRegion:
+        default: Quick Start S3 bucket region
+      RemoteAccessCIDR:
+        default: Allowed external access CIDR
       NodeInstanceType:
         default: Nodes instance type
       NumberOfNodes:
@@ -111,6 +118,24 @@ Metadata:
         default: Node group name
       NodeVolumeSize:
         default: Node volume size
+      LambdaZipsBucketName:
+        default: Lambda zips bucket name
+      PublicSubnet1ID:
+        default: Public subnet 1 ID
+      PublicSubnet2ID:
+        default: Public subnet 2 ID
+      PublicSubnet3ID:
+        default: Public subnet 3 ID
+      PrivateSubnet1ID:
+        default: Private subnet 1 ID
+      PrivateSubnet2ID:
+        default: Private subnet 2 ID
+      PrivateSubnet3ID:
+        default: Private subnet 3 ID
+      VPCID:
+        default: VPC ID
+      KubernetesVersion:
+        default: Kubernetes version
       KubeSphereConsolePassword:
         default: KubeSphereConsolePassword
       Openpitrix:
@@ -439,6 +464,3 @@ Outputs:
     Value: admin
   KubeSphereConsoleLoginPassword:
     Value: !Sub ${KubeSphereConsolePassword}
-
-
-
