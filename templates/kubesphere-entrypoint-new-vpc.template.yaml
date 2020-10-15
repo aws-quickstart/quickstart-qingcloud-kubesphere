@@ -445,7 +445,3 @@ Outputs:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
   KubeSphereConsoleLoginUser:
     Value: admin
-
-
-
-
