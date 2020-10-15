@@ -40,9 +40,6 @@ Metadata:
       Parameters:
       - NodeInstanceType
       - NumberOfNodes
-      - NodeGroupName
-      - NodeVolumeSize
-      - KubernetesVersion
     - Label:
         default: AWS Quick Start configuration
       Parameters:
@@ -72,10 +69,6 @@ Metadata:
         default: Availability Zones
       NumberOfAZs:
         default: Number of Availability Zones
-      LambdaZipsBucketName:
-        default: Lambda zips bucket name
-      KubernetesVersion:
-        default: Kubernetes version
       KeyPairName:
         default: SSH key name
       QSS3BucketRegion:
@@ -104,14 +97,10 @@ Metadata:
         default: Nodes instance type
       NumberOfNodes:
         default: Number of nodes
-      NodeGroupName:
-        default: Node group name
-      NodeVolumeSize:
-        default: Node volume size
       KubeSphereConsolePassword:
         default: KubeSphereConsolePassword
       Openpitrix:
-        default: Openpitrix  
+        default: Openpitrix
       Devops:
         default: Devops
       Servicemesh:
@@ -281,27 +270,10 @@ Parameters:
     Default: 1
     Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
     Type: Number
-  #NodeGroupName:
-  #  Default: Default
-  #  Description: The name for Amazon EKS node group.
-  #  Type: String
-#  NodeVolumeSize:
-#    Default: 100
-#    Description: The size for the node's root EBS volume.
-#   Type: String
- # LambdaZipsBucketName:
-#    Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
-#    Type: String
-#    Default: ''
-# KubernetesVersion:
-#    Type: String
-#    AllowedValues: [ "1.16", "1.15" ]
-#    Default: "1.16"
-#    Description: The Kubernetes control plane version.
   KubeSphereConsolePassword:
-    Type: String
-    AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
-    Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
+     Type: String
+     AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
+     Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
   Openpitrix:
     Type: String
     AllowedValues: ['true', 'false']
@@ -473,5 +445,3 @@ Outputs:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
   KubeSphereConsoleLoginUser:
     Value: admin
-  KubeSphereConsoleLoginPassword:
-    Value: !Sub ${KubeSphereConsolePassword}
