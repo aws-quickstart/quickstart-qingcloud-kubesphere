@@ -40,16 +40,15 @@ Metadata:
       Parameters:
       - NodeInstanceType
       - NumberOfNodes
-      - NodeGroupName
-      - NodeVolumeSize
-      - KubernetesVersion
     - Label:
         default: AWS Quick Start configuration
       Parameters:
       - QSS3BucketName
       - QSS3KeyPrefix
       - QSS3BucketRegion
-      - LambdaZipsBucketName
+      - ConfigSetName
+      - PerAccountSharedResources
+      - PerRegionSharedResources
     - Label:
         default: KubeSphere System and Pluggable Components Configuration
       Parameters:
@@ -101,7 +100,7 @@ Metadata:
       KubeSphereConsolePassword:
         default: KubeSphereConsolePassword
       Openpitrix:
-        default: Openpitrix  
+        default: Openpitrix
       Devops:
         default: Devops
       Servicemesh:
@@ -122,6 +121,12 @@ Metadata:
         default: Networkpolicy
       MetricsServer:
         default: MetricsServer
+      ConfigSetName:
+        default: ConfigSetName
+      PerAccountSharedResources:
+        default: Per account shared resources
+      PerRegionSharedResources:
+        default: Per region shared resources
 Parameters:
   NumberOfAZs:
     Type: String
@@ -165,14 +170,12 @@ Parameters:
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
     Default: 10.0.144.0/20
     Description: CIDR block for the public DMZ subnet 2 located in Availability Zone 2.
-      Zone 2
     Type: String
   PublicSubnet3CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
     Default: 10.0.160.0/20
     Description: CIDR block for the public DMZ subnet 3 located in Availability Zone 3.
-      Zone 3
     Type: String
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
@@ -268,13 +271,13 @@ Parameters:
     Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
     Type: Number
   KubeSphereConsolePassword:
-    Type: String
-    AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
-    Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
+     Type: String
+     AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
+     Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
   Openpitrix:
     Type: String
-    AllowedValues: [true, false]
-    Default: false
+    AllowedValues: ['true', 'false']
+    Default: 'false'
     Description: '[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.'
   Devops:
     Type: String
@@ -364,7 +367,7 @@ Resources:
         PrivateSubnetATag2: "kubernetes.io/role/internal-elb="
         PrivateSubnetATag3: !Sub
           - 'kubernetes.io/cluster/${X}-${AWS::Region}=owned'
-          - X: !Select [ 2, !Split [ "/", !Ref 'AWS::StackId' ] ]
+          - X: !Select [ 2, !Split ["/", !Ref 'AWS::StackId' ]]
         PublicSubnet1CIDR: !Ref 'PublicSubnet1CIDR'
         PublicSubnet2CIDR: !Ref 'PublicSubnet2CIDR'
         PublicSubnet3CIDR: !Ref 'PublicSubnet3CIDR'
@@ -376,9 +379,9 @@ Resources:
     Properties:
       TemplateURL:
         !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks-entrypoint-existing-vpc.template.yaml'
-        - S3Region: !If [ UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion ]
-          S3Bucket: !If [ UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName ]
+          - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks-entrypoint-existing-vpc.template.yaml'
+          - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+            S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
         QSS3BucketName: !Ref QSS3BucketName
         QSS3BucketRegion: !Ref QSS3BucketRegion
@@ -442,5 +445,7 @@ Outputs:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
   KubeSphereConsoleLoginUser:
     Value: admin
-  KubeSphereConsoleLoginPassword:
-    Value: !Sub ${KubeSphereConsolePassword}
+
+
+
+
