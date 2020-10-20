@@ -10,8 +10,8 @@
 (`PrivateSubnet2CIDR`)|`10.0.32.0/19`|CIDR block for private subnet 2 located in Availability Zone 2.|Private subnet 3 CIDR
 (`PrivateSubnet3CIDR`)|`10.0.64.0/19`|CIDR block for private subnet 3 located in Availability Zone 3.|Public subnet 1 CIDR
 (`PublicSubnet1CIDR`)|`10.0.128.0/20`|CIDR block for the public DMZ subnet 1 located in Availability Zone 1.|Public subnet 2 CIDR
-(`PublicSubnet2CIDR`)|`10.0.144.0/20`|CIDR block for the public DMZ subnet 2 located in Availability Zone 2. Zone 2|Public subnet 3 CIDR
-(`PublicSubnet3CIDR`)|`10.0.160.0/20`|CIDR block for the public DMZ subnet 3 located in Availability Zone 3. Zone 3|Allowed external access CIDR
+(`PublicSubnet2CIDR`)|`10.0.144.0/20`|CIDR block for the public DMZ subnet 2 located in Availability Zone 2.|Public subnet 3 CIDR
+(`PublicSubnet3CIDR`)|`10.0.160.0/20`|CIDR block for the public DMZ subnet 3 located in Availability Zone 3.|Allowed external access CIDR
 (`RemoteAccessCIDR`)|`**__Requires input__**`|The CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
 |===
 .Amazon EC2 configuration
@@ -25,10 +25,7 @@
 |===
 |Parameter label (name) |Default value|Description|Nodes instance type
 (`NodeInstanceType`)|`t3.xlarge`|The type of EC2 instance for the node instances.|Number of nodes
-(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.|Node group name
-(`NodeGroupName`)|`Default`|The name for Amazon EKS node group.|Node volume size
-(`NodeVolumeSize`)|`100`|The size for the node's root EBS volume.|Kubernetes version
-(`KubernetesVersion`)|`1.16`|The Kubernetes control plane version.
+(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
 |===
 .AWS Quick Start configuration
 [width="100%",cols="16%,11%,73%",options="header",]
@@ -36,15 +33,17 @@
 |Parameter label (name) |Default value|Description|Quick Start S3 bucket name
 (`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 key prefix
 (`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and forward slash (/).|Quick Start S3 bucket region
-(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Lambda zips bucket name
-(`LambdaZipsBucketName`)|`**__Requires input__**`|[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.
+(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|ConfigSetName
+(`ConfigSetName`)|`**__Requires input__**`|Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for|Per account shared resources
+(`PerAccountSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
+(`PerRegionSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
 |===
 .KubeSphere System and Pluggable Components Configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|KubeSphereConsolePassword
 (`KubeSphereConsolePassword`)|`**__Requires input__**`|The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).|Openpitrix
-(`Openpitrix`)|`False`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
+(`Openpitrix`)|`false`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
 (`Devops`)|`False`|[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).|Servicemesh
 (`Servicemesh`)|`False`|[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.|Notification
 (`Notification`)|`False`|[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.|Alerting

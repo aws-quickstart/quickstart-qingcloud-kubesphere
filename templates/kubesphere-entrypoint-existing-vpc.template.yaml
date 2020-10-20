@@ -21,14 +21,17 @@ Metadata:
     - Label:
         default: Network configuration
       Parameters:
-        - VPCID
-        - PrivateSubnet1ID
-        - PrivateSubnet2ID
-        - PrivateSubnet3ID
-        - PublicSubnet1ID
-        - PublicSubnet2ID
-        - PublicSubnet3ID
-        - RemoteAccessCIDR
+      - NumberOfAZs
+      - AvailabilityZones
+      - VPCID
+      - VPCCIDR
+      - PrivateSubnet1ID
+      - PrivateSubnet2ID
+      - PrivateSubnet3ID
+      - PublicSubnet1ID
+      - PublicSubnet2ID
+      - PublicSubnet3ID
+      - RemoteAccessCIDR
     - Label:
         default: Amazon EC2 configuration
       Parameters:
@@ -38,21 +41,20 @@ Metadata:
       Parameters:
       - NodeInstanceType
       - NumberOfNodes
-      - NodeGroupName
-      - NodeVolumeSize
-      - KubernetesVersion
     - Label:
         default: AWS Quick Start configuration
       Parameters:
       - QSS3BucketName
       - QSS3KeyPrefix
       - QSS3BucketRegion
-      - LambdaZipsBucketName
+      - ConfigSetName
+      - PerAccountSharedResources
+      - PerRegionSharedResources
     - Label:
         default: KubeSphere System and Pluggable Components Configuration
       Parameters:
       - KubeSphereConsolePassword
-      - Openpitrix  
+      - Openpitrix
       - Devops
       - Servicemesh
       - Notification
@@ -64,26 +66,14 @@ Metadata:
       - Networkpolicy
       - MetricsServer
     ParameterLabels:
+      AvailabilityZones:
+        default: Availability Zones
+      NumberOfAZs:
+        default: Number of Availability Zones
       KeyPairName:
         default: SSH key name
-      QSS3BucketName:
-        default: Quick Start S3 bucket name
-      QSS3KeyPrefix:
-        default: Quick Start S3 key prefix
       QSS3BucketRegion:
         default: Quick Start S3 bucket region
-      RemoteAccessCIDR:
-        default: Allowed external access CIDR
-      NodeInstanceType:
-        default: Nodes instance type
-      NumberOfNodes:
-        default: Number of nodes
-      NodeGroupName:
-        default: Node group name
-      NodeVolumeSize:
-        default: Node volume size
-      LambdaZipsBucketName:
-        default: Lambda zips bucket name
       PublicSubnet1ID:
         default: Public subnet 1 ID
       PublicSubnet2ID:
@@ -96,10 +86,20 @@ Metadata:
         default: Private subnet 2 ID
       PrivateSubnet3ID:
         default: Private subnet 3 ID
+      QSS3BucketName:
+        default: Quick Start S3 bucket name
+      QSS3KeyPrefix:
+        default: Quick Start S3 key prefix
+      RemoteAccessCIDR:
+        default: Allowed external access CIDR
       VPCID:
         default: VPC ID
-      KubernetesVersion:
-        default: Kubernetes version
+      VPCCIDR:
+        default: VPC CIDR
+      NodeInstanceType:
+        default: Nodes instance type
+      NumberOfNodes:
+        default: Number of nodes
       KubeSphereConsolePassword:
         default: KubeSphereConsolePassword
       Openpitrix:
@@ -124,6 +124,12 @@ Metadata:
         default: Networkpolicy
       MetricsServer:
         default: MetricsServer
+      ConfigSetName:
+        default: ConfigSetName
+      PerAccountSharedResources:
+        default: Per account shared resources
+      PerRegionSharedResources:
+        default: Per region shared resources
 Parameters:
   NumberOfAZs:
     Type: String
@@ -139,23 +145,28 @@ Parameters:
       to securely connect to your instance after it launches.
     Type: AWS::EC2::KeyPair::KeyName
   PublicSubnet1ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the public subnet in Availability Zone 1 in your existing VPC (e.g., subnet-a0246dcd)
+    Type: String
+    Description: ID of the public subnet in Availability Zone 1 of your existing VPC (e.g., subnet-a0246dcd).
+    Default: ""
   PublicSubnet2ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the public subnet in Availability Zone 2 in your existing VPC (e.g., subnet-b1236eea)
+    Type: String
+    Description: ID of the public subnet in Availability Zone 2 of your existing VPC (e.g., subnet-b1236eea).
+    Default: ""
   PublicSubnet3ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the public subnet in Availability Zone 3 in your existing VPC (e.g., subnet-c3456aba)
+    Type: String
+    Description: ID of the public subnet in Availability Zone 3 of your existing VPC (e.g., subnet-c3456aba).
+    Default: ""
   PrivateSubnet1ID:
     Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the private subnet in Availability Zone 1 in your existing VPC (e.g., subnet-fe9a8b32)
+    Description: ID of the private subnet in Availability Zone 1 of your existing VPC (e.g., subnet-fe9a8b32).
   PrivateSubnet2ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the private subnet in Availability Zone 2 in your existing VPC (e.g., subnet-be8b01ea)
+    Type: String
+    Description: ID of the private subnet in Availability Zone 2 of your existing VPC (e.g., subnet-be8b01ea).
+    Default: ""
   PrivateSubnet3ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)
+    Type: String
+    Description: ID of the private subnet in Availability Zone 3 of your existing VPC (e.g., subnet-abd39039).
+    Default: ""
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
@@ -252,31 +263,14 @@ Parameters:
     Default: 1
     Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
     Type: Number
-  NodeGroupName:
-    Default: Default
-    Description: The name for Amazon EKS node group.
-    Type: String
-  NodeVolumeSize:
-    Default: 100
-    Description: The size for the node's root EBS volume.
-    Type: String
-  LambdaZipsBucketName:
-    Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
-    Type: String
-    Default: ''
-  KubernetesVersion:
-    Type: String
-    AllowedValues: [ "1.16", "1.15" ]
-    Default: "1.16"
-    Description: The Kubernetes control plane version.
   KubeSphereConsolePassword:
     Type: String
     AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
     Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
   Openpitrix:
     Type: String
-    AllowedValues: [true, false]
-    Default: false
+    AllowedValues: ['true', 'false']
+    Default: 'false'
     Description: '[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.'
   Devops:
     Type: String
@@ -328,37 +322,67 @@ Parameters:
     AllowedValues: [true, false]
     Default: true
     Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
+  ConfigSetName:
+    Type: String
+    Default: ""
+    Description: Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for
+  PerAccountSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.
+  PerRegionSharedResources:
+    Type: String
+    AllowedValues: ['Yes', 'No']
+    Default: 'Yes'
+    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
+  3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
+  2AZDeployment: !Or
+    - !Equals [!Ref NumberOfAZs, "2"]
+    - !Equals [!Ref NumberOfAZs, "3"]
 Resources:
-  EKSStack:
+  EKSClusterStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub
-        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks.template.yaml'
+      TemplateURL:
+        !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-amazon-eks/templates/amazon-eks-entrypoint-existing-vpc.template.yaml'
         - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
           S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
-        PublicSubnet1ID: !Ref PublicSubnet1ID
-        PublicSubnet2ID: !Ref PublicSubnet2ID
-        PublicSubnet3ID: !Ref PublicSubnet3ID
-        KeyPairName: !Ref KeyPairName
         QSS3BucketName: !Ref QSS3BucketName
         QSS3BucketRegion: !Ref QSS3BucketRegion
         QSS3KeyPrefix: !Sub "${QSS3KeyPrefix}submodules/quickstart-amazon-eks/"
-        PrivateSubnet1ID: !Ref PrivateSubnet1ID
-        PrivateSubnet2ID: !Ref PrivateSubnet2ID
-        PrivateSubnet3ID: !Ref PrivateSubnet3ID
         NumberOfNodes: !Ref NumberOfNodes
-        NodeGroupName: !Ref NodeGroupName
-        NodeVolumeSize: !Ref NodeVolumeSize
-        LambdaZipsBucketName: !Ref LambdaZipsBucketName
         NodeInstanceType: !Ref NodeInstanceType
         RemoteAccessCIDR: !Ref RemoteAccessCIDR
+        PerRegionSharedResources: !Ref PerRegionSharedResources
+        PerAccountSharedResources: !Ref PerAccountSharedResources
+        ConfigSetName: !Ref 'ConfigSetName'
+        KeyPairName: !Ref 'KeyPairName'
+        PrivateSubnet1ID: !Ref PrivateSubnet1ID
+        PublicSubnet1ID: !Ref PublicSubnet1ID
+        PrivateSubnet2ID: !If
+          - 2AZDeployment
+          - !Ref PrivateSubnet2ID
+          - !Ref AWS::NoValue
+        PrivateSubnet3ID: !If
+          - 3AZDeployment
+          - !Ref PrivateSubnet3ID
+          - !Ref AWS::NoValue
+        PublicSubnet2ID: !If
+          - 2AZDeployment
+          - !Ref PublicSubnet2ID
+          - !Ref AWS::NoValue
+        PublicSubnet3ID: !If
+          - 3AZDeployment
+          - !Ref PublicSubnet3ID
+          - !Ref AWS::NoValue
         VPCID: !Ref VPCID
-        KubernetesVersion: !Ref KubernetesVersion
   KubeSphereStack:
-    DependsOn: EKSStack
+    DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL:
@@ -367,7 +391,7 @@ Resources:
         - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
           S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
       Parameters:
-        KubeClusterName: !GetAtt EKSStack.Outputs.EKSClusterName
+        KubeClusterName: !GetAtt EKSClusterStack.Outputs.EKSClusterName
         KubeConfigKmsContext: "EKSQuickStart"
         KubeSphereConsolePassword: !Ref KubeSphereConsolePassword
         Openpitrix: !Ref Openpitrix
@@ -381,16 +405,12 @@ Resources:
         Networkpolicy: !Ref Networkpolicy
         MetricsServer: !Ref MetricsServer
         Multicluster: !Ref Multicluster
-        KubeManifestLambdaArn: !GetAtt EKSStack.Outputs.KubeManifestLambdaArn
 Outputs:
   EKSClusterName:
-    Value: !GetAtt EKSStack.Outputs.EKSClusterName
+    Value: !GetAtt EKSClusterStack.Outputs.EKSClusterName
   BastionIP:
-    Value: !GetAtt EKSStack.Outputs.BastionIP
+    Value: !GetAtt EKSClusterStack.Outputs.BastionIP
   KubeSphereConsoleEndpoint:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
   KubeSphereConsoleLoginUser:
     Value: admin
-  KubeSphereConsoleLoginPassword:
-    Value: !Sub ${KubeSphereConsolePassword}
-

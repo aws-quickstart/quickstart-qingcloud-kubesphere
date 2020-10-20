@@ -2,14 +2,17 @@
 .Network configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|VPC ID
-(`VPCID`)|`**__Requires input__**`|The ID of your existing VPC (e.g., vpc-0343606e)|Private subnet 1 ID
-(`PrivateSubnet1ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 1 in your existing VPC (e.g., subnet-fe9a8b32)|Private subnet 2 ID
-(`PrivateSubnet2ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 2 in your existing VPC (e.g., subnet-be8b01ea)|Private subnet 3 ID
-(`PrivateSubnet3ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)|Public subnet 1 ID
-(`PublicSubnet1ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 1 in your existing VPC (e.g., subnet-a0246dcd)|Public subnet 2 ID
-(`PublicSubnet2ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 2 in your existing VPC (e.g., subnet-b1236eea)|Public subnet 3 ID
-(`PublicSubnet3ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 3 in your existing VPC (e.g., subnet-c3456aba)|Allowed external access CIDR
+|Parameter label (name) |Default value|Description|Number of Availability Zones
+(`NumberOfAZs`)|`3`|Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.|Availability Zones
+(`AvailabilityZones`)|`**__Requires input__**`|List of Availability Zones to use for the subnets in the VPC. Two or Three Availability Zones are used for this deployment, and it should match what you have selected in the NumberOfAZs parameter. The logical order of your selections are preserved.|VPC ID
+(`VPCID`)|`**__Requires input__**`|The ID of your existing VPC (e.g., vpc-0343606e)|VPC CIDR
+(`VPCCIDR`)|`10.0.0.0/16`|CIDR block for the VPC|Private subnet 1 ID
+(`PrivateSubnet1ID`)|`**__Requires input__**`|ID of the private subnet in Availability Zone 1 of your existing VPC (e.g., subnet-fe9a8b32).|Private subnet 2 ID
+(`PrivateSubnet2ID`)|`**__Requires input__**`|ID of the private subnet in Availability Zone 2 of your existing VPC (e.g., subnet-be8b01ea).|Private subnet 3 ID
+(`PrivateSubnet3ID`)|`**__Requires input__**`|ID of the private subnet in Availability Zone 3 of your existing VPC (e.g., subnet-abd39039).|Public subnet 1 ID
+(`PublicSubnet1ID`)|`**__Requires input__**`|ID of the public subnet in Availability Zone 1 of your existing VPC (e.g., subnet-a0246dcd).|Public subnet 2 ID
+(`PublicSubnet2ID`)|`**__Requires input__**`|ID of the public subnet in Availability Zone 2 of your existing VPC (e.g., subnet-b1236eea).|Public subnet 3 ID
+(`PublicSubnet3ID`)|`**__Requires input__**`|ID of the public subnet in Availability Zone 3 of your existing VPC (e.g., subnet-c3456aba).|Allowed external access CIDR
 (`RemoteAccessCIDR`)|`**__Requires input__**`|The CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
 |===
 .Amazon EC2 configuration
@@ -23,10 +26,7 @@
 |===
 |Parameter label (name) |Default value|Description|Nodes instance type
 (`NodeInstanceType`)|`t3.xlarge`|The type of EC2 instance for the node instances.|Number of nodes
-(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.|Node group name
-(`NodeGroupName`)|`Default`|The name for Amazon EKS node group.|Node volume size
-(`NodeVolumeSize`)|`100`|The size for the node's root EBS volume.|Kubernetes version
-(`KubernetesVersion`)|`1.16`|The Kubernetes control plane version.
+(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
 |===
 .AWS Quick Start configuration
 [width="100%",cols="16%,11%,73%",options="header",]
@@ -34,15 +34,17 @@
 |Parameter label (name) |Default value|Description|Quick Start S3 bucket name
 (`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 key prefix
 (`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and forward slash (/).|Quick Start S3 bucket region
-(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Lambda zips bucket name
-(`LambdaZipsBucketName`)|`**__Requires input__**`|[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.
+(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|ConfigSetName
+(`ConfigSetName`)|`**__Requires input__**`|Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for|Per account shared resources
+(`PerAccountSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
+(`PerRegionSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
 |===
 .KubeSphere System and Pluggable Components Configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|KubeSphereConsolePassword
 (`KubeSphereConsolePassword`)|`**__Requires input__**`|The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).|Openpitrix
-(`Openpitrix`)|`False`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
+(`Openpitrix`)|`false`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
 (`Devops`)|`False`|[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).|Servicemesh
 (`Servicemesh`)|`False`|[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.|Notification
 (`Notification`)|`False`|[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.|Alerting
