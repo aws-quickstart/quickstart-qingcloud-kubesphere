@@ -25,12 +25,12 @@ Metadata:
       - AvailabilityZones
       - VPCID
       - VPCCIDR
-      - PrivateSubnet1CIDR
-      - PrivateSubnet2CIDR
-      - PrivateSubnet3CIDR
-      - PublicSubnet1CIDR
-      - PublicSubnet2CIDR
-      - PublicSubnet3CIDR
+      - PrivateSubnet1ID
+      - PrivateSubnet2ID
+      - PrivateSubnet3ID
+      - PublicSubnet1ID
+      - PublicSubnet2ID
+      - PublicSubnet3ID
       - RemoteAccessCIDR
     - Label:
         default: Amazon EC2 configuration
@@ -74,18 +74,18 @@ Metadata:
         default: SSH key name
       QSS3BucketRegion:
         default: Quick Start S3 bucket region
-      PrivateSubnet1CIDR:
-        default: Private subnet 1 CIDR
-      PrivateSubnet2CIDR:
-        default: Private subnet 2 CIDR
-      PrivateSubnet3CIDR:
-        default: Private subnet 3 CIDR
-      PublicSubnet1CIDR:
-        default: Public subnet 1 CIDR
-      PublicSubnet2CIDR:
-        default: Public subnet 2 CIDR
-      PublicSubnet3CIDR:
-        default: Public subnet 3 CIDR
+      PublicSubnet1ID:
+        default: Public subnet 1 ID
+      PublicSubnet2ID:
+        default: Public subnet 2 ID
+      PublicSubnet3ID:
+        default: Public subnet 3 ID
+      PrivateSubnet1ID:
+        default: Private subnet 1 ID
+      PrivateSubnet2ID:
+        default: Private subnet 2 ID
+      PrivateSubnet3ID:
+        default: Private subnet 3 ID
       QSS3BucketName:
         default: Quick Start S3 bucket name
       QSS3KeyPrefix:
@@ -145,23 +145,28 @@ Parameters:
       to securely connect to your instance after it launches.
     Type: AWS::EC2::KeyPair::KeyName
   PublicSubnet1ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the public subnet in Availability Zone 1 in your existing VPC (e.g., subnet-a0246dcd)
+    Type: String
+    Description: ID of the public subnet in Availability Zone 1 of your existing VPC (e.g., subnet-a0246dcd).
+    Default: ""
   PublicSubnet2ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the public subnet in Availability Zone 2 in your existing VPC (e.g., subnet-b1236eea)
+    Type: String
+    Description: ID of the public subnet in Availability Zone 2 of your existing VPC (e.g., subnet-b1236eea).
+    Default: ""
   PublicSubnet3ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the public subnet in Availability Zone 3 in your existing VPC (e.g., subnet-c3456aba)
+    Type: String
+    Description: ID of the public subnet in Availability Zone 3 of your existing VPC (e.g., subnet-c3456aba).
+    Default: ""
   PrivateSubnet1ID:
     Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the private subnet in Availability Zone 1 in your existing VPC (e.g., subnet-fe9a8b32)
+    Description: ID of the private subnet in Availability Zone 1 of your existing VPC (e.g., subnet-fe9a8b32).
   PrivateSubnet2ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the private subnet in Availability Zone 2 in your existing VPC (e.g., subnet-be8b01ea)
+    Type: String
+    Description: ID of the private subnet in Availability Zone 2 of your existing VPC (e.g., subnet-be8b01ea).
+    Default: ""
   PrivateSubnet3ID:
-    Type: "AWS::EC2::Subnet::Id"
-    Description: The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039)
+    Type: String
+    Description: ID of the private subnet in Availability Zone 3 of your existing VPC (e.g., subnet-abd39039).
+    Default: ""
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
     ConstraintDescription: Quick Start bucket name can include numbers, lowercase
@@ -357,15 +362,15 @@ Resources:
         PerAccountSharedResources: !Ref PerAccountSharedResources
         ConfigSetName: !Ref 'ConfigSetName'
         KeyPairName: !Ref 'KeyPairName'
-        PrivateSubnet1ID: !Ref PrivateSubnet1AID
+        PrivateSubnet1ID: !Ref PrivateSubnet1ID
         PublicSubnet1ID: !Ref PublicSubnet1ID
         PrivateSubnet2ID: !If
           - 2AZDeployment
-          - !Ref PrivateSubnet2AID
+          - !Ref PrivateSubnet2ID
           - !Ref AWS::NoValue
         PrivateSubnet3ID: !If
           - 3AZDeployment
-          - !Ref PrivateSubnet3AID
+          - !Ref PrivateSubnet3ID
           - !Ref AWS::NoValue
         PublicSubnet2ID: !If
           - 2AZDeployment
