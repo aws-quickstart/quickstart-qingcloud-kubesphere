@@ -9,4 +9,4 @@ For KubeSphere users with production environments who want technical support, yo
 
 You are responsible for the cost of the AWS infrastructure, storage, and data services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.
 
-QingCloud is an AWS Partner, as is the KubeSphere project sponsor and maintainer, which means they can provide certified KubeSphere support.
+QingCloud is an AWS Partner, as is the KubeSphere project sponsor and maintainer, which means they can provide technical KubeSphere support.
