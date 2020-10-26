@@ -266,7 +266,7 @@ Parameters:
     Default: ''
   KubernetesVersion:
     Type: String
-    AllowedValues: [ "1.17", "1.18" ]
+    AllowedValues: [ "1.16", "1.17", "1.18" ]
     Default: "1.18"
     Description: The Kubernetes control plane version.
   KubeSphereConsolePassword:
