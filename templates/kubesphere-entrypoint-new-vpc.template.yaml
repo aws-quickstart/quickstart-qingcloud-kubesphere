@@ -274,6 +274,7 @@ Parameters:
      Type: String
      AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
      Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
+     NoEcho: True
   Openpitrix:
     Type: String
     AllowedValues: ['true', 'false']
