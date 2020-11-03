@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Deploy KubeSphere into a new EKS cluster in a new VPC (qs-1qtdde8a5)
+Description: Deploy KubeSphere into a new EKS cluster in a new VPC (qs-1qtdde8a5).
 Metadata:
   QuickStartDocumentation:
-    EntrypointName: "Launch into New VPC"
+    EntrypointName: "Launch into new VPC"
     Order: 1
     OptionalParameters:
       - Openpitrix
@@ -50,7 +50,7 @@ Metadata:
       - PerAccountSharedResources
       - PerRegionSharedResources
     - Label:
-        default: KubeSphere System and Pluggable Components Configuration
+        default: Configures the KubeSphere system and pluggable components
       Parameters:
       - KubeSphereConsolePassword
       - Openpitrix
@@ -72,7 +72,7 @@ Metadata:
       KeyPairName:
         default: SSH key name
       QSS3BucketRegion:
-        default: Quick Start S3 bucket region
+        default: Quick Start S3 bucket Region
       PrivateSubnet1CIDR:
         default: Private subnet 1 CIDR
       PrivateSubnet2CIDR:
@@ -94,7 +94,7 @@ Metadata:
       VPCCIDR:
         default: VPC CIDR
       NodeInstanceType:
-        default: Nodes instance type
+        default: Node instance type
       NumberOfNodes:
         default: Number of nodes
       KubeSphereConsolePassword:
@@ -124,58 +124,57 @@ Metadata:
       ConfigSetName:
         default: ConfigSetName
       PerAccountSharedResources:
-        default: Per account shared resources
+        default: Per-account shared resources
       PerRegionSharedResources:
-        default: Per region shared resources
+        default: Per-Region shared resources
 Parameters:
   NumberOfAZs:
     Type: String
     AllowedValues: ["2", "3"]
     Default: "3"
-    Description: Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.
+    Description: 'Number of Availability Zones to use in the VPC. This must match your selections in the list for the "AvailabilityZones" parameter.'
   AvailabilityZones:
-    Description: List of Availability Zones to use for the subnets in the VPC. Two or Three Availability Zones are used for this deployment,
-      and it should match what you have selected in the NumberOfAZs parameter. The logical order of your selections are preserved.
+    Description: 'List of Availability Zones to use for the VPC subnets. Two or three Availability Zones are used for this deployment,
+      and each one should match the "NumberOfAZs" parameter.'
     Type: List<AWS::EC2::AvailabilityZone::Name>
   KeyPairName:
-    Description: Enter the public/private key pair you created in your preferred AWS Region; see the "Technical requirements" section of the deployment guide.
-      to securely connect to your instance after it launches.
+    Description: Enter the key pair you created in your preferred AWS Region. For more information, see the "Technical requirements" section of the deployment guide.
     Type: AWS::EC2::KeyPair::KeyName
   PrivateSubnet1CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.0.0/19
-    Description: CIDR block for private subnet 1 located in Availability Zone 1.
+    Description: CIDR block for private subnet 1, located in Availability Zone 1.
     Type: String
   PrivateSubnet2CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.32.0/19
-    Description: CIDR block for private subnet 2 located in Availability Zone 2.
+    Description: CIDR block for private subnet 2, located in Availability Zone 2.
     Type: String
   PrivateSubnet3CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.64.0/19
-    Description: CIDR block for private subnet 3 located in Availability Zone 3.
+    Description: CIDR block for private subnet 3, located in Availability Zone 3.
     Type: String
   PublicSubnet1CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.128.0/20
-    Description: CIDR block for the public DMZ subnet 1 located in Availability Zone 1.
+    Description: CIDR block for the public DMZ subnet 1, located in Availability Zone 1.
     Type: String
   PublicSubnet2CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.144.0/20
-    Description: CIDR block for the public DMZ subnet 2 located in Availability Zone 2.
+    Description: CIDR block for the public DMZ subnet 2, located in Availability Zone 2.
     Type: String
   PublicSubnet3CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.160.0/20
-    Description: CIDR block for the public DMZ subnet 3 located in Availability Zone 3.
+    Description: CIDR block for the public DMZ subnet 3, located in Availability Zone 3.
     Type: String
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
@@ -190,25 +189,25 @@ Parameters:
   QSS3KeyPrefix:
     AllowedPattern: ^[0-9a-zA-Z-/.]*$
     ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
-      uppercase letters, hyphens (-), dots(.) and forward slash (/).
+      uppercase letters, hyphens (-), periods (.) and forward slashes (/).
     Default: quickstart-qingcloud-kubesphere/
     Description: The S3 key prefix for the Quick Start assets. Quick Start key prefix
-      can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and
-      forward slash (/).
+      can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.) and
+      forward slashes (/).
     Type: String
   QSS3BucketRegion:
     Default: 'us-east-1'
-    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Description: AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.
     Type: String
   RemoteAccessCIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
-    Description: The CIDR IP range that is permitted to access the instances. We recommend
+    Description: CIDR IP range that is permitted to access the instances. We recommend
       that you set this value to a trusted IP range.
     Type: String
   VPCCIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16–28
     Default: 10.0.0.0/16
     Description: CIDR block for the VPC
     Type: String
@@ -264,86 +263,86 @@ Parameters:
       - z1d.6xlarge
       - z1d.12xlarge
     ConstraintDescription: Must be a valid EC2 instance type
-    Description: The type of EC2 instance for the node instances.
+    Description: Type of EC2 instance for the nodes.
     Type: String
   NumberOfNodes:
     Default: 1
-    Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
+    Description: Number of Amazon EKS node instances. The default is one for each Availability Zone.
     Type: Number
   KubeSphereConsolePassword:
      Type: String
      AllowedPattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@^$!%*?#&])[A-Za-z\d$@^$!%*?#&]{8,}
-     Description: The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).
+     Description: Password of KubeSphere console must be at least 8 characters, including numbers, uppercase letters, lowercase letters, and special characters (!@#$%^&*?).
      NoEcho: True
   Openpitrix:
     Type: String
     AllowedValues: ['true', 'false']
     Default: 'false'
-    Description: '[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.'
+    Description: '(Optional) An application store to package, deploy, and manage cloud-native applications in a multicloud environment.'
   Devops:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).'
+    Description: '(Optional) Provides out-of-the-box CI/CD, based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).'
   Servicemesh:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.'
+    Description: '(Optional) Provides resource-level management, observability, and tracing for distributed microservice applications. It also provides visualization for traffic topology.'
   Notification:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.'
+    Description: '(Optional) Sends alert messages to responders via email, Slack, WeChat, etc.'
   Alerting:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Users can customize alerting policies to send messages to users in time with different time intervals and alerting levels to choose from.'
+    Description: '(Optional) Users can customize alerting policies to send messages with different time intervals and alerting levels.'
   Events:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Events that happen inside a cluster are recorded, such as container running status, image pulling failures and node scheduling activities.'
+    Description: '(Optional) Events that happen inside a cluster are recorded, such as container running status, image pulling failures, and node scheduling activities.'
   Logging:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] Flexible logging functions are provided for query, collection and management. Additional log collectors can be added, such as Elasticsearch, Kafka and Fluentd.'
+    Description: '(Optional) Flexible logging functions are provided for query, collection, and management. Additional log collectors can be added, such as Amazon Elasticsearch, Kafka, and Fluentd.'
   Multicluster:
     Type: String
     AllowedValues: [none, host, member]
     Default: none
-    Description: '[OPTIONAL] Users can create projects to run across clusters, building a container environment for rapid iteration of applications and achieve high availability.'
+    Description: '(Optional) Users can create projects to run across clusters, which builds a container environment with rapid iterations and high availability.'
   Networkpolicy:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain Pods.'
+    Description: '(Optional) Network policy configuration allows for network isolation within a cluster, which means firewalls can be set up between pods.'
   Auditing:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.'
+    Description: '(Optional) DevOps console for developers to automatically create, build, test, and release applications.'
   MetricsServer:
     Type: String
     AllowedValues: [true, false]
     Default: true
-    Description: '[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
+    Description: '(Optional) Users can install "MetricsServer" to enable HPA (Horizontal Pod Autoscaler), which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
   ConfigSetName:
     Type: String
     Default: ""
-    Description: Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for
+    Description: 'Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter.'
   PerAccountSharedResources:
     Type: String
     AllowedValues: ['Yes', 'No']
     Default: 'Yes'
-    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.
+    Description: Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.
   PerRegionSharedResources:
     Type: String
     AllowedValues: ['Yes', 'No']
     Default: 'Yes'
-    Description: Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
+    Description: Choose "No" if you already deployed another EKS Quick Start stack in this Region.
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
   3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
