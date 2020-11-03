@@ -1,4 +1,4 @@
-Deploying this Quick Start for a new virtual private cloud (VPC) with *default parameters* builds the following KubeSphere environment in the AWS Cloud.
+Deploying this Quick Start for a new virtual private cloud (VPC) with default parameters builds the following KubeSphere environment in the AWS Cloud.
 
 // Replace this example diagram with your own. Send us your source PowerPoint file. Be sure to follow our guidelines here : http://(we should include these points on our contributors giude)
 [#architecture1]
@@ -6,7 +6,7 @@ Deploying this Quick Start for a new virtual private cloud (VPC) with *default p
 [link=images/architecture_diagram.png]
 image::../images/architecture_diagram.png[Architecture,width=648,height=439]
 
-As shown in figure 1, the Quick Start sets up the following::
+As shown in figure 1, the Quick Start sets up the following:
 
 * A highly available VPC architecture that spans three Availability Zones. The VPC is configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*
 * In the public subnets:
