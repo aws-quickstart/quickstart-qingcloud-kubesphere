@@ -3,56 +3,56 @@
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|Number of Availability Zones
-(`NumberOfAZs`)|`3`|Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.|Availability Zones
-(`AvailabilityZones`)|`**__Requires input__**`|List of Availability Zones to use for the subnets in the VPC. Two or Three Availability Zones are used for this deployment, and it should match what you have selected in the NumberOfAZs parameter. The logical order of your selections are preserved.|VPC ID
-(`VPCID`)|`**__Requires input__**`|The ID of your existing VPC (e.g., vpc-0343606e)|VPC CIDR
+(`NumberOfAZs`)|`3`|Number of Availability Zones to use in the VPC. This must match your selections in the list for the "AvailabilityZones" parameter.|Availability Zones
+(`AvailabilityZones`)|`**__Requires input__**`|List of Availability Zones to use for the VPC subnets. Two or three Availability Zones are used for this deployment, and each one should match the "NumberOfAZs" parameter.|VPC ID
+(`VPCID`)|`**__Requires input__**`|ID of your existing VPC (e.g., vpc-0343606e)|VPC CIDR
 (`VPCCIDR`)|`10.0.0.0/16`|CIDR block for the VPC|Private subnet 1 ID
 (`PrivateSubnet1ID`)|`**__Requires input__**`|ID of the private subnet in Availability Zone 1 of your existing VPC (e.g., subnet-fe9a8b32).|Private subnet 2 ID
-(`PrivateSubnet2ID`)|`**__Requires input__**`|ID of the private subnet in Availability Zone 2 of your existing VPC (e.g., subnet-be8b01ea).|Private subnet 3 ID
-(`PrivateSubnet3ID`)|`**__Requires input__**`|ID of the private subnet in Availability Zone 3 of your existing VPC (e.g., subnet-abd39039).|Public subnet 1 ID
-(`PublicSubnet1ID`)|`**__Requires input__**`|ID of the public subnet in Availability Zone 1 of your existing VPC (e.g., subnet-a0246dcd).|Public subnet 2 ID
-(`PublicSubnet2ID`)|`**__Requires input__**`|ID of the public subnet in Availability Zone 2 of your existing VPC (e.g., subnet-b1236eea).|Public subnet 3 ID
-(`PublicSubnet3ID`)|`**__Requires input__**`|ID of the public subnet in Availability Zone 3 of your existing VPC (e.g., subnet-c3456aba).|Allowed external access CIDR
-(`RemoteAccessCIDR`)|`**__Requires input__**`|The CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
+(`PrivateSubnet2ID`)|`**__Blank string__**`|ID of the private subnet in Availability Zone 2 of your existing VPC (e.g., subnet-be8b01ea).|Private subnet 3 ID
+(`PrivateSubnet3ID`)|`**__Blank string__**`|ID of the private subnet in Availability Zone 3 of your existing VPC (e.g., subnet-abd39039).|Public subnet 1 ID
+(`PublicSubnet1ID`)|`**__Blank string__**`|ID of the public subnet in Availability Zone 1 of your existing VPC (e.g., subnet-a0246dcd).|Public subnet 2 ID
+(`PublicSubnet2ID`)|`**__Blank string__**`|ID of the public subnet in Availability Zone 2 of your existing VPC (e.g., subnet-b1236eea).|Public subnet 3 ID
+(`PublicSubnet3ID`)|`**__Blank string__**`|ID of the public subnet in Availability Zone 3 of your existing VPC (e.g., subnet-c3456aba).|Allowed external access CIDR
+(`RemoteAccessCIDR`)|`**__Requires input__**`|CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
 |===
 .Amazon EC2 configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|SSH key name
-(`KeyPairName`)|`**__Requires input__**`|Enter the public/private key pair you created in your preferred AWS Region; see the "Technical requirements" section of the deployment guide. to securely connect to your instance after it launches.
+(`KeyPairName`)|`**__Requires input__**`|Enter the key pair you created in your preferred AWS Region. For more information, see the "Technical requirements" section of the deployment guide.
 |===
 .EKS configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|Nodes instance type
-(`NodeInstanceType`)|`t3.xlarge`|The type of EC2 instance for the node instances.|Number of nodes
-(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
+|Parameter label (name) |Default value|Description|Node instance type
+(`NodeInstanceType`)|`t3.xlarge`|Type of EC2 instance for the nodes.|Number of nodes
+(`NumberOfNodes`)|`1`|Number of Amazon EKS node instances. The default is one for each Availability Zones.
 |===
 .AWS Quick Start configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|Quick Start S3 bucket name
 (`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 key prefix
-(`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and forward slash (/).|Quick Start S3 bucket region
-(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|ConfigSetName
-(`ConfigSetName`)|`**__Requires input__**`|Name for the config set, if you have launched the advanced configuration stack, this name must match the ConfigSetName parameter in that stack for|Per account shared resources
-(`PerAccountSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
-(`PerRegionSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
+(`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|S3 key prefix for the Quick Start assets. The Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.) and forward slashes (/).|Quick Start S3 bucket region
+(`QSS3BucketRegion`)|`us-east-1`|AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.|ConfigSetName
+(`ConfigSetName`)|`**__Blank string__**`|Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter.|Per-account shared resources
+(`PerAccountSharedResources`)|`Yes`|Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
+(`PerRegionSharedResources`)|`Yes`|Choose "No" if you already deployed another EKS Quick Start stack in this Region.
 |===
-.KubeSphere System and Pluggable Components Configuration
+.Configures the KubeSphere system and pluggable components
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|KubeSphereConsolePassword
-(`KubeSphereConsolePassword`)|`**__Requires input__**`|The password of KubeSphere console must be at least 8 characters, including numbers, upper and lower case letters, and special characters (!@#$%^&*?).|Openpitrix
-(`Openpitrix`)|`false`|[OPTIONAL] An application store to package, deploy and manage cloud native applications into multi-cloud environment.|Devops
-(`Devops`)|`False`|[OPTIONAL] Provides out-of-box CI/CD based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).|Servicemesh
-(`Servicemesh`)|`False`|[OPTIONAL] Provides fine-grained traffic management, observability and tracing for distributed microservice applications, and provides visualization for traffic topology.|Notification
-(`Notification`)|`False`|[OPTIONAL] Sends alert messages to specified responders via email, slack, wechat etc.|Alerting
-(`Alerting`)|`False`|[OPTIONAL] Users can customize alerting policies to send messages to users in time with different time intervals and alerting levels to choose from.|Auditing
-(`Auditing`)|`False`|[OPTIONAL] A one-stop DevOps console is provided to enable developers to create, build, test and release their applications in an automated way.|Logging
-(`Logging`)|`False`|[OPTIONAL] Flexible logging functions are provided for query, collection and management. Additional log collectors can be added, such as Elasticsearch, Kafka and Fluentd.|Events
-(`Events`)|`False`|[OPTIONAL] Events that happen inside a cluster are recorded, such as container running status, image pulling failures and node scheduling activities.|Multicluster
-(`Multicluster`)|`none`|[OPTIONAL] Users can create projects to run across clusters, building a container environment for rapid iteration of applications and achieve high availability.|Networkpolicy
-(`Networkpolicy`)|`False`|[OPTIONAL] The Network policy configuration allows network isolation within the same cluster, which means firewalls can be set up between certain Pods.|MetricsServer
-(`MetricsServer`)|`True`|[OPTIONAL] Users can install metrics-server to enable HPA (Horizontal Pod Autoscaler) which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.
+(`KubeSphereConsolePassword`)|`**__Requires input__**`|Password of KubeSphere console must be at least 8 characters, including numbers, uppercase letters, lowercase letters, and special characters (!@#$%^&*?).|Openpitrix
+(`Openpitrix`)|`false`|(Optional) An application store to package, deploy, and manage cloud-native applications in a multicloud environment.|Devops
+(`Devops`)|`False`|(Optional) Provides out-of-the-box CI/CD, based on Jenkins, and offers automated workflow tools including binary-to-image (B2I) and source-to-image (S2I).|Servicemesh
+(`Servicemesh`)|`False`|(Optional) Provides resource-level management, observability, and tracing for distributed microservice applications. It also provides visualization for traffic topology.|Notification
+(`Notification`)|`False`|(Optional) Sends alert messages to responders via email, Slack, WeChat, etc.|Alerting
+(`Alerting`)|`False`|(Optional) Users can customize alerting policies to send messages with different time intervals and alerting levels.|Auditing
+(`Auditing`)|`False`|(Optional) DevOps console for developers to automatically create, build, test, and release applications.|Logging
+(`Logging`)|`False`|(Optional) Flexible logging functions are provided for query, collection, and management. Additional log collectors can be added, such as Amazon Elasticsearch, Kafka and Fluentd.|Events
+(`Events`)|`False`|(Optional) Events that happen inside a cluster are recorded, such as container running status, image pulling failures, and node scheduling activities.|Multicluster
+(`Multicluster`)|`none`|(Optional) Users can create projects to run across clusters, which builds a container environment with rapid iterations and high availability.|Networkpolicy
+(`Networkpolicy`)|`False`|(Optional) Network policy configuration allows for network isolation within a cluster, which means firewalls can be set up between pods.|MetricsServer
+(`MetricsServer`)|`True`|(Optional) Users can install "MetricsServer" to enable HPA (Horizontal Pod Autoscaler), which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.
 |===

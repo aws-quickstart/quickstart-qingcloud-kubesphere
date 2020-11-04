@@ -1,6 +1,6 @@
 
-=== Launch into New VPC
+=== Launch into new VPC
 include::kubesphere-entrypoint-new-vpc.template.adoc[]
 
-=== Launch into Existing VPC
+=== Launch into existing VPC
 include::kubesphere-entrypoint-existing-vpc.template.adoc[]
