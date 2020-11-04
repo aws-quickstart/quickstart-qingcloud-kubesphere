@@ -126,7 +126,7 @@ Metadata:
       PerAccountSharedResources:
         default: Per-account shared resources
       PerRegionSharedResources:
-        default: Per-Region shared resources
+        default: Per region shared resources
 Parameters:
   NumberOfAZs:
     Type: String

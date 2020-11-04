@@ -73,7 +73,7 @@ Metadata:
       KeyPairName:
         default: SSH key name
       QSS3BucketRegion:
-        default: Quick Start S3 bucket Region
+        default: Quick Start S3 bucket region
       PublicSubnet1ID:
         default: Public subnet 1 ID
       PublicSubnet2ID:
@@ -129,7 +129,7 @@ Metadata:
       PerAccountSharedResources:
         default: Per-account shared resources
       PerRegionSharedResources:
-        default: Per-Region shared resources
+        default: Per region shared resources
 Parameters:
   NumberOfAZs:
     Type: String
