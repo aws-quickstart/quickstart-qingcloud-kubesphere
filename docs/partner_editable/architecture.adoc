@@ -6,7 +6,9 @@ Deploying this Quick Start for a new virtual private cloud (VPC) with default pa
 [link=images/architecture_diagram.png]
 image::../images/architecture_diagram.png[Architecture,width=648,height=439]
 
+
 As shown in figure 1, the Quick Start sets up the following:
+
 
 * A highly available VPC architecture that spans three Availability Zones. The VPC is configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*
 * In the public subnets:
@@ -17,5 +19,6 @@ As shown in figure 1, the Quick Start sets up the following:
 * An Amazon EKS cluster, which provides the Kubernetes control plane.
 * AWS IAM roles to help you securely control access to AWS resources.
 * Elastic Load Balancing to distribute incoming application or network traffic across multiple targets. 
+
 
 *The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.
