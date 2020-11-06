@@ -15,4 +15,4 @@ WARNING: When you set *Rollback on failure* to *Disabled*, you continue to incur
 
 *Q.* How to change the language.
 
-*A.* Choose the user name at the top-right corner of the console, and choose *User settings* to find the language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.
+*A.* Choose the user name from the top-right corner of the console, and choose *User settings* for language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.

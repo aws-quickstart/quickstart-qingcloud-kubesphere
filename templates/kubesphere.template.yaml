@@ -594,7 +594,6 @@ Resources:
           name: admin
         spec:
           email: admin@kubesphere.io
-          lang: zh
           password: ${KubeSphereConsolePassword}
 Outputs:
   KubeSphereConsole:
