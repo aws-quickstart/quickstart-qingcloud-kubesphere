@@ -13,3 +13,4 @@
 |NAT gateway |3
 |t2.medium instances |3
 |t2.micro instances |1
+|===
