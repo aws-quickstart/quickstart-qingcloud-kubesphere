@@ -65,6 +65,10 @@ Metadata:
       - Multicluster
       - Networkpolicy
       - MetricsServer
+    - Label:
+        default: Amazon EC2 configuration
+      Parameters:
+        - ProvisionBastionHost
     ParameterLabels:
       AvailabilityZones:
         default: Availability Zones
@@ -130,6 +134,8 @@ Metadata:
         default: Per-account shared resources
       PerRegionSharedResources:
         default: Per region shared resources
+      ProvisionBastionHost:
+        default: Provision bastion host
 Parameters:
   NumberOfAZs:
     Type: String
@@ -336,6 +342,11 @@ Parameters:
     AllowedValues: ['Yes', 'No']
     Default: 'Yes'
     Description: Choose "No" if you already deployed another EKS Quick Start stack in this Region.
+  ProvisionBastionHost:
+    Type: String
+    AllowedValues: [ "Enabled", "Disabled" ]
+    Default: "Enabled"
+    Description: Skip creating a bastion host by choosing "Disabled."
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
   3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
@@ -381,7 +392,7 @@ Resources:
           - !Ref PublicSubnet3ID
           - !Ref AWS::NoValue
         VPCID: !Ref VPCID
-        ProvisionBastionHost: Disabled
+        ProvisionBastionHost: !Ref ProvisionBastionHost
   KubeSphereStack:
     DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack
