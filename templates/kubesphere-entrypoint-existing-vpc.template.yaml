@@ -381,6 +381,7 @@ Resources:
           - !Ref PublicSubnet3ID
           - !Ref AWS::NoValue
         VPCID: !Ref VPCID
+        ProvisionBastionHost: Disabled
   KubeSphereStack:
     DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack
