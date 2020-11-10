@@ -18,8 +18,8 @@
 .Amazon EC2 configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|SSH key name
-(`KeyPairName`)|`**__Requires input__**`|Enter the key pair you created in your preferred AWS Region. For more information, see the "Technical requirements" section of the deployment guide.
+|Parameter label (name) |Default value|Description|Provision bastion host
+(`ProvisionBastionHost`)|`Enabled`|Skip creating a bastion host by choosing "Disabled."
 |===
 .EKS configuration
 [width="100%",cols="16%,11%,73%",options="header",]
