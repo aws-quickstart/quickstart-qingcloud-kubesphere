@@ -40,8 +40,6 @@
 
     $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
 
-    $ kubectl get pod –all-namespaces
-
 [start=4]
 . Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the administrator account and password defined by `KubeSphereConsolePassword`.
 
@@ -95,7 +93,7 @@ When you see welcome information in the output logs, the pluggable components ar
 
 *Create proper network policies:* KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster's projects and workspaces, create https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[network policies^] based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all 
 //TODO Replace "ingress" with "receive," "input," "inbound," or "incoming."
-ingress traffic to avoid pods from one project mistakenly sending traffic to another project's services or databases.
+incoming traffic to avoid pods from one project mistakenly sending traffic to another project's services or databases.
 
 //== Other useful information
 //Provide any other information of interest to users, especially focusing on areas where AWS or cloud usage differs from on-premises usage.
@@ -103,8 +101,8 @@ ingress traffic to avoid pods from one project mistakenly sending traffic to ano
 == Get started with KubeSphere
 
 When you finish deploying this Quick Start, refer to the
-//TODO This link returns a 404:
- https://kubesphere.io/docs/quick-start/admin-quick-start/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.
+
+ https://kubesphere.io/docs/quick-start/create-workspace-and-project/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.
 
 == Central control plane for multicloud and multicluster management
 
@@ -132,6 +130,8 @@ file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphe
 *KubeSphere*
 
 * https://kubesphere.io/docs/introduction/what-is-kubesphere/[What is KubeSphere^]
-* https://kubesphere.io/docs/installation/intro/[Installation Guide^]
-* https://kubesphere.io/docs/installation/pluggable-components/[Introduction to Pluggable Components^]
-* https://github.com/kubesphere[KubeSphere GitHub^]
+* https://kubesphere.io/docs/pluggable-components/[Introduction to Pluggable Components^]
+* https://kubesphere.io/docs/multicluster-management/introduction/overview/[Multi-cluster Management^]
+* https://kubesphere.io/docs/installing-on-kubernetes/[Installing KubeSphere on Kubernetes^]
+* https://kubesphere.io/docs/installing-on-linux/[Installing KubeSphere on Linux^]
+* https://github.com/kubesphere/[KubeSphere GitHub^]
