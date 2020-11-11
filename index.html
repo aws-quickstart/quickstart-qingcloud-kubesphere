@@ -1952,11 +1952,6 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <pre>$ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f</pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>$ kubectl get pod –all-namespaces</pre>
-</div>
-</div>
 </li>
 </ol>
 </div>
@@ -2041,7 +2036,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </div>
 <div class="paragraph">
 <p><strong>Create proper network policies:</strong> KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster&#8217;s projects and workspaces, create <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank" rel="noopener">network policies</a> based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all
-ingress traffic to avoid pods from one project mistakenly sending traffic to another project&#8217;s services or databases.</p>
+incoming traffic to avoid pods from one project mistakenly sending traffic to another project&#8217;s services or databases.</p>
 </div>
 </div>
 </div>
@@ -2049,8 +2044,12 @@ ingress traffic to avoid pods from one project mistakenly sending traffic to ano
 <h2 id="_get_started_with_kubesphere">Get started with KubeSphere</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you finish deploying this Quick Start, refer to the
- <a href="https://kubesphere.io/docs/quick-start/admin-quick-start/" target="_blank" rel="noopener">KubeSphere Getting Started Guide</a>. It has hands-on labs and tutorials that can help you get started with KubeSphere.</p>
+<p>When you finish deploying this Quick Start, refer to the</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>https://kubesphere.io/docs/quick-start/create-workspace-and-project/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2116,13 +2115,19 @@ ingress traffic to avoid pods from one project mistakenly sending traffic to ano
 <p><a href="https://kubesphere.io/docs/introduction/what-is-kubesphere/" target="_blank" rel="noopener">What is KubeSphere</a></p>
 </li>
 <li>
-<p><a href="https://kubesphere.io/docs/installation/intro/" target="_blank" rel="noopener">Installation Guide</a></p>
+<p><a href="https://kubesphere.io/docs/pluggable-components/" target="_blank" rel="noopener">Introduction to Pluggable Components</a></p>
 </li>
 <li>
-<p><a href="https://kubesphere.io/docs/installation/pluggable-components/" target="_blank" rel="noopener">Introduction to Pluggable Components</a></p>
+<p><a href="https://kubesphere.io/docs/multicluster-management/introduction/overview/" target="_blank" rel="noopener">Multi-cluster Management</a></p>
 </li>
 <li>
-<p><a href="https://github.com/kubesphere" target="_blank" rel="noopener">KubeSphere GitHub</a></p>
+<p><a href="https://kubesphere.io/docs/installing-on-kubernetes/" target="_blank" rel="noopener">Installing KubeSphere on Kubernetes</a></p>
+</li>
+<li>
+<p><a href="https://kubesphere.io/docs/installing-on-linux/" target="_blank" rel="noopener">Installing KubeSphere on Linux</a></p>
+</li>
+<li>
+<p><a href="https://github.com/kubesphere/" target="_blank" rel="noopener">KubeSphere GitHub</a></p>
 </li>
 </ul>
 </div>
