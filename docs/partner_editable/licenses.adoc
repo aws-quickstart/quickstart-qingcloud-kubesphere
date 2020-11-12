@@ -3,7 +3,7 @@
 //These two paragraphs provide an example of the details you can provide. Provide links as appropriate.
 
 
-KubeSphere is open source and doesn’t require a license. It is free for all Amazon EKS users. For any KubeSphere issues, see https://github.com/kubesphere/kubesphere[KubeSphere community^] and raise an issue, or contact the KubeSphere https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE[Slack community^] or https://groups.google.com/forum/#!forum/kubesphere[mailing list^].
+KubeSphere is open source and doesn’t require a license. It is free for all Amazon EKS users. For any KubeSphere issues, see the https://github.com/kubesphere/kubesphere[KubeSphere GitHub community^] and raise an issue. Alternatively, contact KubeSphere through the https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE[Slack community^] or its https://groups.google.com/forum/#!forum/kubesphere[mailing list^].
 
 For KubeSphere users with production environments who want technical support, you must have a support subscription. To get started, contact your account executive or fill out KubeSphere's https://jinshuju.net/f/bDS8me[Commercial Support^] form.
 
