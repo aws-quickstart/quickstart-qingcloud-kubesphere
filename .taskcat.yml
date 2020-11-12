@@ -75,6 +75,7 @@ tests:
       ALBIngressController: Disabled
       PerAccountSharedResources: 'No'
       PerRegionSharedResources: 'No'
+      ProvisionBastionHost: Disabled
     regions:
     - cn-northwest-1
     template: templates/kubesphere-entrypoint-new-vpc.template.yaml
@@ -95,6 +96,7 @@ tests:
       Auditing: 'false'
       MetricsServer: 'true'
       Networkpolicy: 'false'
+      ProvisionBastionHost: Disabled
     regions:
     - cn-north-1
     template: templates/kubesphere-entrypoint-new-vpc.template.yaml
