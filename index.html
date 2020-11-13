@@ -805,8 +805,6 @@ p.footer-text a{color:#d7d8d8}
 <ul class="sectlevel2">
 <li><a href="#_sign_in_to_your_aws_account">Sign in to your AWS account</a></li>
 <li><a href="#_launch_the_quick_start">Launch the Quick Start</a></li>
-<li><a href="#_launch_into_new_vpc">Launch into new VPC</a></li>
-<li><a href="#_launch_into_existing_vpc">Launch into existing VPC</a></li>
 </ul>
 </li>
 <li><a href="#_test_the_deployment">Test the deployment</a></li>
@@ -816,6 +814,12 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_central_control_plane_for_multicloud_and_multicluster_management">Central control plane for multicloud and multicluster management</a></li>
 <li><a href="#_additional_resources">Additional resources</a></li>
 <li><a href="#_faq">FAQ</a></li>
+<li><a href="#_parameter_reference">Parameter reference</a>
+<ul class="sectlevel2">
+<li><a href="#_launch_into_new_vpc">Launch into new VPC</a></li>
+<li><a href="#_launch_into_existing_vpc">Launch into existing VPC</a></li>
+</ul>
+</li>
 <li><a href="#_send_us_feedback">Send us feedback</a></li>
 <li><a href="#_quick_start_reference_deployments">Quick Start reference deployments</a></li>
 <li><a href="#_github_repository">GitHub repository</a></li>
@@ -921,7 +925,7 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 <p>Role-based access control</p>
 </li>
 <li>
-<p><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener">Network Policies</a></p>
+<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener">Network Policies</a></p>
 </li>
 </ul>
 </div>
@@ -959,7 +963,7 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_software_licenses">Software licenses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>KubeSphere is open source and doesn’t require a license. It is free for all Amazon EKS users. For any KubeSphere issues, see <a href="https://github.com/kubesphere/kubesphere" target="_blank" rel="noopener">KubeSphere community</a> and raise an issue, or contact the KubeSphere <a href="https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE" target="_blank" rel="noopener">Slack community</a> or <a href="https://groups.google.com/forum/#!forum/kubesphere" target="_blank" rel="noopener">mailing list</a>.</p>
+<p>KubeSphere is open source and doesn’t require a license. It is free for all Amazon EKS users. For any KubeSphere issues, see the <a href="https://github.com/kubesphere/kubesphere" target="_blank" rel="noopener">KubeSphere GitHub community</a> and raise an issue. Alternatively, contact KubeSphere through the <a href="https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE" target="_blank" rel="noopener">Slack community</a> or its <a href="https://groups.google.com/forum/#!forum/kubesphere" target="_blank" rel="noopener">mailing list</a>.</p>
 </div>
 <div class="paragraph">
 <p>For KubeSphere users with production environments who want technical support, you must have a support subscription. To get started, contact your account executive or fill out KubeSphere&#8217;s <a href="https://jinshuju.net/f/bDS8me" target="_blank" rel="noopener">Commercial Support</a> form.</p>
@@ -1220,6 +1224,14 @@ You are responsible for the cost of the AWS services used while running this Qui
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/XJaW5" target="_blank" rel="noopener">Deploy KubeSphere into an existing VPC on AWS</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/X4KMN" target="_blank" rel="noopener">View template</a></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/eYPQm" target="_blank" rel="noopener">Deploy KubeSphere into a new VPC on AWS into CN-North-1 Region</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-cn-north-1.s3.cn-north-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/Ep9b4" target="_blank" rel="noopener">Deploy KubeSphere into an existing VPC on AWS into CN-Northwest-1 Region</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
+</tr>
 </tbody>
 </table>
 <div class="admonitionblock warning">
@@ -1229,13 +1241,12 @@ You are responsible for the cost of the AWS services used while running this Qui
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-If you deploy KubeSphere into an existing VPC, ensure that your VPC has three private subnets in different Availability Zones for the workload instances and that the subnets aren’t shared. This Quick Start doesn’t support <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html" target="_blank" rel="noopener">shared subnets</a>. To allow the instances to download packages and software without exposing them to the internet, the subnets require <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener">NAT gateways</a> in their route tables.
+If you deploy KubeSphere into an existing VPC, ensure that your VPC has three private subnets in different Availability Zones for the workload instances and that the subnets aren’t shared. This Quick Start doesn’t support <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html" target="_blank" rel="noopener">shared subnets</a>. To allow the instances to download packages and software without exposing them to the internet, the subnets require <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener">NAT gateways</a> in their route tables.<br>
+<br>
+Also, ensure that the domain name in the DHCP options is configured, as explained in the <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html" target="_blank" rel="noopener">DHCP options sets</a>. When you launch the Quick Start, provide your VPC settings.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Also, ensure that the domain name in the DHCP options is configured, as explained in the <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html" target="_blank" rel="noopener">DHCP options sets</a>. When you launch the Quick Start, provide your VPC settings.</p>
 </div>
 <div class="paragraph">
 <p>Each deployment takes about 40–50 minutes to complete.</p>
@@ -1269,9 +1280,338 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>In the following tables, parameters are listed by category and described separately for the deployment options. When you finish reviewing and customizing the parameters, choose <strong>Next</strong>.</p>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>On the <strong>Configure stack options</strong> page, you can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html" target="_blank" rel="noopener">specify tags</a> (key-value pairs) for resources in your stack and <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html" target="_blank" rel="noopener">set advanced options</a>. When you’re finished, choose <strong>Next</strong>.</p>
+</li>
+<li>
+<p>On the <strong>Review</strong> page, review and confirm the template settings. Under <strong>Capabilities</strong>, select the two check boxes to acknowledge that the template creates IAM resources and might require the ability to automatically expand macros.</p>
+</li>
+<li>
+<p>Choose <strong>Create stack</strong> to deploy the stack.</p>
+</li>
+<li>
+<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the KubeSphere deployment is ready.</p>
+</li>
+<li>
+<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">KubeSphere outputs after successful deployment</a>, to view the created resources.</p>
+</li>
+</ol>
 </div>
+<div id="cfn_outputs" class="imageblock">
+<div class="content">
+<a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="648" height="439"></a>
+</div>
+<div class="title">Figure 2. KubeSphere outputs after successful deployment</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_the_deployment">Test the deployment</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to the bastion host using your configured key pair and the user name <code>ec2-user</code>. You can get the IP address of the bastion host from the <strong>Outputs</strong> tab of the AWS CloudFormation console.</p>
+<div class="literalblock">
+<div class="content">
+<pre>ssh -i "~/.ssh/cap.pem" ec2-user@12.23.34.45</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Verify that the client software was installed through the bastion host:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Kubectl version:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl version</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Helm version:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ helm version</pre>
+</div>
+</div>
+</li>
+<li>
+<p>AWS CLI version:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ aws -version</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Cf version:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ cf -version</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Git version</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ git version</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Verify the health of the Amazon EKS cluster through the bastion host. Use the installed <code>kubectl</code> and <code>helm</code> commands to verify access to the environment and the running state of the cluster and packages. The installation was successful if you see the welcome-information outputs in the log.</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl cluster-info</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl get nodes</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the administrator account and password defined by <code>KubeSphereConsolePassword</code>.</p>
+</li>
+</ol>
+</div>
+<div id="KubeSphereLogin1" class="imageblock">
+<div class="content">
+<a class="image" href="images/image4.png"><img src="images/image4.png" alt="Architecture" width="648" height="439"></a>
+</div>
+<div class="title">Figure 3. KubeSphere login page</div>
+</div>
+<div id="KubeSphereLogin2" class="imageblock">
+<div class="content">
+<a class="image" href="images/image5.png"><img src="images/image5.png" alt="Architecture" width="648" height="439"></a>
+</div>
+<div class="title">Figure 4. KubeSphere dashboard</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_best_practices_for_using_kubesphere_on_aws">Best practices for using KubeSphere on AWS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As mentioned in the table <em>KubeSphere System and Pluggable Configuration of <a href="#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc">Step3</a></em>, KubeSphere has 11 pluggable components, which can be enabled individually. If you don&#8217;t enable them, KubeSphere starts with a minimal installation by default. Ensure that you have the necessary CPU and memory requirements in your cluster. For more information, see the <a href="https://kubesphere.io/docs/pluggable-components/overview/" target="_blank" rel="noopener">KubeSphere Overview</a>.</p>
+</div>
+<div class="paragraph">
+<p>The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node that has at least 16 GiB RAM and 4 CPUs. We recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the cluster&#8217;s configuration as follows:</p>
+</div>
+<div class="paragraph">
+<p>Use an administrative account to access <strong>Cluster Management</strong>. Choose the EKS cluster, and select <strong>CRDs</strong> from the left-hand menu. Search for <strong>ClusterConfiguration</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/image6.png" alt="Architecture" width="648" height="439">
+</div>
+</div>
+<div class="paragraph">
+<p>Choose the <strong>ClusterConfiguration</strong> resource page. Choose <strong>···</strong> from the list, and select <strong>Edit YAML</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/image7.png" alt="Architecture" width="648" height="439">
+</div>
+</div>
+<div class="paragraph">
+<p>Scroll down to the <strong>spec</strong> section, and change the pluggable components from <strong>false</strong> to <strong>true</strong> for the features you want. Finally, choose <strong>Update</strong> to save your changes. The installation automatically starts at the backend.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/image8.png" alt="Architecture" width="648" height="439">
+</div>
+</div>
+<div class="paragraph">
+<p>Open the <strong>Web kubectl</strong> from <strong>Toolbox</strong> (<strong>bottom right</strong>), and inspect the installation logs:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you see welcome information in the output logs, the pluggable components are ready to use.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security">Security</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Set up the TLS</strong>: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend that you set up the TLS for you Network Load Balancer to establish a secure connection between the client and server. This helps to ensure that all data passed between the client and your load balancer is private, for more information, see <a href="file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer" target="_blank" rel="noopener">TLS listeners for your Network Load Balancer</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Keep the secret private</strong>: KubeSphere supports multicluster management in a unified control plane. Save the secrets used to connect to the external cluster. For more information, see <a href="https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/" target="_blank" rel="noopener">Direct Connection</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Create proper multitenant management policies:</strong> KubeSphere is a multitenant platform. Multitenancy in KubeSphere refers to one or more clusters that are shared between tenants. Ensure that you set the proper roles, permissions, and projects for tenants. For more information, see <a href="https://kubesphere.io/docs/quick-start/create-workspace-and-project/" target="_blank" rel="noopener">Create Workspace, Project, Account and Role</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Create proper network policies:</strong> KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster&#8217;s projects and workspaces, create <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank" rel="noopener">network policies</a> based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all
+incoming traffic to avoid pods from one project mistakenly sending traffic to another project&#8217;s services or databases.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_started_with_kubesphere">Get started with KubeSphere</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you finish deploying this Quick Start, refer to the</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>https://kubesphere.io/docs/quick-start/create-workspace-and-project/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_central_control_plane_for_multicloud_and_multicluster_management">Central control plane for multicloud and multicluster management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to build a hybrid cloud for multicloud and multicluster management, enable Kubernetes federation to set up a central control plane using KubeSphere. KubeSphere supports application distribution across multiple clusters and cloud providers. It also provides disaster recovery and cross-cluster observability. For more information, see
+<a href="file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphere/How%20to%20Enable%20the%20Multi-cluster%20Feature" target="_blank" rel="noopener">How to enable a multicluster feature</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources">Additional resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>AWS resources</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started Resource Center</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/general/latest/gr/" target="_blank" rel="noopener">AWS General Reference</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/general/latest/gr/glos-chap.html" target="_blank" rel="noopener">AWS Glossary</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>AWS services</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.aws.amazon.com/cloudformation/" target="_blank" rel="noopener">AWS CloudFormation</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/eks/?id=docs_gateway" target="_blank" rel="noopener">Amazon EKS</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html" target="_blank" rel="noopener">Amazon EBS</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/ec2/" target="_blank" rel="noopener">Amazon EC2</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/iam/" target="_blank" rel="noopener">IAM</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/vpc/" target="_blank" rel="noopener">Amazon VPC</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>KubeSphere</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://kubesphere.io/docs/introduction/what-is-kubesphere/" target="_blank" rel="noopener">What is KubeSphere</a></p>
+</li>
+<li>
+<p><a href="https://kubesphere.io/docs/pluggable-components/" target="_blank" rel="noopener">Introduction to Pluggable Components</a></p>
+</li>
+<li>
+<p><a href="https://kubesphere.io/docs/multicluster-management/introduction/overview/" target="_blank" rel="noopener">Multi-cluster Management</a></p>
+</li>
+<li>
+<p><a href="https://kubesphere.io/docs/installing-on-kubernetes/" target="_blank" rel="noopener">Installing KubeSphere on Kubernetes</a></p>
+</li>
+<li>
+<p><a href="https://kubesphere.io/docs/installing-on-linux/" target="_blank" rel="noopener">Installing KubeSphere on Linux</a></p>
+</li>
+<li>
+<p><a href="https://github.com/kubesphere/" target="_blank" rel="noopener">KubeSphere GitHub</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_faq">FAQ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. (This setting is under <strong>Advanced</strong> in the AWS CloudFormation console, <strong>Options</strong> page.) With this setting, the stack’s state is retained, and the instance remains running so you can troubleshoot the issue. (For Windows, look at the log files in <code>%ProgramFiles%\Amazon\EC2ConfigService</code> and <code>C:\cfn\log</code>.)</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, you continue to incur AWS charges for the stack. Ensure that you delete the stack when you finish troubleshooting. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> I encountered a size limitation error when I deployed the AWS CloudFormation templates.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer, or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see the <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation quotas</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> How to change the language.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> Choose the user name from the top-right corner of the console, and choose <strong>User settings</strong> for language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameter_reference">Parameter reference</h2>
+<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1284,7 +1624,6 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </td>
 </tr>
 </table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_launch_into_new_vpc">Launch into new VPC</h3>
@@ -1839,332 +2178,6 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </tr>
 </tbody>
 </table>
-<div class="olist arabic">
-<ol class="arabic" start="5">
-<li>
-<p>On the <strong>Configure stack options</strong> page, you can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html" target="_blank" rel="noopener">specify tags</a> (key-value pairs) for resources in your stack and <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html" target="_blank" rel="noopener">set advanced options</a>. When you’re finished, choose <strong>Next</strong>.</p>
-</li>
-<li>
-<p>On the <strong>Review</strong> page, review and confirm the template settings. Under <strong>Capabilities</strong>, select the two check boxes to acknowledge that the template creates IAM resources and might require the ability to automatically expand macros.</p>
-</li>
-<li>
-<p>Choose <strong>Create stack</strong> to deploy the stack.</p>
-</li>
-<li>
-<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the KubeSphere deployment is ready.</p>
-</li>
-<li>
-<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">KubeSphere outputs after successful deployment</a>, to view the created resources.</p>
-</li>
-</ol>
-</div>
-<div id="cfn_outputs" class="imageblock">
-<div class="content">
-<a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="648" height="439"></a>
-</div>
-<div class="title">Figure 2. KubeSphere outputs after successful deployment</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_test_the_deployment">Test the deployment</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log in to the bastion host using your configured key pair and the user name <code>ec2-user</code>. You can get the IP address of the bastion host from the <strong>Outputs</strong> tab of the AWS CloudFormation console.</p>
-<div class="literalblock">
-<div class="content">
-<pre>ssh -i "~/.ssh/cap.pem" ec2-user@12.23.34.45</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>Verify that the client software was installed through the bastion host:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Kubectl version:</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ kubectl version</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Helm version:</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ helm version</pre>
-</div>
-</div>
-</li>
-<li>
-<p>AWS CLI version:</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ aws -version</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Cf version:</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ cf -version</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Git version</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ git version</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>Verify the health of the Amazon EKS cluster through the bastion host. Use the installed <code>kubectl</code> and <code>helm</code> commands to verify access to the environment and the running state of the cluster and packages. The installation was successful if you see the welcome-information outputs in the log.</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ kubectl cluster-info</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ kubectl get nodes</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="4">
-<li>
-<p>Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the administrator account and password defined by <code>KubeSphereConsolePassword</code>.</p>
-</li>
-</ol>
-</div>
-<div id="KubeSphereLogin1" class="imageblock">
-<div class="content">
-<a class="image" href="images/image4.png"><img src="images/image4.png" alt="Architecture" width="648" height="439"></a>
-</div>
-<div class="title">Figure 3. KubeSphere login page</div>
-</div>
-<div id="KubeSphereLogin2" class="imageblock">
-<div class="content">
-<a class="image" href="images/image5.png"><img src="images/image5.png" alt="Architecture" width="648" height="439"></a>
-</div>
-<div class="title">Figure 4. KubeSphere dashboard</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_best_practices_for_using_kubesphere_on_aws">Best practices for using KubeSphere on AWS</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As mentioned in the table <em>KubeSphere System and Pluggable Configuration of <a href="#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc">Step3</a></em>, KubeSphere has 11 pluggable components, which can be enabled individually. If you don&#8217;t enable them, KubeSphere starts with a minimal installation by default. Ensure that you have the necessary CPU and memory requirements in your cluster. For more information, see the <a href="https://kubesphere.io/docs/pluggable-components/overview/" target="_blank" rel="noopener">KubeSphere Overview</a>.</p>
-</div>
-<div class="paragraph">
-<p>The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node that has at least 16 GiB RAM and 4 CPUs. We recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the cluster&#8217;s configuration as follows:</p>
-</div>
-<div class="paragraph">
-<p>Use an administrative account to access <strong>Cluster Management</strong>. Choose the EKS cluster, and select <strong>CRDs</strong> from the left-hand menu. Search for <strong>ClusterConfiguration</strong>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/image6.png" alt="Architecture" width="648" height="439">
-</div>
-</div>
-<div class="paragraph">
-<p>Choose the <strong>ClusterConfiguration</strong> resource page. Choose <strong>···</strong> from the list, and select <strong>Edit YAML</strong>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/image7.png" alt="Architecture" width="648" height="439">
-</div>
-</div>
-<div class="paragraph">
-<p>Scroll down to the <strong>spec</strong> section, and change the pluggable components from <strong>false</strong> to <strong>true</strong> for the features you want. Finally, choose <strong>Update</strong> to save your changes. The installation automatically starts at the backend.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/image8.png" alt="Architecture" width="648" height="439">
-</div>
-</div>
-<div class="paragraph">
-<p>Open the <strong>Web kubectl</strong> from <strong>Toolbox</strong> (<strong>bottom right</strong>), and inspect the installation logs:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>When you see welcome information in the output logs, the pluggable components are ready to use.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_security">Security</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Set up the TLS</strong>: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend that you set up the TLS for you Network Load Balancer to establish a secure connection between the client and server. This helps to ensure that all data passed between the client and your load balancer is private, for more information, see <a href="file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer" target="_blank" rel="noopener">TLS listeners for your Network Load Balancer</a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Keep the secret private</strong>: KubeSphere supports multicluster management in a unified control plane. Save the secrets used to connect to the external cluster. For more information, see <a href="https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/" target="_blank" rel="noopener">Direct Connection</a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Create proper multitenant management policies:</strong> KubeSphere is a multitenant platform. Multitenancy in KubeSphere refers to one or more clusters that are shared between tenants. Ensure that you set the proper roles, permissions, and projects for tenants. For more information, see <a href="https://kubesphere.io/docs/quick-start/create-workspace-and-project/" target="_blank" rel="noopener">Create Workspace, Project, Account and Role</a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Create proper network policies:</strong> KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster&#8217;s projects and workspaces, create <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank" rel="noopener">network policies</a> based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all
-incoming traffic to avoid pods from one project mistakenly sending traffic to another project&#8217;s services or databases.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_get_started_with_kubesphere">Get started with KubeSphere</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>When you finish deploying this Quick Start, refer to the</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>https://kubesphere.io/docs/quick-start/create-workspace-and-project/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_central_control_plane_for_multicloud_and_multicluster_management">Central control plane for multicloud and multicluster management</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you want to build a hybrid cloud for multicloud and multicluster management, enable Kubernetes federation to set up a central control plane using KubeSphere. KubeSphere supports application distribution across multiple clusters and cloud providers. It also provides disaster recovery and cross-cluster observability. For more information, see
-<a href="file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphere/How%20to%20Enable%20the%20Multi-cluster%20Feature" target="_blank" rel="noopener">How to enable a multicluster feature</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_additional_resources">Additional resources</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>AWS resources</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started Resource Center</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/general/latest/gr/" target="_blank" rel="noopener">AWS General Reference</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/general/latest/gr/glos-chap.html" target="_blank" rel="noopener">AWS Glossary</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>AWS services</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.aws.amazon.com/cloudformation/" target="_blank" rel="noopener">AWS CloudFormation</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/eks/?id=docs_gateway" target="_blank" rel="noopener">Amazon EKS</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html" target="_blank" rel="noopener">Amazon EBS</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/ec2/" target="_blank" rel="noopener">Amazon EC2</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/iam/" target="_blank" rel="noopener">IAM</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/vpc/" target="_blank" rel="noopener">Amazon VPC</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>KubeSphere</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://kubesphere.io/docs/introduction/what-is-kubesphere/" target="_blank" rel="noopener">What is KubeSphere</a></p>
-</li>
-<li>
-<p><a href="https://kubesphere.io/docs/pluggable-components/" target="_blank" rel="noopener">Introduction to Pluggable Components</a></p>
-</li>
-<li>
-<p><a href="https://kubesphere.io/docs/multicluster-management/introduction/overview/" target="_blank" rel="noopener">Multi-cluster Management</a></p>
-</li>
-<li>
-<p><a href="https://kubesphere.io/docs/installing-on-kubernetes/" target="_blank" rel="noopener">Installing KubeSphere on Kubernetes</a></p>
-</li>
-<li>
-<p><a href="https://kubesphere.io/docs/installing-on-linux/" target="_blank" rel="noopener">Installing KubeSphere on Linux</a></p>
-</li>
-<li>
-<p><a href="https://github.com/kubesphere/" target="_blank" rel="noopener">KubeSphere GitHub</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_faq">FAQ</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
-</div>
-<div class="paragraph">
-<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. (This setting is under <strong>Advanced</strong> in the AWS CloudFormation console, <strong>Options</strong> page.) With this setting, the stack’s state is retained, and the instance remains running so you can troubleshoot the issue. (For Windows, look at the log files in <code>%ProgramFiles%\Amazon\EC2ConfigService</code> and <code>C:\cfn\log</code>.)</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, you continue to incur AWS charges for the stack. Ensure that you delete the stack when you finish troubleshooting. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Q.</strong> I encountered a size limitation error when I deployed the AWS CloudFormation templates.</p>
-</div>
-<div class="paragraph">
-<p><strong>A.</strong> We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer, or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see the <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation quotas</a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Q.</strong> How to change the language.</p>
-</div>
-<div class="paragraph">
-<p><strong>A.</strong> Choose the user name from the top-right corner of the console, and choose <strong>User settings</strong> for language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.</p>
 </div>
 </div>
 </div>
