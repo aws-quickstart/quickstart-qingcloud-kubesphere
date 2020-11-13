@@ -455,5 +455,9 @@ Outputs:
     Value: !GetAtt EKSClusterStack.Outputs.BastionIP
   KubeSphereConsoleEndpoint:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
+  KubeSpherePortConsoleEndpoint:
+    Value: !GetAtt KubeSphereStack.Outputs.KubeSpherePortConsole
   KubeSphereConsoleLoginUser:
     Value: admin
+  KubeSphereConsoleLoginPassword:
+    Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsoleLoginPassword
