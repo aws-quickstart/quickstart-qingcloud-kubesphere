@@ -18,10 +18,16 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 
 ^|https://fwd.aws/XJaW5[Deploy {partner-product-short-name} into an existing VPC on AWS^]
 ^|https://fwd.aws/X4KMN[View template^]
+
+^|https://fwd.aws/eYPQm[Deploy {partner-product-short-name} into a new VPC on AWS into CN-North-1 Region^]
+^|https://aws-quickstart-cn-north-1.s3.cn-north-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[View template^]
+
+^|https://fwd.aws/Ep9b4[Deploy {partner-product-short-name} into an existing VPC on AWS into CN-Northwest-1 Region^]
+^|https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[View template^]
 |===
 
-WARNING: If you deploy {partner-product-short-name} into an existing VPC, ensure that your VPC has three private subnets in different Availability Zones for the workload instances and that the subnets aren’t shared. This Quick Start doesn’t support https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html[shared subnets^]. To allow the instances to download packages and software without exposing them to the internet, the subnets require https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html[NAT gateways^] in their route tables. 
-
+WARNING: If you deploy {partner-product-short-name} into an existing VPC, ensure that your VPC has three private subnets in different Availability Zones for the workload instances and that the subnets aren’t shared. This Quick Start doesn’t support https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html[shared subnets^]. To allow the instances to download packages and software without exposing them to the internet, the subnets require https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html[NAT gateways^] in their route tables. +
+ +
 Also, ensure that the domain name in the DHCP options is configured, as explained in the http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html[DHCP options sets^]. When you launch the Quick Start, provide your VPC settings.
 
 Each deployment takes about {deployment_time} to complete.
