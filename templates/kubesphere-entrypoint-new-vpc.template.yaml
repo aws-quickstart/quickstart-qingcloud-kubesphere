@@ -424,6 +424,7 @@ Resources:
           - !Ref AWS::NoValue
         VPCID: !GetAtt VPCStack.Outputs.VPCID
         ProvisionBastionHost: !Ref ProvisionBastionHost
+        ALBIngressController: Disabled
   KubeSphereStack:
     DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack

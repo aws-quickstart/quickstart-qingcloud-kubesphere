@@ -393,6 +393,7 @@ Resources:
           - !Ref AWS::NoValue
         VPCID: !Ref VPCID
         ProvisionBastionHost: !Ref ProvisionBastionHost
+        ALBIngressController: Disabled
   KubeSphereStack:
     DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack
