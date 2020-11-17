@@ -424,6 +424,7 @@ Resources:
           - !Ref AWS::NoValue
         VPCID: !GetAtt VPCStack.Outputs.VPCID
         ProvisionBastionHost: !Ref ProvisionBastionHost
+        ALBIngressController: Disabled
   KubeSphereStack:
     DependsOn: EKSClusterStack
     Type: AWS::CloudFormation::Stack
@@ -453,7 +454,11 @@ Outputs:
     Value: !GetAtt EKSClusterStack.Outputs.EKSClusterName
   BastionIP:
     Value: !GetAtt EKSClusterStack.Outputs.BastionIP
-  KubeSphereConsoleEndpoint:
+  KubeSphereConsoleDefaultEndpoint:
     Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsole
+  KubeSphereConsoleEndpoint:
+    Value: !GetAtt KubeSphereStack.Outputs.KubeSpherePortConsole
   KubeSphereConsoleLoginUser:
     Value: admin
+  KubeSphereConsoleLoginPassword:
+    Value: !GetAtt KubeSphereStack.Outputs.KubeSphereConsoleLoginPassword

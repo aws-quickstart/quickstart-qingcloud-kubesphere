@@ -446,8 +446,11 @@ Resources:
         spec:
           ports:
           - name: nginx
-            nodePort: 30880
             port: 80
+            protocol: TCP
+            targetPort: 8000
+          - name: nginx-8000
+            port: 8000
             protocol: TCP
             targetPort: 8000
           selector:
@@ -598,6 +601,8 @@ Resources:
 Outputs:
   KubeSphereConsole:
     Value: !Sub "http://${KubeSphereConsole}"
+  KubeSpherePortConsole:
+    Value: !Sub "http://${KubeSphereConsole}:8000"
   KubeSphereConsoleLoginUser:
     Value: admin
   KubeSphereConsoleLoginPassword:
