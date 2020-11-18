@@ -354,6 +354,12 @@ Parameters:
     AllowedValues: [ "Enabled", "Disabled" ]
     Default: "Enabled"
     Description: Skip creating a bastion host by choosing "Disabled."
+Rules:
+  AZRule:
+    RuleCondition: !Equals [ !Ref AWS::Region, cn-north-1 ]
+    Assertions:
+      - Assert: !Equals [ !Ref NumberOfAZs, '2' ]
+        AssertDescription: To enable NAT gateways you must have both CreatePrivateSubnets and CreatePublicSubnets set to 'true'
 Conditions:
   UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
   3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
