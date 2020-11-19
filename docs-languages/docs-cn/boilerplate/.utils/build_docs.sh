@@ -18,6 +18,7 @@ if [ -d docs-languages ]; then
   for dir in docs-languages/*/
   do
     dir=${dir%*/}
-    asciidoctor --base-dir docs-languages/${dir##*/}/ --backend=html5 -o ../index.html -w --failure-level ERROR --doctype=book -a toc2 ${ASCIIDOC_ATTRIBUTES} docs-languages/${dir##*/}/boilerplate/index.adoc
+    lang=$(echo ${dir%*/} | awk -F'[-]' '{print $2}')
+    asciidoctor --base-dir docs-languages/${dir##*/}/ --backend=html5 -o ../index-${lang}.html -w --failure-level ERROR --doctype=book -a toc2 ${ASCIIDOC_ATTRIBUTES} docs-languages/${dir##*/}/boilerplate/index.adoc
   done
 fi
