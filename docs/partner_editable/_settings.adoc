@@ -1,0 +1,16 @@
+:quickstart-project-name: quickstart-qingcloud-kubesphere
+:partner-product-name: QingCloud KubeSphere
+:partner-product-short-name: KubeSphere
+:partner-company-name: QingCloud
+:doc-month: November
+:doc-year: 2020
+:partner-contributors: Xiaosi Zhou, Pengfei Zhou, Shuang Yu, and Sherlock Xu, QingCloud
+:quickstart-contributors: Troy Ameigh, AWS Quick Start team
+:deployment_time: 40–50 minutes
+:default_deployment_region: us-east-1
+:parameters_as_appendix:
+// Uncomment these two attributes if you are leveraging
+// - an AWS Marketplace listing.
+// Additional content will be auto-generated based on these attributes.
+// :marketplace_subscription:
+// :marketplace_listing_url: https://example.com/
