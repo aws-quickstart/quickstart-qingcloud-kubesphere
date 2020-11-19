@@ -12,4 +12,12 @@ if [ "${GITHUB_REPO_OWNER}" == "aws-quickstart" ]; then
   fi
 fi
 asciidoctor --base-dir docs/ --backend=html5 -o ../index.html -w --failure-level ERROR --doctype=book -a toc2 ${ASCIIDOC_ATTRIBUTES} docs/boilerplate/index.adoc
-asciidoctor --base-dir docs-languages/docs-cn/ --backend=html5 -o ../index.html -w --failure-level ERROR --doctype=book -a toc2 ${ASCIIDOC_ATTRIBUTES} docsdocs-languages/docs-cn/boilerplate/index.adoc
+
+
+if [ -d docs-languages ]; then
+  for dir in docs-languages/*/
+  do
+    dir=${dir%*/}
+    asciidoctor --base-dir docs-languages/${dir##*/}/ --backend=html5 -o ../index.html -w --failure-level ERROR --doctype=book -a toc2 ${ASCIIDOC_ATTRIBUTES} docs-languages/${dir##*/}/boilerplate/index.adoc
+  done
+fi
