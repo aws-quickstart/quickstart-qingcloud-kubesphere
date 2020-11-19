@@ -49,12 +49,12 @@
 [#KubeSphereLogin1]
 .KubeSphere login page
 [link=images/image4.png]
-image::../images/image4.png[Architecture,width=648,height=439]
+image::../../../docs/images/image4.png[Architecture,width=648,height=439]
 
 [#KubeSphereLogin2]
 .KubeSphere dashboard
 [link=images/image5.png]
-image::../images/image5.png[Architecture,width=648,height=439]
+image::../../../docs/images/image5.png[Architecture,width=648,height=439]
 
 
 == Best practices for using {partner-product-short-name} on AWS
@@ -67,16 +67,16 @@ The optimal configuration for running KubeSphere Container Platform on an Amazon
 Use an administrative account to access *Cluster Management*. Choose the EKS cluster, and select *CRDs* from the left-hand menu. Search for *ClusterConfiguration*.
 
 
-image::../images/image6.png[Architecture,width=648,height=439]
+image::../../../docs/images/image6.png[Architecture,width=648,height=439]
 
 Choose the *ClusterConfiguration* resource page. Choose *···* from the list, and select *Edit YAML*.
 
-image::../images/image7.png[Architecture,width=648,height=439]
+image::../../../docs/images/image7.png[Architecture,width=648,height=439]
 
 
 Scroll down to the *spec* section, and change the pluggable components from *false* to *true* for the features you want. Finally, choose *Update* to save your changes. The installation automatically starts at the backend.
 
-image::../images/image8.png[Architecture,width=648,height=439]
+image::../../../docs/images/image8.png[Architecture,width=648,height=439]
 
 Open the *Web kubectl* from *Toolbox* (**bottom right**), and inspect the installation logs:
 
