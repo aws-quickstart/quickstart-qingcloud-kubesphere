@@ -1,7 +1,7 @@
 // Do not change this first attribute. Do change the others.
-:quickstart-team-name: Test-1
-:quickstart-project-name: test
-:partner-product-name: test
+:quickstart-team-name: AWS Quick Start team
+:quickstart-project-name: quickstart-documentation-base
+:partner-product-name: Example Product Name
 // For the following attribute, if you have no short name, enter the same name as partner-product-name.
 :partner-product-short-name: Example Product Name
 // If there's no partner, comment partner-company-name and partner-contributors.
