@@ -7,7 +7,7 @@
 :toc2: left
 :toc-title: 
 :toclevels: 2
-:stylesheet: ../../docs/{includedir}/.css/quickstart.css
+:stylesheet: ../../{includedir}/.css/quickstart.css
 :project_cfn:
 :template_services_ec2:
 include::{specificdir}/_settings.adoc[]
