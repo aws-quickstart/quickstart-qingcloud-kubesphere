@@ -25,4 +25,3 @@ WARNING: When you set *Rollback on failure* to *Disabled*, you continue to incur
 
 *A.* When deploying a stack into an Account where you already deployed a cluster using the Quick Start. You need to set "PerAccountSharedResources" to "No", this stack once deployed will be used by all subsequent deployments in that Account.
 
-
