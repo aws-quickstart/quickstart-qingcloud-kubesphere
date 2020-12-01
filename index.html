@@ -1607,6 +1607,18 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <div class="paragraph">
 <p><strong>A.</strong> Choose the user name from the top-right corner of the console, and choose <strong>User settings</strong> for language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.</p>
 </div>
+<div class="paragraph">
+<p><strong>Q.</strong> Deploying second cluster into a Region causes the "Regional Resource" stack to fail.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> When deploying a stack into a Region where you already deployed a cluster using the Quick Start. You need to set "PerRegionSharedResources" to "No", this stack once deployed will be used by all subsequent deployments in that Region.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> Deploying second cluster into an Account causes the "Account Resource" stack to fail.</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> When deploying a stack into an Account where you already deployed a cluster using the Quick Start. You need to set "PerAccountSharedResources" to "No", this stack once deployed will be used by all subsequent deployments in that Account.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
