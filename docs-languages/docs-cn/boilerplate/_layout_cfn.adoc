@@ -1,17 +1,17 @@
 
 [.text-center]
 [discrete]
-== {partner-product-name} on the AWS Cloud
+== AWS Cloud 上的{partner-product-name}
 :doctitle: {partner-product-name} on the AWS Cloud
 :!toc:
 [.text-left]
 include::../{includedir}/introduction.adoc[]
 
-== Overview
+== 概述
 include::../{includedir}/overview.adoc[]
 
 
-== {partner-product-name} on AWS
+== AWS 上的{partner-product-name}
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/product_description.adoc`**_
 [.preview_mode]
@@ -23,11 +23,11 @@ ifndef::production_build[]
 |===
 endif::production_build[]
 
-== Cost
+== 费用
 include::../{includedir}/cost.adoc[]
 
 ifndef::disable_licenses[]
-== Software licenses
+== 软件许可证
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/licenses.adoc`**_
 [.preview_mode]
@@ -40,7 +40,7 @@ ifndef::production_build[]
 endif::production_build[]
 endif::disable_licenses[]
 
-== Architecture
+== 架构
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/architecture.adoc`**_
 [.preview_mode]
@@ -52,11 +52,11 @@ ifndef::production_build[]
 |===
 endif::production_build[]
 
-== Planning the deployment
+== 规划部署
 
 include::../{includedir}/planning_deployment.adoc[]
 
-== Deployment steps
+== 部署步骤
 include::../{includedir}/deployment_steps.adoc[]
 
 // == Parameters
@@ -96,20 +96,18 @@ Region`, and `Quick Start S3 key prefix`. Changing these parameter settings auto
 include::../{generateddir}/parameters/index.adoc[]
 endif::parameters_as_appendix[]
 
-== Send us feedback
+== 发送反馈
 
-To post feedback, submit feature ideas, or report bugs, use the *Issues* section of the https://github.com/aws-quickstart/{quickstart-project-name}[GitHub repository^] for this Quick Start. To submit code, see the https://aws-quickstart.github.io/[Quick Start Contributor’s Guide^].
+若要提出反馈、提交功能建议或上报问题，请使用此快速入门 https://github.com/aws-quickstart/{quickstart-project-name}[GitHub 仓库^]的 *Issues* 部分。若要提交代码，请参见 https://aws-quickstart.github.io/[Quick Start Contributor’s Guide^]。
 
-== Quick Start reference deployments
+== 快速入门参考部署
 
-See the https://aws.amazon.com/quickstart/[AWS Quick Start home page].
+请参见 https://aws.amazon.com/cn/quickstart/architecture/qingcloud-kubesphere/[AWS 快速入门首页]。
 
 
-== GitHub repository
+== GitHub 仓库
 
-Visit our https://github.com/aws-quickstart/{quickstart-project-name}[GitHub repository^] to download
-the templates and scripts for this Quick Start, to post your comments,
-and to share your customizations with others.
+访问我们的 https://github.com/aws-quickstart/{quickstart-project-name}[GitHub 仓库^] 以下载此快速入门的模板和脚本，发表评论，并和他人分享您的自定义配置。
 
 '''
 include::../{includedir}/disclaimer.adoc[]
