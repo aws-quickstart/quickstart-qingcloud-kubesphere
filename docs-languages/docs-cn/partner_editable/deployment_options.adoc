@@ -1,8 +1,8 @@
 // There are generally two deployment options. If additional are required, add them here
 
-This Quick Start provides two deployment options:
+此快速入门提供两种部署方式：
 
-* *Deploy {partner-product-short-name} into a new VPC (end-to-end deployment)*. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys {partner-product-short-name} into this new VPC.
-* *Deploy {partner-product-short-name} into an existing VPC*. This option provisions Amazon EKS and {partner-product-short-name} in your existing AWS infrastructure.
+* *将 {partner-product-short-name} 部署在新建的 VPC 中 (end-to-end deployment)*。此方式会自动创建一个全新的 AWS 环境，其中包含 VPC、子网、NAT 网关、安全组、堡垒主机以及其他一些基础设施组件，{partner-product-short-name} 会部署在这个新建的 VPC 中。
+* *将 {partner-product-short-name} 部署在现有的 VPC 中*。此方式会将 Amazon EKS 和 {partner-product-short-name} 部署在您现有的 AWS 基础设施中。
 
-The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and {partner-product-short-name} settings, as discussed later in this guide.
+此快速入门还为这两种方式提供了的可独立配置的模板，用户可以自定义无类别域间路由 (CIDR)、实例类型以及 {partner-product-short-name} 的相关配置，具体信息会在本指南的以下章节详细介绍。
