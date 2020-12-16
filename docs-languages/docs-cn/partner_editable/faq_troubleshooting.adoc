@@ -2,17 +2,17 @@
 
 == FAQ
 
-*Q.* I encountered a *CREATE_FAILED* error when I launched the Quick Start.
+*问：*启动此快速入门时提示 *CREATE_FAILED* 错误。
 
-*A.* If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with *Rollback on failure* set to *Disabled*. (This setting is under *Advanced* in the AWS CloudFormation console, *Options* page.) With this setting, the stack’s state is retained, and the instance remains running so you can troubleshoot the issue. (For Windows, look at the log files in `%ProgramFiles%\Amazon\EC2ConfigService` and `C:\cfn\log`.)
+*答：*如果 AWS CloudFormation 创建堆栈失败，建议您将*失败时回滚*设置为*已禁用*并重启该模板。（此设置在 AWS CloudFormation 控制台*选项*页面的*高级*部分下。）设置后，该堆栈的状态会保留，实例会持续运行以便您解决问题。(对于 Windows 系统, 请查看 `%ProgramFiles%\Amazon\EC2ConfigService` 和 `C:\cfn\log` 中的日志文件。）
 // If you’re deploying on Linux instances, provide the location for log files on Linux, or omit this sentence.
 
-WARNING: When you set *Rollback on failure* to *Disabled*, you continue to incur AWS charges for the stack. Ensure that you delete the stack when you finish troubleshooting. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html[Troubleshooting AWS CloudFormation^].
+WARNING: 当您将*失败时回滚*设置为*已禁用*时，该堆栈仍然会在 AWS 上持续计费。请确保您在解决问题后删除该堆栈。有关更多信息，请参见 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/troubleshooting.html[AWS CloudFormation 疑难解答^]。
 
-*Q.* I encountered a size limitation error when I deployed the AWS CloudFormation templates.
+*问：*部署 AWS CloudFormation 模板时提示大小限制错误。
 
-*A.* We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer, or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see the http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
+*答：*建议您通过此指南中的链接或另一个 S3 存储桶去启动快速入门模板。如果您从本地副本部署模板，或从 S3 存储桶以外的地方部署模板，则可能会发生模板大小限制问题。有关更多信息，请参见 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation 配额^]。
 
-*Q.* How to change the language.
+*问：*如何修改语言？
 
-*A.* Choose the user name from the top-right corner of the console, and choose *User settings* for language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.
+*答：*从控制台右上角的下拉菜单中选择*个人设置*以切换语言。KubeSphere 控制台支持英文、西班牙文、简体中文和繁体中文。

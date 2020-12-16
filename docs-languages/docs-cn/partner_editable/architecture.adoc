@@ -1,24 +1,24 @@
-Deploying this Quick Start for a new virtual private cloud (VPC) with default parameters builds the following KubeSphere environment in the AWS Cloud.
+如果您在新建虚拟私有网络 (VPC) 使用默认参数部署此快速入门，AWS 云中会构建以下 KubeSphere 环境。
 
 // Replace this example diagram with your own. Send us your source PowerPoint file. Be sure to follow our guidelines here : http://(we should include these points on our contributors giude)
 [#architecture1]
-.Quick Start architecture for _{partner-product-short-name}_ on AWS
+.AWS 上 _{partner-product-short-name}_ 快速入门架构
 [link=images/architecture_diagram.png]
 image::../../../docs/images/architecture_diagram.png[Architecture,width=648,height=439]
 
 
-As shown in figure 1, the Quick Start sets up the following:
+如图 1 所示，此快速入门设置以下内容：
 
 
-* A highly available VPC architecture that spans three Availability Zones. The VPC is configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*
-* In the public subnets:
-** Managed network address translation (NAT) gateways to allow outbound internet access for resources in the private subnets.*
-** Linux bastion hosts in an Auto Scaling group to allow inbound Secure Shell (SSH) access to administer the KubeSphere platform and Amazon EKS environment.*
-* In the private subnets:
-** Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group. KubeSphere core components and your applications run on worker nodes.
-* An Amazon EKS cluster, which provides the Kubernetes control plane.
-* AWS IAM roles to help you securely control access to AWS resources.
-* Elastic Load Balancing to distribute incoming application or network traffic across multiple targets. 
+* 一个跨三个可用区的高可用 VPC 架构。该 VPC 根据 AWS 的最佳做法配置有公共和私有子网，为您在 AWS 上提供您自己的虚拟网络。*
+* 该公共子网中包含：
+** 受管的网络地址转换 (NAT) 网关，允许外网对私有子网内资源的访问。*
+** Auto Scaling 组中的 Linux 堡垒主机，允许在内网中通过 Secure Shell (SSH) 访问并管理 KubeSphere 平台和 Amazon EKS 环境。*
+* 该私有子网中包含：
+** Auto Scaling 组中的 Amazon Elastic Compute Cloud (Amazon EC2) 实例。KubeSphere 核心组件以及您运行在工作节点上的应用程序。
+* 一个 Amazon EKS 集群，提供 Kubernetes 控制平面。
+* 各种 AWS IAM 角色，帮助您安全地控制对 AWS 资源的访问。
+* Elastic Load Balancing 在多个目标之间分配传入的应用程序或网络流量。
 
 
-*The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.
+*将此快速入门部署至已有 VPC 的模板会省略标注有星号的组件，并为您提示您现有的 VPC 配置。

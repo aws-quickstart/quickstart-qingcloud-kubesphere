@@ -27,15 +27,14 @@ ifndef::production_build[]
 |===
 endif::production_build[]
 
-TIP: Visit our https://github.com/aws-quickstart/{quickstart-project-name}[GitHub repository^] for source files and to post feedback,
-report bugs, or submit feature ideas for this Quick Start.
+TIP: 访问我们的 https://github.com/aws-quickstart/{quickstart-project-name}[GitHub 仓库^]以查看源文件并针对此快速入门提出反馈、上报问题或提交功能建议。
 
 ifdef::partner-company-name[]
 [.text-left]
-This Quick Start was created by {partner-company-name} in collaboration with Amazon Web Services (AWS). http://aws.amazon.com/quickstart/[Quick Starts^] are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.
+此快速入门由{partner-company-name} 和 Amazon Web Services (AWS) 共同创建。 http://aws.amazon.com/cn/quickstart/[快速入门^]是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。
 endif::[]
 
 ifndef::partner-company-name[]
 [.text-left]
-This Quick Start was created by Amazon Web Services (AWS). http://aws.amazon.com/quickstart/[Quick Starts^] are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.
+此快速入门由 Amazon Web Services (AWS) 创建。http://aws.amazon.com/cn/quickstart/[快速入门^]是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。
 endif::[]

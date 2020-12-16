@@ -1,38 +1,38 @@
 // Add steps as necessary for accessing the software, post-configuration, and testing. Don’t include full usage instructions for your software, but add links to your product documentation for that information.
 //Should any sections not be applicable, remove them
 
-== Test the deployment
+== 测试部署
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
-. Log in to the bastion host using your configured key pair and the user name `ec2-user`. You can get the IP address of the bastion host from the *Outputs* tab of the AWS CloudFormation console.
+. 使用您配置好的密钥对和用户名 `ec2-user` 登录堡垒主机。您可以从 AWS CloudFormation 控制台的*输出*选项卡中获取堡垒主机的 IP 地址。
 
  ssh -i "~/.ssh/cap.pem" ec2-user@12.23.34.45
 
 [start=2]
-. Verify that the client software was installed through the bastion host:
+. 通过堡垒主机确认客户端软件的安装：
 
-* Kubectl version:
+* Kubectl 版本：
 
  $ kubectl version
 
-* Helm version:
+* Helm 版本：
 
  $ helm version
 
-* AWS CLI version:
+* AWS CLI 版本：
 
  $ aws -version
 
-* Cf version:
+* Cf 版本：
 
  $ cf -version
 
-* Git version
+* Git 版本：
 
  $ git version
 
 [start=3]
-. Verify the health of the Amazon EKS cluster through the bastion host. Use the installed `kubectl` and `helm` commands to verify access to the environment and the running state of the cluster and packages. The installation was successful if you see the welcome-information outputs in the log.
+. 通过堡垒主机确认 Amazon EKS 集群的健康状况。使用安装好的 `kubectl` 和 `helm` 命令来确认对环境的访问以及集群和软件包的运行状态。如果日志中输出欢迎信息，则说明安装成功。 
 
     $ kubectl cluster-info
 
@@ -43,95 +43,96 @@
     $ kubectl get pod –all-namespaces
 
 [start=4]
-. Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the administrator account and password defined by `KubeSphereConsolePassword`.
+. 在输出列表中检索生成的 KubeSphere 控制台 URL。在浏览器中访问 KubeSphere 控制台，并使用 `KubeSphereConsolePassword` 定义的管理员账户和密码登录 KubeSphere 控制台。
 
 
 [#KubeSphereLogin1]
-.KubeSphere login page
+.KubeSphere 登录页面
 [link=images/image4.png]
 image::../../../docs/images/image4.png[Architecture,width=648,height=439]
 
 [#KubeSphereLogin2]
-.KubeSphere dashboard
+.KubeSphere 仪表板
 [link=images/image5.png]
 image::../../../docs/images/image5.png[Architecture,width=648,height=439]
 
 
-== Best practices for using {partner-product-short-name} on AWS
+== 在 AWS 上使用 {partner-product-short-name} 的最佳做法
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-As mentioned in the table _KubeSphere System and Pluggable Configuration of link:#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc[Step3]_, KubeSphere has 11 pluggable components, which can be enabled individually. If you don't enable them, KubeSphere starts with a minimal installation by default. Ensure that you have the necessary CPU and memory requirements in your cluster. For more information, see the https://kubesphere.io/docs/pluggable-components/overview/[KubeSphere Overview^].
+在_link:#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc[步骤 3] 的 KubeSphere 系统和可插拔配置_表格中提到，KubeSphere 有 11 个可插拔组件，可以单独启用。如果您不启用它们，KubeSphere 默认以最小化安装启动。请确保您的集群满足必要的 CPU 和内存要求。有关更多信息，请参见 https://kubesphere.com.cn/docs/pluggable-components/overview/[KubeSphere 概述^]。
 
-The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node that has at least 16 GiB RAM and 4 CPUs. We recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the cluster's configuration as follows:
+在 Amazon EKS 集群上运行 KubeSphere 容器平台的最佳配置要求至少有一个工作节点，该节点至少有 16GiB RAM 和 4 个 CPU。建议您启用这些可插拔组件，以体验 KubeSphere 提供的全栈特性和功能。如果 KubeSphere 以最小化安装，您仍然可以通过编辑集群配置来启用可插拔组件，如下所示：
 
-Use an administrative account to access *Cluster Management*. Choose the EKS cluster, and select *CRDs* from the left-hand menu. Search for *ClusterConfiguration*.
+使用管理员账户访问*集群管理*。选择 EKS 集群，并从左侧菜单中选择*自定义资源 CRD*，搜索 *ClusterConfiguration*。
 
 
 image::../../../docs/images/image6.png[Architecture,width=648,height=439]
 
-Choose the *ClusterConfiguration* resource page. Choose *···* from the list, and select *Edit YAML*.
+选择 *ClusterConfiguration* 资源页，点击列表右侧的 *···*，选择*编辑配置文件*。
 
 image::../../../docs/images/image7.png[Architecture,width=648,height=439]
 
 
-Scroll down to the *spec* section, and change the pluggable components from *false* to *true* for the features you want. Finally, choose *Update* to save your changes. The installation automatically starts at the backend.
+下拉至 *spec* 部分，将您想要启用的可插拔组件从 *false* 更改为 *true*。最后，选择*更新*来保存您的更改，后端会自动开始安装。
 
 image::../../../docs/images/image8.png[Architecture,width=648,height=439]
 
-Open the *Web kubectl* from *Toolbox* (**bottom right**), and inspect the installation logs:
+从*工具箱*（**右下角**）打开 *Web kubectl*，查看安装日志：
 
  $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
 
-When you see welcome information in the output logs, the pluggable components are ready to use.
+如果您在输出日志中看到欢迎信息，可插拔组件便可供使用。
 
-== Security
+== 安全
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-*Set up the TLS*: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend that you set up the TLS for you Network Load Balancer to establish a secure connection between the client and server. This helps to ensure that all data passed between the client and your load balancer is private, for more information, see file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer[TLS listeners for your Network Load Balancer^].
+*设置 TLS*：此快速入门自动设置弹性负载均衡 (ELB)，支持 KubeSphere 容器平台集群的关键服务。建议您为您的网络负载均衡器设置 TLS，在客户端和服务器之间建立安全连接。这有助于确保客户端和负载均衡器之间传递的所有数据的私密性。有关更多信息，请参见https://docs.aws.amazon.com/zh_cn/elasticloadbalancing/latest/network/create-tls-listener.html[网络负载均衡器的 TLS 侦听器^]。
 
-*Keep the secret private*: KubeSphere supports multicluster management in a unified control plane. Save the secrets used to connect to the external cluster. For more information, see https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/[Direct Connection^].
+*保持密钥私密性*：KubeSphere 在统一的控制平面支持多集群管理。保存用来连接外部集群的密钥。有关更多信息，请参见https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/[直接连接^]。
 
-*Create proper multitenant management policies:* KubeSphere is a multitenant platform. Multitenancy in KubeSphere refers to one or more clusters that are shared between tenants. Ensure that you set the proper roles, permissions, and projects for tenants. For more information, see https://kubesphere.io/docs/quick-start/create-workspace-and-project/[Create Workspace, Project, Account and Role^].
+*创建合适的多租户管理策略*：KubeSphere 是一个多租户平台，KubeSphere 中的多租户架构是指租户之间共享一个或多个集群。请确保为租户设置合适的角色、权限以及项目。有关更多信息，请参见https://kubesphere.io/docs/quick-start/create-workspace-and-project/[创建企业空间、项目、帐户和角色^]。
 
-*Create proper network policies:* KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster's projects and workspaces, create https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[network policies^] based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all 
+*创建合适的网络策略*：KubeSphere 中的管理员可以为不同的项目（命名空间）和企业空间设置网络策略。若要控制每个集群的项目和企业空间中 Pod 之间的网络通信，请根据您租户的要求创建 https://kubesphere.com.cn/docs/pluggable-components/network-policy/[网络策略^]。建议您屏蔽托管不同租户应用程序的项目之间的流量。同时，拒绝所有入站流量，避免一个项目的 Pod 向另一个项目的服务或数据库误发流量。
 //TODO Replace "ingress" with "receive," "input," "inbound," or "incoming."
-ingress traffic to avoid pods from one project mistakenly sending traffic to another project's services or databases.
 
 //== Other useful information
 //Provide any other information of interest to users, especially focusing on areas where AWS or cloud usage differs from on-premises usage.
 
-== Get started with KubeSphere
+== 上手 KubeSphere
 
-When you finish deploying this Quick Start, refer to the
+当您部署完此快速入门，请参考
 //TODO This link returns a 404:
- https://kubesphere.io/docs/quick-start/admin-quick-start/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.
+ https://kubesphere.com.cn/docs/quick-start/create-workspace-and-project/[KubeSphere 上手指南^]。这里有动手实验和教程，能帮助您快速上手 KubeSphere。
 
-== Central control plane for multicloud and multicluster management
+== 用于多云和多集群管理的中央控制平面
 
-If you want to build a hybrid cloud for multicloud and multicluster management, enable Kubernetes federation to set up a central control plane using KubeSphere. KubeSphere supports application distribution across multiple clusters and cloud providers. It also provides disaster recovery and cross-cluster observability. For more information, see 
+如果您想构建一个用于多云和多集群管理的混合云，请启用 Kubernetes 联邦，并使用 KubeSphere 建立一个中央控制平面。KubeSphere 支持跨多个集群和云厂商的应用分发。同时，KubeSphere 也提供灾备功能和多集群可观察性。有关更多信息，请参见 
 //TODO The following link is local and hence doesn't resolve:
-file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphere/How%20to%20Enable%20the%20Multi-cluster%20Feature[How to enable a multicluster feature^].
+https://kubesphere.com.cn/docs/multicluster-management/[如何启用多集群功能^]。
 
-== Additional resources
+== 额外资源
 
-*AWS resources*
+*AWS 资源*
 
-* https://aws.amazon.com/getting-started/[Getting Started Resource Center^]
-* https://docs.aws.amazon.com/general/latest/gr/[AWS General Reference^]
-* https://docs.aws.amazon.com/general/latest/gr/glos-chap.html[AWS Glossary^]
+* https://aws.amazon.com/cn/getting-started/[开始使用资源中心^]
+* https://docs.aws.amazon.com/general/latest/gr/[AWS 通用参考^]
+* https://docs.aws.amazon.com/general/latest/gr/glos-chap.html[AWS 词汇表^]
 
-*AWS services*
+*AWS 服务*
 
-* https://docs.aws.amazon.com/cloudformation/[AWS CloudFormation^]
-* https://docs.aws.amazon.com/eks/?id=docs_gateway[Amazon EKS^]
-* https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html[Amazon EBS^]
-* https://docs.aws.amazon.com/ec2/[Amazon EC2^]
-* https://docs.aws.amazon.com/iam/[IAM^]
-* https://docs.aws.amazon.com/vpc/[Amazon VPC^]
+* https://docs.aws.amazon.com/zh_cn/cloudformation/[AWS CloudFormation^]
+* https://docs.aws.amazon.com/zh_cn/eks/?id=docs_gateway[Amazon EKS^]
+* https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AmazonEBS.html[Amazon EBS^]
+* https://docs.aws.amazon.com/zh_cn/ec2/[Amazon EC2^]
+* https://docs.aws.amazon.com/zh_cn/iam/[IAM^]
+* https://docs.aws.amazon.com/zh_cn/vpc//[Amazon VPC^]
 
 *KubeSphere*
 
-* https://kubesphere.io/docs/introduction/what-is-kubesphere/[What is KubeSphere^]
-* https://kubesphere.io/docs/installation/intro/[Installation Guide^]
-* https://kubesphere.io/docs/installation/pluggable-components/[Introduction to Pluggable Components^]
+* https://kubesphere.com.cn/docs/introduction/what-is-kubesphere/[什么是 KubeSphere^]
+* https://kubesphere.com.cn/docs/pluggable-components/[可插拔组件介绍^]
+* https://kubesphere.com.cn/docs/multicluster-management/[多集群管理^]
+* https://kubesphere.com.cn/docs/installing-on-kubernetes/[在 Kubernetes 上安装 KubeSphere^]
+* https://kubesphere.com.cn/docs/installing-on-linux/[在 Linux 上安装 KubeSphere^]
 * https://github.com/kubesphere[KubeSphere GitHub^]

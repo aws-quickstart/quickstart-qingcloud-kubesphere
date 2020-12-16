@@ -1,12 +1,9 @@
-=== Specialized knowledge
+=== 专业知识
 
-This deployment guide requires a moderate level of familiarity with
-AWS services. If you’re new to AWS, visit the
-https://aws.amazon.com/getting-started/[Getting Started Resource Center^]
-and the https://aws.amazon.com/training/[AWS Training and Certification
-website]. These sites provide materials for learning how to design,
-deploy, and operate your infrastructure and applications on the AWS
-Cloud.
+此部署指南要求使用者对 AWS 的相关服务有一定程度的了解。
+如果您是首次使用 AWS，可访问https://aws.amazon.com/cn/getting-started/[开始使用资源中心^]以及
+https://aws.amazon.com/training/[AWS 培训和认证网站]。
+以上两个网站提供为您提供了相关学习素材，以帮助您在 AWS 云平台之上规划、部署以及运维您的基础设施和应用程序。
 
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/specialized_knowledge.adoc`**_
@@ -19,20 +16,20 @@ ifndef::production_build[]
 |===
 endif::production_build[]
 
-=== AWS account
+=== AWS 账户
 
-If you don’t already have an AWS account, create one at https://aws.amazon.com/[https://aws.amazon.com^] by following the on-screen instructions. Part of the sign-up process involves receiving a phone call and entering a PIN using the phone keypad.
+如果您还没有 AWS 账户，请按页面上的说明在 https://aws.amazon.com/cn/[https://aws.amazon.com/cn^] 上创建。注册过程中部分流程会需要您接听手机并使用手机键盘输入 PIN 码。
 
-Your AWS account is automatically signed up for all AWS services. You are charged only for the services you use.
+您的 AWS 账户会自动注册 AWS 中的所有服务，但您仅需对您所使用的服务付费。
 
 ifndef::disable_requirements[]
-=== Technical requirements
+=== 技术要求
 
-Before you launch the Quick Start, your account must be configured as specified in the following table. Otherwise, deployment might fail.
+在开始使用此快速入门之前，请确保您的账户满足以下表格中所列的要求，否则部署可能会失败。
 endif::disable_requirements[]
 
-==== Resource quotas
-If necessary, request https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/[service quota increases^] for the following resources. You might need to request increases if your existing deployment currently uses these resources and if this Quick Start deployment could result in exceeding the default quotas. The https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/[Service Quotas console^] displays your usage and quotas for some aspects of some services. For more information, see https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html[What is Service Quotas?^] and https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html[AWS service quotas^].
+==== 资源配额
+如有必要，请为以下资源申请https://amazonaws-china.com/cn/getting-started/hands-on/request-service-quota-increase/[服务配额^]。如果您当前使用的一些服务已经消耗了以下的配额资源，而部署此快速入门会导致资源超出默认配额，请提前申请扩大配额。https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/[服务配额控制台^]显示您当前服务的资源用量及配额使用情况。有关更多信息，请参见https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html[什么是服务配额？^]以及 https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html[AWS 服务配额^]。
 
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/service_limits.adoc`**_
@@ -50,14 +47,14 @@ include::../{generateddir}/services/metadata.adoc[]
 
 ifndef::disable_regions[]
 // We can also pull in Regions automatically.
-==== Supported Regions
+==== 支持的区域
 
 ifdef::template_not_all_regions[]
-This deployment includes <service>, which isn’t currently supported in https://aws.amazon.com/about-aws/global-infrastructure/[all AWS Regions^].
+此部署包含 <service> 服务，当前并未在https://aws.amazon.com/about-aws/global-infrastructure/[所有 AWS 区域^]都支持。
 endif::template_not_all_regions[]
 
 ifdef::auto_populate_regions[]
-The following Regions are currently supported by this Quick Start.
+此快速入门当前支持以下区域。
 include::../{generateddir}/regions/index.adoc[]
 endif::auto_populate_regions[]
 
@@ -78,22 +75,22 @@ endif::production_build[]
 
 endif::auto_populate_regions[]
 
-TIP: Certain Regions are available on an opt-in basis. See https://docs.aws.amazon.com/general/latest/gr/rande-manage.html[Managing AWS Regions^].
+TIP: 特定区域需进行相关参数的手动操作，请参见 https://docs.aws.amazon.com/general/latest/gr/rande-manage.html[Managing AWS Regions^]。
 
 endif::disable_regions[]
 ifdef::template_ec2[]
-==== EC2 key pairs
+==== EC2 密钥对
 ifndef::production_build[====]
 ifndef::production_build[_This section applies only if the Cloudformation templates include EC2 instances._]
 ifndef::production_build[====]
-Make sure that at least one https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 key pair^] exists in your AWS account in the Region where you plan to deploy the Quick Start. Make note of the key pair name. You need it during deployment. To create a key pair, see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 key pairs and Linux instances^].
+在计划部署该快速入门的区域内，确保您的账户下至少有一个可使用的 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 密钥对^]。请记下此密钥对名称，您在部署时将用到此密钥对。若要创建密钥对，请参见 https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ec2-key-pairs.html[Amazon EC2 密钥对和 Linux 实例^]。
 
-For testing or proof-of-concept purposes, we recommend creating a new key pair instead of using one that’s already being used by a production instance.
+出于测试或者验证的目的，我们推荐为此快速入门创建一个全新的密钥对，而不是复用在其他生产业务上正在使用的密钥对。
 endif::template_ec2[]
 
-==== IAM permissions
+==== IAM 权限
 //todo: scope of least-privilege
-Before launching the Quick Start, you must sign in to the AWS Management Console with IAM permissions for the resources that the templates deploy. The _AdministratorAccess_ managed policy within IAM provides sufficient permissions, although your organization may choose to use a custom policy with more restrictions. For more information, see https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html[AWS managed policies for job functions^].
+在部署此快速入门之前，请先通过 IAM 权限登录 AWS 管理控制台并确保当前账户在此区域有相关资源的使用权限。IAM 内的 _AdministratorAccess_ 托管策略提供足够的权限, 也可以按需创建一个自定义权限策略的账户。有关更多信息，请参见https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/access_policies_job-functions.html[工作职能的 AWS 托管策略^]。
 
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/pre-reqs.adoc`**_
@@ -106,7 +103,7 @@ ifndef::production_build[]
 |===
 endif::production_build[]
 
-==== Deployment options
+==== 部署方式
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/deployment_options.adoc`**_
 [.preview_mode]
