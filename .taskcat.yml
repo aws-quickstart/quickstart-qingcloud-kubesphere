@@ -54,44 +54,44 @@ tests:
     - us-west-2
     - ca-central-1
     template: templates/kubesphere-entrypoint-new-vpc.template.yaml
-  qingcloud-kubesphere-china-nw:
-    parameters:
-      Alerting: 'false'
-      AvailabilityZones: $[taskcat_genaz_3]
-      Devops: 'false'
-      KeyPairName: override
-      KubeSphereLicenseKey: OVERRIDE
-      Logging: 'false'
-      NodeInstanceType: t3.xlarge
-      Notification: 'false'
-      Openpitrix: 'false'
-      Servicemesh: 'false'
-      Events: 'false'
-      Auditing: 'false'
-      MetricsServer: 'true'
-      Networkpolicy: 'false'
-      ProvisionBastionHost: Disabled
-    regions:
-    - cn-northwest-1
-    template: templates/kubesphere-entrypoint-new-vpc.template.yaml
-  qingcloud-kubesphere-2az:
-    parameters:
-      Alerting: 'false'
-      AvailabilityZones: $[taskcat_genaz_2]
-      NumberOfAZs: "2"
-      Devops: 'false'
-      KeyPairName: override
-      KubeSphereLicenseKey: OVERRIDE
-      Logging: 'false'
-      NodeInstanceType: t3.xlarge
-      Notification: 'false'
-      Openpitrix: 'false'
-      Servicemesh: 'false'
-      Events: 'false'
-      Auditing: 'false'
-      MetricsServer: 'true'
-      Networkpolicy: 'false'
-      ProvisionBastionHost: Disabled
-    regions:
-    - cn-north-1
-    template: templates/kubesphere-entrypoint-new-vpc.template.yaml
+  #qingcloud-kubesphere-china-nw:
+  #  parameters:
+  #    Alerting: 'false'
+  #    AvailabilityZones: $[taskcat_genaz_3]
+  #    Devops: 'false'
+  #    KeyPairName: override
+  #    KubeSphereLicenseKey: OVERRIDE
+  #    Logging: 'false'
+  #    NodeInstanceType: t3.xlarge
+  #    Notification: 'false'
+  #    Openpitrix: 'false'
+  #    Servicemesh: 'false'
+  #    Events: 'false'
+  #    Auditing: 'false'
+  #    MetricsServer: 'true'
+  #    Networkpolicy: 'false'
+  #    ProvisionBastionHost: Disabled
+  #  regions:
+  #  - cn-northwest-1
+  #  template: templates/kubesphere-entrypoint-new-vpc.template.yaml
+  #qingcloud-kubesphere-2az:
+  #  parameters:
+  #    Alerting: 'false'
+  #    AvailabilityZones: $[taskcat_genaz_2]
+  #    NumberOfAZs: "2"
+  #    Devops: 'false'
+  #    KeyPairName: override
+  #    KubeSphereLicenseKey: OVERRIDE
+  #   Logging: 'false'
+  #    NodeInstanceType: t3.xlarge
+  #    Notification: 'false'
+  #    Openpitrix: 'false'
+  #    Servicemesh: 'false'
+  #    Events: 'false'
+  #    Auditing: 'false'
+  #    MetricsServer: 'true'
+  #    Networkpolicy: 'false'
+  #    ProvisionBastionHost: Disabled
+  #  regions:
+  #  - cn-north-1
+  #  template: templates/kubesphere-entrypoint-new-vpc.template.yaml
