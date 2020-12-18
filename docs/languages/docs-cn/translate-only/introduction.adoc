@@ -1,0 +1,40 @@
+[.text-center]
+[discrete]
+== Quick Start Reference Deployment
+
+// Do not change the URL below. The aws-quickstart-graphic.png icon needs to come from the aws-quickstart S3 bucket.
+[.text-center]
+image::https://aws-quickstart.s3.amazonaws.com/{quickstart-project-name}/docs/boilerplate/.images/aws-quickstart-graphic.png[QS,80,80]
+
+ifndef::production_build[]
+[.text-center]
+[discrete]
+=== DRAFT DOCUMENT / UNOFFICIAL GUIDANCE
+_**This portion of the deployment guide is located at `docs/{specificdir}/__settings_.adoc`**_
+[.preview_mode]
+|===
+a|
+endif::production_build[]
+[.text-center]
+*{doc-month} {doc-year}* +
+ifdef::partner-contributors[]
+_{partner-contributors}_ +
+endif::partner-contributors[]
+_{quickstart-contributors}_
+[.text-left]
+
+ifndef::production_build[]
+|===
+endif::production_build[]
+
+TIP: 访问我们的 https://github.com/aws-quickstart/{quickstart-project-name}[GitHub 仓库^]以查看源文件并针对此快速入门提出反馈、上报问题或提交功能建议。
+
+ifdef::partner-company-name[]
+[.text-left]
+此快速入门由{partner-company-name} 和 Amazon Web Services (AWS) 共同创建。 http://aws.amazon.com/cn/quickstart/[快速入门^]是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。
+endif::[]
+
+ifndef::partner-company-name[]
+[.text-left]
+此快速入门由 Amazon Web Services (AWS) 创建。http://aws.amazon.com/cn/quickstart/[快速入门^]是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。
+endif::[]

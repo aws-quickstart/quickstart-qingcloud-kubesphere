@@ -341,13 +341,13 @@ Parameters:
     Description: 'Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter.'
   PerAccountSharedResources:
     Type: String
-    AllowedValues: ['Yes', 'No']
-    Default: 'Yes'
+    AllowedValues: ['AutoDetect', 'Yes', 'No']
+    Default: 'AutoDetect'
     Description: Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.
   PerRegionSharedResources:
     Type: String
-    AllowedValues: ['Yes', 'No']
-    Default: 'Yes'
+    AllowedValues: ['AutoDetect', 'Yes', 'No']
+    Default: 'AutoDetect'
     Description: Choose "No" if you already deployed another EKS Quick Start stack in this Region.
   ProvisionBastionHost:
     Type: String
@@ -356,7 +356,7 @@ Parameters:
     Description: Skip creating a bastion host by choosing "Disabled."
 Rules:
   AZRule:
-    RuleCondition: !Equals [ !Ref AWS::Region, cn-north-1 ]
+    RuleCondition: !Equals [ !Ref 'AWS::Region', cn-north-1 ]
     Assertions:
       - Assert: !Equals [ !Ref NumberOfAZs, '2' ]
         AssertDescription: To enable NAT gateways you must have both CreatePrivateSubnets and CreatePublicSubnets set to 'true'

@@ -1,0 +1,50 @@
+// We need to work around Step numbers here if we are going to potentially exclude the AMI subscription
+=== 登录您的 AWS 账户
+
+. 前往 https://aws.amazon.com 使用具有必要权限的 IAM 用户角色登录您的 AWS 账户。有关更多信息，请参见本指南前文中的link:#_planning_the_deployment[规划部署]。
+. 按照link:#_technical_requirements[技术要求]部分，确保您的 AWS 账户配置正确。
+
+
+=== 启动快速入门
+
+NOTE: 运行此快速入门参考部署时，您需要为 AWS 的各项服务付费。使用此快速入门无需支付额外费用。有关详细信息，请参见此快速入门所使用的各项 AWS 服务的价格页面。价格可能会变化。
+
+. 登录您的 AWS 账户，并选择以下选项之一来启动 AWS CloudFormation 模板。有关部署方式的信息，请参见本指南上文中的link:#_deployment_options[部署方式]。
+
+[cols=2*]
+|===
+^|https://fwd.aws/vW77e[在 AWS 上将 {partner-product-short-name} 部署至一个新建 VPC 中^]
+^|https://fwd.aws/NxKAW[查看模板^]
+
+^|https://fwd.aws/XJaW5[在 AWS 上将 {partner-product-short-name} 部署至一个现有 VPC 中^]
+^|https://fwd.aws/X4KMN[查看模板^]
+
+^|https://fwd.aws/eYPQm[在 AWS 上将 {partner-product-short-name} 部署至一个新建 VPC 中的 CN-North-1 区域^]
+^|https://aws-quickstart-cn-north-1.s3.cn-north-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[查看模板^]
+
+^|https://fwd.aws/Ep9b4[在 AWS 上将 {partner-product-short-name} 部署至一个现有 VPC 中的 CN-Northwest-1 区域^]
+^|https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[查看模板^]
+|===
+
+WARNING: 如果您将 {partner-product-short-name} 部署至现有 VPC 中，请确保您的 VPC 在不同可用区为工作负载实例提供三个私有子网，并且子网不共享。此快速入门不支持https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-sharing.html[共享子网^]。为了让实例在下载文件包和软件时不暴露于互联网，子网需要在其路由表中设置 https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-nat-gateway.html[NAT 网关^]。 +
+ +
+另外，请根据 https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/VPC_DHCP_Options.html[DHCP 选项集^]，确保 DHCP 选项中的域名已配置好。当您启动快速入门时，请提供您的 VPC 设置。
+
+每次部署大约需要 {deployment_time} 完成。
+
+[start=2]
+. 查看导航栏右上角显示的 AWS 区域，如果有需要可以进行更改。{partner-product-short-name} 的网络基础设施在此区域构建。该模板默认在 {default_deployment_region} 区域中启动。
+
+NOTE: 此部署包括 Amazon EFS，目前并非所有 AWS 区域都支持 Amazon EFS。有关当前支持 Amazon EFS 的区域列表，请参见 https://docs.aws.amazon.com/general/latest/gr/elasticfilesystem.html[Amazon Elastic File System endpoints and quotas^]。
+
+[start=3]
+. 在*创建堆栈*页面，保持模板的默认设置，然后选择*下一步*。
+. 在*指定堆栈详细信息*页面，根据需要更改堆栈名称，查看模板的各项参数并为需要输入的参数提供值。对于所有其他参数，查看默认设置，并根据需要进行自定义。
+
+//In the following tables, parameters are listed by category and described separately for the two deployment options:
+
+//* Parameters for deploying {partner-product-short-name} into a new VPC
+//* Parameters for deploying {partner-product-short-name} into an existing VPC
+
+
+

@@ -1,0 +1,20 @@
+// Replace the content in <>
+// Briefly describe the software. Use consistent and clear branding. 
+// Include the benefits of using the software on AWS, and provide details on usage scenarios.
+
+KubeSphere 是一个多租户企业级容器平台，拥有全栈的自动化运维和 DevOps 工作流。KubeSphere 提供开发者友好的 Web 界面，帮助企业快速构建一个强大和功能丰富的容器云平台，平台上包含了企业级 Kubernetes 工作负载最常用的各项功能。
+
+此快速入门基于 AWS CloudFormation 模板构建，帮助 IAM 用户在已有或新建 VPC 上自动配置 Amazon EKS 环境。IAM 用户可以通过 KubeSphere 控制台管理 Amazon EKS 集群，主要包含以下功能：
+
+* Kubernetes 资源管理
+* 多云和多集群管理
+* DevOps（基于 https://www.jenkins.io/[Jenkins^] 的持续集成和持续交付）
+* 应用程序生命周期管理
+* 应用商店
+* 丰富的可观察性功能，包括监控、日志、审计、告警和通知
+* 服务网格（基于 https://istio.io/[Istio^] 和 https://www.jaegertracing.io/[Jaeger^]）
+* 企业级多租户
+* 存储，网络，和镜像仓库管理
+* 自动伸缩
+* 基于角色的访问控制
+* Kubernetes https://kubernetes.io/docs/concepts/services-networking/network-policies/[网络策略^]

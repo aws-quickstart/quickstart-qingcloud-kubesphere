@@ -1,0 +1,43 @@
+
+ifndef::production_build[]
+_**This portion of the deployment guide is located at `docs/{specificdir}/deploy_steps.adoc`**_
+++++
+<div class="preview_mode">
+++++
+endif::production_build[]
+include::../{specificdir}/deploy_steps.adoc[]
+ifndef::production_build[]
+++++
+</div>
+++++
+endif::production_build[]
+
+ifndef::custom_number_of_deploy_steps[]
+ifndef::parameters_as_appendix[]
+In the following tables, parameters are listed by category and described separately for the deployment options. When you finish reviewing and customizing the parameters, choose *Next*.
+endif::parameters_as_appendix[]
+
+ifndef::parameters_as_appendix[]
+
+NOTE: 除非您为自己的部署项目自定义快速入门模板，建议您对标有 `Quick Start S3 bucket name`、`Quick Start S3 bucket
+Region` 以及 `Quick Start S3 key prefix` 标签的参数保持默认值。修改这些参数设置会自动更新代码参考以指向新的快速入门地址。有关更多信息，请参见 https://aws-quickstart.github.io/option1.html[AWS Quick Start Contributor’s Guide^]。
+
+// Parameter tables linked in here
+include::../{generateddir}/parameters/index.adoc[]
+endif::parameters_as_appendix[]
+
+[start=5]
+. 在*配置堆栈选项*页面，您可以为堆栈中的资源https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html[指定标签^]（键值对）并https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html[设置高级选项^]。操作完成后，选择*下一步*。
+. 在*审核*页面，审核并确认模板设置。勾选*功能*下的两个复选框，以确认该模板创建 IAM 资源并可能需要自动扩展宏的能力。
+. 选择*创建堆栈*来部署堆栈。
+ifndef::partner-product-short-name[. 监控该堆栈的状态。当状态为 *CREATE_COMPLETE* 时，{partner-product-name} 部署准备就绪。]
+ifdef::partner-product-short-name[. 监控该堆栈的状态。当状态为 *CREATE_COMPLETE* 时，{partner-product-short-name} 部署准备就绪。]
+. 如 <<cfn_outputs>> 所示，使用堆栈*输出*选项卡下显示的值来查看创建好的资源。
+
+:xrefstyle: short
+[#cfn_outputs]
+ifndef::partner-product-short-name[.成功部署后的 {partner-product-name} 输出]
+ifdef::partner-product-short-name[.成功部署后的 {partner-product-short-name} 输出]
+[link=images/cfn_outputs.png]
+image::../images/cfn_outputs.png[cfn_outputs,width=648,height=439]
+endif::custom_number_of_deploy_steps[]

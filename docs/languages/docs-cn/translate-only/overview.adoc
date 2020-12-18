@@ -1,0 +1,16 @@
+
+
+ifndef::production_build[]
+_**This portion of the deployment guide is located at `docs/{specificdir}/overview_target_and_usage.adoc`**_
+[.preview_mode]
+|===
+a|
+endif::production_build[]
+include::../{specificdir}/overview_target_and_usage.adoc[]
+ifndef::production_build[]
+|===
+endif::production_build[]
+
+ifdef::partner-company-name[]
+NOTE: Amazon 可能会将用户部署信息分享给在该快速入门上和 AWS 进行合作的 AWS 合作伙伴。
+endif::partner-company-name[]
