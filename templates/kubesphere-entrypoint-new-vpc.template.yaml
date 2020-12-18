@@ -341,13 +341,13 @@ Parameters:
     Description: 'Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter.'
   PerAccountSharedResources:
     Type: String
-    AllowedValues: ['Yes', 'No']
-    Default: 'Yes'
+    AllowedValues: ['AutoDetect', 'Yes', 'No']
+    Default: 'AutoDetect'
     Description: Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.
   PerRegionSharedResources:
     Type: String
-    AllowedValues: ['Yes', 'No']
-    Default: 'Yes'
+    AllowedValues: ['AutoDetect', 'Yes', 'No']
+    Default: 'AutoDetect'
     Description: Choose "No" if you already deployed another EKS Quick Start stack in this Region.
   ProvisionBastionHost:
     Type: String
