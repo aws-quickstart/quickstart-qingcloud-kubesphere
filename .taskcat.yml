@@ -68,7 +68,7 @@ tests:
       Devops: 'false'
       KeyPairName: override
       KubeSphereLicenseKey: OVERRIDE
-     Logging: 'false'
+      Logging: 'false'
       NodeInstanceType: t3.xlarge
       Notification: 'false'
       Openpitrix: 'false'
