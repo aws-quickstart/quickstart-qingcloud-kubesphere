@@ -1,0 +1,1 @@
+此快速入门的部署包含了 Amazon EKS 服务，而并非所有 AWS 区域都提供 EKS 服务。有关更多信息，请参见 https://docs.aws.amazon.com/general/latest/gr/eks.html[Amazon Elastic Kubernetes Service endpoints and quotas^]。

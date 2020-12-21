@@ -1,0 +1,6 @@
+// Replace the content in <>
+// Identify your target audience and explain how/why they would use this Quick Start.
+//Avoid borrowing text from third-party websites (copying text from AWS service documentation is fine). Also, avoid marketing-speak, focusing instead on the technical aspect.
+
+
+此快速入门参考指南提供在 AWS 云上通过 Amazon EKS 部署 KubeSphere 的详细说明。此快速入门面向 Amazon EKS 的 AWS Identity and Access Management (IAM) 用户，帮助他们使用 Web 控制台进行 Kubernetes 工作负载的日常管理。

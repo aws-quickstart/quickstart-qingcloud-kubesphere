@@ -1,0 +1,12 @@
+// Include details about the license and how they can sign up. If no license is required, clarify that. 
+
+//These two paragraphs provide an example of the details you can provide. Provide links as appropriate.
+
+
+KubeSphere 为开源项目，不需要许可证。所有 Amazon EKS 用户均可免费使用。如果您有任何有关 KubeSphere 的问题，请参见 https://github.com/kubesphere/kubesphere[KubeSphere GitHub 社区^]并提交问题。您也可以通过 https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE[Slack 社区^]或https://groups.google.com/forum/#!forum/kubesphere[邮件列表^]联系 KubeSphere。
+
+对于在生产环境使用 KubeSphere 的用户，如果您想获得技术支持，请先订阅支持服务。首先，请联系您的账户管理员或填写 KubeSphere 的https://jinshuju.net/f/bDS8me[商业支持^]表格。
+
+运行此快速入门参考部署时，您需要为 AWS 的基础设施、存储和数据服务付费。使用此快速入门无需支付额外费用。
+
+青云QingCloud 是一个 AWS 的合作伙伴，是 KubeSphere 项目的赞助方和维护者，他们可以提供 KubeSphere 技术支持。

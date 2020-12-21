@@ -35,8 +35,8 @@
 (`QSS3KeyPrefix`)|`quickstart-qingcloud-kubesphere/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), periods (.) and forward slashes (/).|Quick Start S3 bucket Region
 (`QSS3BucketRegion`)|`us-east-1`|AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. If you use your own bucket, you must specify this value.|ConfigSetName
 (`ConfigSetName`)|`**__Blank string__**`|Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter.|Per-account shared resources
-(`PerAccountSharedResources`)|`Yes`|Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
-(`PerRegionSharedResources`)|`Yes`|Choose "No" if you already deployed another EKS Quick Start stack in this Region.
+(`PerAccountSharedResources`)|`AutoDetect`|Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
+(`PerRegionSharedResources`)|`AutoDetect`|Choose "No" if you already deployed another EKS Quick Start stack in this Region.
 |===
 .Configures the KubeSphere system and pluggable components
 [width="100%",cols="16%,11%,73%",options="header",]

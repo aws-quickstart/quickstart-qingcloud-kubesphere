@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>QingCloud KubeSphere on the AWS Cloud</title>
+<title>青云QingCloud KubeSphere on the AWS Cloud</title>
 <style>
 
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -790,29 +790,29 @@ p.footer-text a{color:#d7d8d8}
 <div id="toctitle"></div>
 <ul class="sectlevel1">
 <li><a href="#_overview">Overview</a></li>
-<li><a href="#_qingcloud_kubesphere_on_aws">QingCloud KubeSphere on AWS</a></li>
+<li><a href="#_青云qingcloud_kubesphere_on_aws">青云QingCloud KubeSphere on AWS</a></li>
 <li><a href="#_cost">Cost</a></li>
 <li><a href="#_software_licenses">Software licenses</a></li>
 <li><a href="#_architecture">Architecture</a></li>
 <li><a href="#_planning_the_deployment">Planning the deployment</a>
 <ul class="sectlevel2">
-<li><a href="#_specialized_knowledge">Specialized knowledge</a></li>
-<li><a href="#_aws_account">AWS account</a></li>
-<li><a href="#_technical_requirements">Technical requirements</a></li>
+<li><a href="#_专业知识">专业知识</a></li>
+<li><a href="#_aws_账户">AWS 账户</a></li>
+<li><a href="#_技术要求">技术要求</a></li>
 </ul>
 </li>
 <li><a href="#_deployment_steps">Deployment steps</a>
 <ul class="sectlevel2">
-<li><a href="#_sign_in_to_your_aws_account">Sign in to your AWS account</a></li>
-<li><a href="#_launch_the_quick_start">Launch the Quick Start</a></li>
+<li><a href="#_登录您的_aws_账户">登录您的 AWS 账户</a></li>
+<li><a href="#_启动快速入门">启动快速入门</a></li>
 </ul>
 </li>
-<li><a href="#_test_the_deployment">Test the deployment</a></li>
-<li><a href="#_best_practices_for_using_kubesphere_on_aws">Best practices for using KubeSphere on AWS</a></li>
-<li><a href="#_security">Security</a></li>
-<li><a href="#_get_started_with_kubesphere">Get started with KubeSphere</a></li>
-<li><a href="#_central_control_plane_for_multicloud_and_multicluster_management">Central control plane for multicloud and multicluster management</a></li>
-<li><a href="#_additional_resources">Additional resources</a></li>
+<li><a href="#_测试部署">测试部署</a></li>
+<li><a href="#_在_aws_上使用_kubesphere_的最佳做法">在 AWS 上使用 KubeSphere 的最佳做法</a></li>
+<li><a href="#_安全">安全</a></li>
+<li><a href="#_上手_kubesphere">上手 KubeSphere</a></li>
+<li><a href="#_用于多云和多集群管理的中央控制平面">用于多云和多集群管理的中央控制平面</a></li>
+<li><a href="#_额外资源">额外资源</a></li>
 <li><a href="#_faq">FAQ</a></li>
 <li><a href="#_parameter_reference">Parameter reference</a>
 <ul class="sectlevel2">
@@ -823,14 +823,14 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_send_us_feedback">Send us feedback</a></li>
 <li><a href="#_quick_start_reference_deployments">Quick Start reference deployments</a></li>
 <li><a href="#_github_repository">GitHub repository</a></li>
-<li><a href="#_notices">Notices</a></li>
+<li><a href="#_版权声明">版权声明</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<h2 id="_qingcloud_kubesphere_on_the_aws_cloud" class="discrete text-center">QingCloud KubeSphere on the AWS Cloud</h2>
+<h2 id="_青云qingcloud_kubesphere_on_the_aws_cloud" class="discrete text-center">青云QingCloud KubeSphere on the AWS Cloud</h2>
 <h2 id="_quick_start_reference_deployment" class="discrete text-left text-center">Quick Start Reference Deployment</h2>
 <div class="imageblock text-center">
 <div class="content">
@@ -839,7 +839,7 @@ p.footer-text a{color:#d7d8d8}
 </div>
 <div class="paragraph text-center">
 <p><strong>November 2020</strong><br>
-<em>Xiaosi Zhou, Pengfei Zhou, Shuang Yu, and Sherlock Xu, QingCloud</em><br>
+<em>周小四、周鹏飞、于爽、徐文涛和刘金辉，青云QingCloud</em><br>
 <em>Troy Ameigh, AWS Quick Start team</em></p>
 </div>
 <div class="admonitionblock tip text-left">
@@ -849,14 +849,13 @@ p.footer-text a{color:#d7d8d8}
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Visit our <a href="https://github.com/aws-quickstart/quickstart-qingcloud-kubesphere" target="_blank" rel="noopener">GitHub repository</a> for source files and to post feedback,
-report bugs, or submit feature ideas for this Quick Start.
+访问我们的 <a href="https://github.com/aws-quickstart/quickstart-qingcloud-kubesphere" target="_blank" rel="noopener">GitHub 仓库</a>以查看源文件并针对此快速入门提出反馈、上报问题或提交功能建议。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph text-left">
-<p>This Quick Start was created by QingCloud in collaboration with Amazon Web Services (AWS). <a href="http://aws.amazon.com/quickstart/" target="_blank" rel="noopener">Quick Starts</a> are automated reference deployments that use AWS CloudFormation templates to deploy key technologies on AWS, following AWS best practices.</p>
+<p>此快速入门由青云QingCloud 和 Amazon Web Services (AWS) 共同创建。 <a href="http://aws.amazon.com/cn/quickstart/" target="_blank" rel="noopener">快速入门</a>是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。</p>
 </div>
 </div>
 </div>
@@ -864,7 +863,7 @@ report bugs, or submit feature ideas for this Quick Start.
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start reference guide provides step-by-step instructions for deploying KubeSphere with Amazon EKS on the AWS Cloud. It is for AWS Identity and Access Management (IAM) users of Amazon EKS who are looking for a web console to manage daily Kubernetes workloads.</p>
+<p>此快速入门参考指南提供在 AWS 云上通过 Amazon EKS 部署 KubeSphere 的详细说明。此快速入门面向 Amazon EKS 的 AWS Identity and Access Management (IAM) 用户，帮助他们使用 Web 控制台进行 Kubernetes 工作负载的日常管理。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -873,7 +872,7 @@ report bugs, or submit feature ideas for this Quick Start.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Amazon may share user-deployment information with the AWS Partner that collaborated with AWS on the Quick Start.
+Amazon 可能会将用户部署信息分享给在该快速入门上和 AWS 进行合作的 AWS 合作伙伴。
 </td>
 </tr>
 </table>
@@ -881,51 +880,51 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 </div>
 </div>
 <div class="sect1">
-<h2 id="_qingcloud_kubesphere_on_aws">QingCloud KubeSphere on AWS</h2>
+<h2 id="_青云qingcloud_kubesphere_on_aws">青云QingCloud KubeSphere on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>KubeSphere is a multitenant, enterprise-grade, container platform with full-stack automation, operation, and DevOps workflows. It provides developer-friendly web interfaces, which can help enterprises build more robust and feature-rich platforms that includes the most common functionalities needed for enterprise Kubernetes workloads.</p>
+<p>KubeSphere 是一个多租户企业级容器平台，拥有全栈的自动化运维和 DevOps 工作流。KubeSphere 提供开发者友好的 Web 界面，帮助企业快速构建一个强大和功能丰富的容器云平台，平台上包含了企业级 Kubernetes 工作负载最常用的各项功能。</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start is powered by AWS CloudFormation templates that help IAM users automatically provision Amazon EKS environments on a new or existing VPC. This gives IAM users the ability to manage Amazon EKS clusters through the KubeSphere console, which provides the following capabilities:</p>
+<p>此快速入门基于 AWS CloudFormation 模板构建，帮助 IAM 用户在已有或新建 VPC 上自动配置 Amazon EKS 环境。IAM 用户可以通过 KubeSphere 控制台管理 Amazon EKS 集群，主要包含以下功能：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Kubernetes resource management</p>
+<p>Kubernetes 资源管理</p>
 </li>
 <li>
-<p>Multicloud and multicluster management</p>
+<p>多云和多集群管理</p>
 </li>
 <li>
-<p>DevOps (continuous integration and continuous delivery based on <a href="https://www.jenkins.io/" target="_blank" rel="noopener">Jenkins</a>)</p>
+<p>DevOps（基于 <a href="https://www.jenkins.io/" target="_blank" rel="noopener">Jenkins</a> 的持续集成和持续交付）</p>
 </li>
 <li>
-<p>Application lifecycle management</p>
+<p>应用程序生命周期管理</p>
 </li>
 <li>
-<p>An app store</p>
+<p>应用商店</p>
 </li>
 <li>
-<p>Rich observability for monitoring, logging, auditing, alerting, and notifying</p>
+<p>丰富的可观察性功能，包括监控、日志、审计、告警和通知</p>
 </li>
 <li>
-<p>A service mesh for distributed microservices (based on <a href="https://istio.io/" target="_blank" rel="noopener">Istio</a> and <a href="https://www.jaegertracing.io/" target="_blank" rel="noopener">Jaeger</a>)</p>
+<p>服务网格（基于 <a href="https://istio.io/" target="_blank" rel="noopener">Istio</a> 和 <a href="https://www.jaegertracing.io/" target="_blank" rel="noopener">Jaeger</a>）</p>
 </li>
 <li>
-<p>Enterprise multitenancy</p>
+<p>企业级多租户</p>
 </li>
 <li>
-<p>Storage, network, and registry management</p>
+<p>存储，网络，和镜像仓库管理</p>
 </li>
 <li>
-<p>Automatic scaling</p>
+<p>自动伸缩</p>
 </li>
 <li>
-<p>Role-based access control</p>
+<p>基于角色的访问控制</p>
 </li>
 <li>
-<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener">Network Policies</a></p>
+<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener">网络策略</a></p>
 </li>
 </ul>
 </div>
@@ -935,15 +934,14 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 <h2 id="_cost">Cost</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You are responsible for the cost of the AWS services used while running
-this Quick Start. There is no additional cost for
-using the Quick Start.</p>
+<p>运行此快速入门时，您需要为 AWS 的各项服务付费。
+使用此快速入门无需支付额外费用。</p>
 </div>
 <div class="paragraph">
-<p>The AWS CloudFormation templates for Quick Starts include
-configuration parameters that you can customize. Some of the settings,
-such as the instance type, affect the cost of deployment. For cost estimates,
-see the pricing pages for each AWS service you use. Prices are subject to change.</p>
+<p>快速入门的 AWS CloudFormation 模板包括您可以自定义的配置参数。
+其中的部分设置会影响部署的费用，例如实例类型。
+有关预估费用，请参见您所使用的每个 AWS 服务的价格页面。
+价格可能会变化。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -952,7 +950,7 @@ see the pricing pages for each AWS service you use. Prices are subject to change
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-gettingstarted-turnonreports.html" target="_blank" rel="noopener">create AWS Cost and Usage Reports</a> to deliver billing metrics to an Amazon Simple Storage Service (Amazon S3) bucket in your account. These reports provide cost estimates based on usage throughout each month and aggregate the data at the end of the month. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-costusage.html" target="_blank" rel="noopener">What are AWS Cost and Usage Reports?</a>
+在部署该快速入门后，您可以https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-gettingstarted-turnonreports.html[创建 AWS 费用和使用率报告^]将账单指标交付至您账户的 Amazon Simple Storage Service (Amazon S3) 存储桶中。这些报告基于每个月整月的使用率提供费用预估，并在月底汇总数据。有关更多信息，请参见https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-costusage.html[什么是 AWS 费用和使用率报告？^]
 </td>
 </tr>
 </table>
@@ -963,16 +961,16 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_software_licenses">Software licenses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>KubeSphere is open source and doesn’t require a license. It is free for all Amazon EKS users. For any KubeSphere issues, see the <a href="https://github.com/kubesphere/kubesphere" target="_blank" rel="noopener">KubeSphere GitHub community</a> and raise an issue. Alternatively, contact KubeSphere through the <a href="https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE" target="_blank" rel="noopener">Slack community</a> or its <a href="https://groups.google.com/forum/#!forum/kubesphere" target="_blank" rel="noopener">mailing list</a>.</p>
+<p>KubeSphere 为开源项目，不需要许可证。所有 Amazon EKS 用户均可免费使用。如果您有任何有关 KubeSphere 的问题，请参见 <a href="https://github.com/kubesphere/kubesphere" target="_blank" rel="noopener">KubeSphere GitHub 社区</a>并提交问题。您也可以通过 <a href="https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE">Slack 社区<sup></a>或https://groups.google.com/forum/#!forum/kubesphere[邮件列表</sup>]联系 KubeSphere。</p>
 </div>
 <div class="paragraph">
-<p>For KubeSphere users with production environments who want technical support, you must have a support subscription. To get started, contact your account executive or fill out KubeSphere&#8217;s <a href="https://jinshuju.net/f/bDS8me" target="_blank" rel="noopener">Commercial Support</a> form.</p>
+<p>对于在生产环境使用 KubeSphere 的用户，如果您想获得技术支持，请先订阅支持服务。首先，请联系您的账户管理员或填写 KubeSphere 的https://jinshuju.net/f/bDS8me[商业支持^]表格。</p>
 </div>
 <div class="paragraph">
-<p>You are responsible for the cost of the AWS infrastructure, storage, and data services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start.</p>
+<p>运行此快速入门参考部署时，您需要为 AWS 的基础设施、存储和数据服务付费。使用此快速入门无需支付额外费用。</p>
 </div>
 <div class="paragraph">
-<p>QingCloud is an AWS Partner, and is the KubeSphere project sponsor and maintainer, which means they can provide technical KubeSphere support.</p>
+<p>青云QingCloud 是一个 AWS 的合作伙伴，是 KubeSphere 项目的赞助方和维护者，他们可以提供 KubeSphere 技术支持。</p>
 </div>
 </div>
 </div>
@@ -980,58 +978,58 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_architecture">Architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Deploying this Quick Start for a new virtual private cloud (VPC) with default parameters builds the following KubeSphere environment in the AWS Cloud.</p>
+<p>如果您在新建虚拟私有网络 (VPC) 使用默认参数部署此快速入门，AWS 云中会构建以下 KubeSphere 环境。</p>
 </div>
 <div id="architecture1" class="imageblock">
 <div class="content">
-<a class="image" href="images/architecture_diagram.png"><img src="images/architecture_diagram.png" alt="Architecture" width="648" height="439"></a>
+<a class="image" href="images/architecture_diagram.png"><img src="../../docs/images/architecture_diagram.png" alt="Architecture" width="648" height="439"></a>
 </div>
-<div class="title">Figure 1. Quick Start architecture for <em>KubeSphere</em> on AWS</div>
-</div>
-<div class="paragraph">
-<p>As shown in figure 1, the Quick Start sets up the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A highly available VPC architecture that spans three Availability Zones. The VPC is configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*</p>
-</li>
-<li>
-<p>In the public subnets:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Managed network address translation (NAT) gateways to allow outbound internet access for resources in the private subnets.*</p>
-</li>
-<li>
-<p>Linux bastion hosts in an Auto Scaling group to allow inbound Secure Shell (SSH) access to administer the KubeSphere platform and Amazon EKS environment.*</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>In the private subnets:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group. KubeSphere core components and your applications run on worker nodes.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>An Amazon EKS cluster, which provides the Kubernetes control plane.</p>
-</li>
-<li>
-<p>AWS IAM roles to help you securely control access to AWS resources.</p>
-</li>
-<li>
-<p>Elastic Load Balancing to distribute incoming application or network traffic across multiple targets.</p>
-</li>
-</ul>
+<div class="title">Figure 1. AWS 上 <em>KubeSphere</em> 快速入门架构</div>
 </div>
 <div class="paragraph">
-<p>*The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.</p>
+<p>如图 1 所示，此快速入门设置以下内容：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>一个跨三个可用区的高可用 VPC 架构。该 VPC 根据 AWS 的最佳做法配置有公共和私有子网，为您在 AWS 上提供您自己的虚拟网络。*</p>
+</li>
+<li>
+<p>该公共子网中包含：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>受管的网络地址转换 (NAT) 网关，允许外网对私有子网内资源的访问。*</p>
+</li>
+<li>
+<p>Auto Scaling 组中的 Linux 堡垒主机，允许在内网中通过 Secure Shell (SSH) 访问并管理 KubeSphere 平台和 Amazon EKS 环境。*</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>该私有子网中包含：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Auto Scaling 组中的 Amazon Elastic Compute Cloud (Amazon EC2) 实例。KubeSphere 核心组件以及您运行在工作节点上的应用程序。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>一个 Amazon EKS 集群，提供 Kubernetes 控制平面。</p>
+</li>
+<li>
+<p>各种 AWS IAM 角色，帮助您安全地控制对 AWS 资源的访问。</p>
+</li>
+<li>
+<p>Elastic Load Balancing 在多个目标之间分配传入的应用程序或网络流量。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>*将此快速入门部署至已有 VPC 的模板会省略标注有星号的组件，并为您提示您现有的 VPC 配置。</p>
 </div>
 </div>
 </div>
@@ -1039,32 +1037,35 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_planning_the_deployment">Planning the deployment</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_specialized_knowledge">Specialized knowledge</h3>
+<h3 id="_专业知识">专业知识</h3>
 <div class="paragraph">
-<p>This deployment requires a moderate level of familiarity with AWS services. If you’re new to AWS, visit <a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started with AWS</a> and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">Training and Certification</a>. These sites provide materials for learning how to design, deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
+<p>此部署指南要求使用者对 AWS 的相关服务有一定程度的了解。
+如果您是首次使用 AWS，可访问https://aws.amazon.com/cn/getting-started/[开始使用资源中心^]以及
+<a href="https://aws.amazon.com/training/">AWS 培训和认证网站</a>。
+以上两个网站提供为您提供了相关学习素材，以帮助您在 AWS 云平台之上规划、部署以及运维您的基础设施和应用程序。</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start assumes that you have working knowledge of <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> and <a href="https://www.kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a>.</p>
+<p>此快速入门假设您已具备 <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> 和 <a href="https://www.kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a> 的相关知识以及使用经验。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_aws_account">AWS account</h3>
+<h3 id="_aws_账户">AWS 账户</h3>
 <div class="paragraph">
-<p>If you don’t already have an AWS account, create one at <a href="https://aws.amazon.com/" target="_blank" rel="noopener">https://aws.amazon.com</a> by following the on-screen instructions. Part of the sign-up process involves receiving a phone call and entering a PIN using the phone keypad.</p>
+<p>如果您还没有 AWS 账户，请按页面上的说明在 <a href="https://aws.amazon.com/cn/" target="_blank" rel="noopener">https://aws.amazon.com/cn</a> 上创建。注册过程中部分流程会需要您接听手机并使用手机键盘输入 PIN 码。</p>
 </div>
 <div class="paragraph">
-<p>Your AWS account is automatically signed up for all AWS services. You are charged only for the services you use.</p>
+<p>您的 AWS 账户会自动注册 AWS 中的所有服务，但您仅需对您所使用的服务付费。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_technical_requirements">Technical requirements</h3>
+<h3 id="_技术要求">技术要求</h3>
 <div class="paragraph">
-<p>Before you launch the Quick Start, your account must be configured as specified in the following table. Otherwise, deployment might fail.</p>
+<p>在开始使用此快速入门之前，请确保您的账户满足以下表格中所列的要求，否则部署可能会失败。</p>
 </div>
 <div class="sect3">
-<h4 id="_resource_quotas">Resource quotas</h4>
+<h4 id="_资源配额">资源配额</h4>
 <div class="paragraph">
-<p>If necessary, request <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/" target="_blank" rel="noopener">service quota increases</a> for the following resources. You might request quota increases to avoid exceeding the default limits for any resources that are shared across multiple deployments. The <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/" target="_blank" rel="noopener">Service Quotas console</a> displays your usage and quotas for some aspects of some services. For more information, see <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html" target="_blank" rel="noopener">What is Service Quotas?</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html" target="_blank" rel="noopener">AWS service quotas</a>.</p>
+<p>如有必要，请为以下资源申请https://amazonaws-china.com/cn/getting-started/hands-on/request-service-quota-increase/[服务配额<sup>]。如果您当前使用的一些服务已经消耗了以下的配额资源，而部署此快速入门会导致资源超出默认配额，请提前申请扩大配额。https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/[服务配额控制台</sup>]显示您当前服务的资源用量及配额使用情况。有关更多信息，请参见https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html[什么是服务配额？^]以及 <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html" target="_blank" rel="noopener">AWS 服务配额</a>。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1073,8 +1074,8 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Resource</th>
-<th class="tableblock halign-left valign-top">This deployment uses</th>
+<th class="tableblock halign-left valign-top">资源</th>
+<th class="tableblock halign-left valign-top">数量</th>
 </tr>
 </thead>
 <tbody>
@@ -1122,9 +1123,9 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 </table>
 </div>
 <div class="sect3">
-<h4 id="_supported_regions">Supported Regions</h4>
+<h4 id="_支持的区域">支持的区域</h4>
 <div class="paragraph">
-<p>This deployment includes Amazon EKS, which may not be supported in all AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/eks.html" target="_blank" rel="noopener">Amazon Elastic Kubernetes Service endpoints and quotas</a>.</p>
+<p>此快速入门的部署包含了 Amazon EKS 服务，而并非所有 AWS 区域都提供 EKS 服务。有关更多信息，请参见 <a href="https://docs.aws.amazon.com/general/latest/gr/eks.html" target="_blank" rel="noopener">Amazon Elastic Kubernetes Service endpoints and quotas</a>。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1133,35 +1134,35 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html" target="_blank" rel="noopener">Managing AWS Regions</a>.
+特定区域需进行相关参数的手动操作，请参见 <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html" target="_blank" rel="noopener">Managing AWS Regions</a>。
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_iam_permissions">IAM permissions</h4>
+<h4 id="_iam_权限">IAM 权限</h4>
 <div class="paragraph">
-<p>Before launching the Quick Start, you must sign in to the AWS Management Console with IAM permissions for the resources that the templates deploy. The <em>AdministratorAccess</em> managed policy within IAM provides sufficient permissions, although your organization may choose to use a custom policy with more restrictions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html" target="_blank" rel="noopener">AWS managed policies for job functions</a>.</p>
+<p>在部署此快速入门之前，请先通过 IAM 权限登录 AWS 管理控制台并确保当前账户在此区域有相关资源的使用权限。IAM 内的 <em>AdministratorAccess</em> 托管策略提供足够的权限, 也可以按需创建一个自定义权限策略的账户。有关更多信息，请参见https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/access_policies_job-functions.html[工作职能的 AWS 托管策略^]。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_deployment_options">Deployment options</h4>
+<h4 id="_部署方式">部署方式</h4>
 <div class="paragraph">
-<p>This Quick Start provides two deployment options:</p>
+<p>此快速入门提供两种部署方式：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Deploy KubeSphere into a new VPC (end-to-end deployment)</strong>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys KubeSphere into this new VPC.</p>
+<p><strong>将 KubeSphere 部署在新建的 VPC 中 (end-to-end deployment)</strong>。此方式会自动创建一个全新的 AWS 环境，其中包含 VPC、子网、NAT 网关、安全组、堡垒主机以及其他一些基础设施组件，KubeSphere 会部署在这个新建的 VPC 中。</p>
 </li>
 <li>
-<p><strong>Deploy KubeSphere into an existing VPC</strong>. This option provisions Amazon EKS and KubeSphere in your existing AWS infrastructure.</p>
+<p><strong>将 KubeSphere 部署在现有的 VPC 中</strong>。此方式会将 Amazon EKS 和 KubeSphere 部署在您现有的 AWS 基础设施中。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and KubeSphere settings, as discussed later in this guide.</p>
+<p>此快速入门还为这两种方式提供了的可独立配置的模板，用户可以自定义无类别域间路由 (CIDR)、实例类型以及 KubeSphere 的相关配置，具体信息会在本指南的以下章节详细介绍。</p>
 </div>
 </div>
 </div>
@@ -1171,20 +1172,20 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <h2 id="_deployment_steps">Deployment steps</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_sign_in_to_your_aws_account">Sign in to your AWS account</h3>
+<h3 id="_登录您的_aws_账户">登录您的 AWS 账户</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign in to your AWS account at <a href="https://aws.amazon.com" class="bare">https://aws.amazon.com</a> with an IAM user role that has the necessary permissions. For more information, see <a href="#_planning_the_deployment">Planning the deployment</a>, earlier in this guide.</p>
+<p>前往 <a href="https://aws.amazon.com" class="bare">https://aws.amazon.com</a> 使用具有必要权限的 IAM 用户角色登录您的 AWS 账户。有关更多信息，请参见本指南前文中的<a href="#_planning_the_deployment">规划部署</a>。</p>
 </li>
 <li>
-<p>Ensure that your AWS account is configured correctly, as discussed in the <a href="#_technical_requirements">Technical requirements</a> section.</p>
+<p>按照<a href="#_technical_requirements">技术要求</a>部分，确保您的 AWS 账户配置正确。</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_launch_the_quick_start">Launch the Quick Start</h3>
+<h3 id="_启动快速入门">启动快速入门</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1192,7 +1193,7 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using this Quick Start. For full details, see the pricing pages for each AWS service used by this Quick Start. Prices are subject to change.
+运行此快速入门参考部署时，您需要为 AWS 的各项服务付费。使用此快速入门无需支付额外费用。有关详细信息，请参见此快速入门所使用的各项 AWS 服务的价格页面。价格可能会变化。
 </td>
 </tr>
 </table>
@@ -1200,7 +1201,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see <a href="#_deployment_options">Deployment options</a>, earlier in this guide.</p>
+<p>登录您的 AWS 账户，并选择以下选项之一来启动 AWS CloudFormation 模板。有关部署方式的信息，请参见本指南上文中的<a href="#_deployment_options">部署方式</a>。</p>
 </li>
 </ol>
 </div>
@@ -1211,20 +1212,20 @@ You are responsible for the cost of the AWS services used while running this Qui
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/vW77e" target="_blank" rel="noopener">Deploy KubeSphere into a new VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/NxKAW" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/vW77e" target="_blank" rel="noopener">在 AWS 上将 KubeSphere 部署至一个新建 VPC 中</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/NxKAW" target="_blank" rel="noopener">查看模板</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/XJaW5" target="_blank" rel="noopener">Deploy KubeSphere into an existing VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/X4KMN" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/XJaW5" target="_blank" rel="noopener">在 AWS 上将 KubeSphere 部署至一个现有 VPC 中</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/X4KMN" target="_blank" rel="noopener">查看模板</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/eYPQm" target="_blank" rel="noopener">Deploy KubeSphere into a new VPC on AWS into CN-North-1 Region</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-cn-north-1.s3.cn-north-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/eYPQm" target="_blank" rel="noopener">在 AWS 上将 KubeSphere 部署至一个新建 VPC 中的 CN-North-1 区域</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-cn-north-1.s3.cn-north-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">查看模板</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/Ep9b4" target="_blank" rel="noopener">Deploy KubeSphere into an existing VPC on AWS into CN-Northwest-1 Region</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/Ep9b4" target="_blank" rel="noopener">在 AWS 上将 KubeSphere 部署至一个现有 VPC 中的 CN-Northwest-1 区域</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">查看模板</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1235,20 +1236,20 @@ You are responsible for the cost of the AWS services used while running this Qui
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-If you deploy KubeSphere into an existing VPC, ensure that your VPC has three private subnets in different Availability Zones for the workload instances and that the subnets aren’t shared. This Quick Start doesn’t support <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html" target="_blank" rel="noopener">shared subnets</a>. To allow the instances to download packages and software without exposing them to the internet, the subnets require <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener">NAT gateways</a> in their route tables.<br>
+如果您将 KubeSphere 部署至现有 VPC 中，请确保您的 VPC 在不同可用区为工作负载实例提供三个私有子网，并且子网不共享。此快速入门不支持https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-sharing.html[共享子网^]。为了让实例在下载文件包和软件时不暴露于互联网，子网需要在其路由表中设置 <a href="https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-nat-gateway.html" target="_blank" rel="noopener">NAT 网关</a>。<br>
 <br>
-Also, ensure that the domain name in the DHCP options is configured, as explained in the <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html" target="_blank" rel="noopener">DHCP options sets</a>. When you launch the Quick Start, provide your VPC settings.
+另外，请根据 <a href="https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/VPC_DHCP_Options.html" target="_blank" rel="noopener">DHCP 选项集</a>，确保 DHCP 选项中的域名已配置好。当您启动快速入门时，请提供您的 VPC 设置。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Each deployment takes about 40–50 minutes to complete.</p>
+<p>每次部署大约需要 40–50 minutes 完成。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>Check the AWS Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This is where the network infrastructure for KubeSphere is built. The template launches in the us-east-1 Region by default.</p>
+<p>查看导航栏右上角显示的 AWS 区域，如果有需要可以进行更改。KubeSphere 的网络基础设施在此区域构建。该模板默认在 us-east-1 区域中启动。</p>
 </li>
 </ol>
 </div>
@@ -1259,7 +1260,7 @@ Also, ensure that the domain name in the DHCP options is configured, as explaine
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This deployment includes Amazon EFS, which isn’t currently supported in all AWS Regions. For a current list of supported Regions, see <a href="https://docs.aws.amazon.com/general/latest/gr/elasticfilesystem.html" target="_blank" rel="noopener">Amazon Elastic File System endpoints and quotas</a>.
+此部署包括 Amazon EFS，目前并非所有 AWS 区域都支持 Amazon EFS。有关当前支持 Amazon EFS 的区域列表，请参见 <a href="https://docs.aws.amazon.com/general/latest/gr/elasticfilesystem.html" target="_blank" rel="noopener">Amazon Elastic File System endpoints and quotas</a>。
 </td>
 </tr>
 </table>
@@ -1267,48 +1268,48 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>On the <strong>Create stack</strong> page, keep the default setting for the template, and then choose <strong>Next</strong>.</p>
+<p>在*创建堆栈*页面，保持模板的默认设置，然后选择*下一步*。</p>
 </li>
 <li>
-<p>On the <strong>Specify stack details</strong> page, change the stack name if needed. Review the parameters for the template. Provide values for the parameters that require input. For all other parameters, review the default settings and customize them as necessary.</p>
+<p>在*指定堆栈详细信息*页面，根据需要更改堆栈名称，查看模板的各项参数并为需要输入的参数提供值。对于所有其他参数，查看默认设置，并根据需要进行自定义。</p>
 </li>
 </ol>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>On the <strong>Configure stack options</strong> page, you can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html" target="_blank" rel="noopener">specify tags</a> (key-value pairs) for resources in your stack and <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html" target="_blank" rel="noopener">set advanced options</a>. When you’re finished, choose <strong>Next</strong>.</p>
+<p>在*配置堆栈选项*页面，您可以为堆栈中的资源https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html[指定标签<sup>]（键值对）并https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html[设置高级选项</sup>]。操作完成后，选择*下一步*。</p>
 </li>
 <li>
-<p>On the <strong>Review</strong> page, review and confirm the template settings. Under <strong>Capabilities</strong>, select the two check boxes to acknowledge that the template creates IAM resources and might require the ability to automatically expand macros.</p>
+<p>在*审核*页面，审核并确认模板设置。勾选*功能*下的两个复选框，以确认该模板创建 IAM 资源并可能需要自动扩展宏的能力。</p>
 </li>
 <li>
-<p>Choose <strong>Create stack</strong> to deploy the stack.</p>
+<p>选择*创建堆栈*来部署堆栈。</p>
 </li>
 <li>
-<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the KubeSphere deployment is ready.</p>
+<p>监控该堆栈的状态。当状态为 <strong>CREATE_COMPLETE</strong> 时，KubeSphere 部署准备就绪。</p>
 </li>
 <li>
-<p>Use the values displayed in the <strong>Outputs</strong> tab for the stack, as shown in <a href="#cfn_outputs">KubeSphere outputs after successful deployment</a>, to view the created resources.</p>
+<p>如 <a href="#cfn_outputs">成功部署后的 KubeSphere 输出</a> 所示，使用堆栈*输出*选项卡下显示的值来查看创建好的资源。</p>
 </li>
 </ol>
 </div>
 <div id="cfn_outputs" class="imageblock">
 <div class="content">
-<a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="100%" height="100%"></a>
+<a class="image" href="images/cfn_outputs.png"><img src="images/cfn_outputs.png" alt="cfn_outputs" width="648" height="439"></a>
 </div>
-<div class="title">Figure 2. KubeSphere outputs after successful deployment</div>
+<div class="title">Figure 2. 成功部署后的 KubeSphere 输出</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_test_the_deployment">Test the deployment</h2>
+<h2 id="_测试部署">测试部署</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Log in to the bastion host using your configured key pair and the user name <code>ec2-user</code>. You can get the IP address of the bastion host from the <strong>Outputs</strong> tab of the AWS CloudFormation console.</p>
+<p>使用您配置好的密钥对和用户名 <code>ec2-user</code> 登录堡垒主机。您可以从 AWS CloudFormation 控制台的*输出*选项卡中获取堡垒主机的 IP 地址。</p>
 <div class="literalblock">
 <div class="content">
 <pre>ssh -i "~/.ssh/cap.pem" ec2-user@12.23.34.45</pre>
@@ -1320,11 +1321,11 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>Verify that the client software was installed through the bastion host:</p>
+<p>通过堡垒主机确认客户端软件的安装：</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Kubectl version:</p>
+<p>Kubectl 版本：</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ kubectl version</pre>
@@ -1332,7 +1333,7 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 </div>
 </li>
 <li>
-<p>Helm version:</p>
+<p>Helm 版本：</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ helm version</pre>
@@ -1340,7 +1341,7 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 </div>
 </li>
 <li>
-<p>AWS CLI version:</p>
+<p>AWS CLI 版本：</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ aws -version</pre>
@@ -1348,7 +1349,7 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 </div>
 </li>
 <li>
-<p>Cf version:</p>
+<p>Cf 版本：</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ cf -version</pre>
@@ -1356,7 +1357,7 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 </div>
 </li>
 <li>
-<p>Git version</p>
+<p>Git 版本：</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ git version</pre>
@@ -1371,7 +1372,7 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>Verify the health of the Amazon EKS cluster through the bastion host. Use the installed <code>kubectl</code> and <code>helm</code> commands to verify access to the environment and the running state of the cluster and packages. The installation was successful if you see the welcome-information outputs in the log.</p>
+<p>通过堡垒主机确认 Amazon EKS 集群的健康状况。使用安装好的 <code>kubectl</code> 和 <code>helm</code> 命令来确认对环境的访问以及集群和软件包的运行状态。如果日志中输出欢迎信息，则说明安装成功。</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ kubectl cluster-info</pre>
@@ -1387,65 +1388,70 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 <pre>$ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f</pre>
 </div>
 </div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl get pod –all-namespaces</pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the administrator account and password defined by <code>KubeSphereConsolePassword</code>.</p>
+<p>在输出列表中检索生成的 KubeSphere 控制台 URL。在浏览器中访问 KubeSphere 控制台，并使用 <code>KubeSphereConsolePassword</code> 定义的管理员账户和密码登录 KubeSphere 控制台。</p>
 </li>
 </ol>
 </div>
 <div id="KubeSphereLogin1" class="imageblock">
 <div class="content">
-<a class="image" href="images/image4.png"><img src="images/image4.png" alt="Architecture" width="648" height="439"></a>
+<a class="image" href="images/image4.png"><img src="../../docs/images/image4.png" alt="Architecture" width="648" height="439"></a>
 </div>
-<div class="title">Figure 3. KubeSphere login page</div>
+<div class="title">Figure 3. KubeSphere 登录页面</div>
 </div>
 <div id="KubeSphereLogin2" class="imageblock">
 <div class="content">
-<a class="image" href="images/image5.png"><img src="images/image5.png" alt="Architecture" width="648" height="439"></a>
+<a class="image" href="images/image5.png"><img src="../../docs/images/image5.png" alt="Architecture" width="648" height="439"></a>
 </div>
-<div class="title">Figure 4. KubeSphere dashboard</div>
+<div class="title">Figure 4. KubeSphere 仪表板</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_best_practices_for_using_kubesphere_on_aws">Best practices for using KubeSphere on AWS</h2>
+<h2 id="_在_aws_上使用_kubesphere_的最佳做法">在 AWS 上使用 KubeSphere 的最佳做法</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As mentioned in the table <em>KubeSphere System and Pluggable Configuration of <a href="#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc">Step3</a></em>, KubeSphere has 11 pluggable components, which can be enabled individually. If you don&#8217;t enable them, KubeSphere starts with a minimal installation by default. Ensure that you have the necessary CPU and memory requirements in your cluster. For more information, see the <a href="https://kubesphere.io/docs/pluggable-components/overview/" target="_blank" rel="noopener">KubeSphere Overview</a>.</p>
+<p>在_<a href="#option-1-parameters-for-deploying-kubesphere-into-a-new-vpc">步骤 3</a> 的 KubeSphere 系统和可插拔配置_表格中提到，KubeSphere 有 11 个可插拔组件，可以单独启用。如果您不启用它们，KubeSphere 默认以最小化安装启动。请确保您的集群满足必要的 CPU 和内存要求。有关更多信息，请参见 <a href="https://kubesphere.com.cn/docs/pluggable-components/overview/" target="_blank" rel="noopener">KubeSphere 概述</a>。</p>
 </div>
 <div class="paragraph">
-<p>The optimal configuration for running KubeSphere Container Platform on an Amazon EKS cluster requires a minimum of one worker node that has at least 16 GiB RAM and 4 CPUs. We recommended that you enable these pluggable components to discover the full-stack features and capabilities provided by KubeSphere. If you already have a minimal KubeSphere setup, you can still enable the pluggable components by editing the cluster&#8217;s configuration as follows:</p>
+<p>在 Amazon EKS 集群上运行 KubeSphere 容器平台的最佳配置要求至少有一个工作节点，该节点至少有 16GiB RAM 和 4 个 CPU。建议您启用这些可插拔组件，以体验 KubeSphere 提供的全栈特性和功能。如果 KubeSphere 以最小化安装，您仍然可以通过编辑集群配置来启用可插拔组件，如下所示：</p>
 </div>
 <div class="paragraph">
-<p>Use an administrative account to access <strong>Cluster Management</strong>. Choose the EKS cluster, and select <strong>CRDs</strong> from the left-hand menu. Search for <strong>ClusterConfiguration</strong>.</p>
+<p>使用管理员账户访问*集群管理*。选择 EKS 集群，并从左侧菜单中选择*自定义资源 CRD*，搜索 <strong>ClusterConfiguration</strong>。</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/image6.png" alt="Architecture" width="648" height="439">
+<img src="../../docs/images/image6.png" alt="Architecture" width="648" height="439">
 </div>
 </div>
 <div class="paragraph">
-<p>Choose the <strong>ClusterConfiguration</strong> resource page. Choose <strong>···</strong> from the list, and select <strong>Edit YAML</strong>.</p>
+<p>选择 <strong>ClusterConfiguration</strong> 资源页，点击列表右侧的 <strong>···</strong>，选择*编辑配置文件*。</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/image7.png" alt="Architecture" width="648" height="439">
+<img src="../../docs/images/image7.png" alt="Architecture" width="648" height="439">
 </div>
 </div>
 <div class="paragraph">
-<p>Scroll down to the <strong>spec</strong> section, and change the pluggable components from <strong>false</strong> to <strong>true</strong> for the features you want. Finally, choose <strong>Update</strong> to save your changes. The installation automatically starts at the backend.</p>
+<p>下拉至 <strong>spec</strong> 部分，将您想要启用的可插拔组件从 <strong>false</strong> 更改为 <strong>true</strong>。最后，选择*更新*来保存您的更改，后端会自动开始安装。</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/image8.png" alt="Architecture" width="648" height="439">
+<img src="../../docs/images/image8.png" alt="Architecture" width="648" height="439">
 </div>
 </div>
 <div class="paragraph">
-<p>Open the <strong>Web kubectl</strong> from <strong>Toolbox</strong> (<strong>bottom right</strong>), and inspect the installation logs:</p>
+<p>从*工具箱*（<strong>右下角</strong>）打开 <strong>Web kubectl</strong>，查看安装日志：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1453,91 +1459,86 @@ This deployment includes Amazon EFS, which isn’t currently supported in all AW
 </div>
 </div>
 <div class="paragraph">
-<p>When you see welcome information in the output logs, the pluggable components are ready to use.</p>
+<p>如果您在输出日志中看到欢迎信息，可插拔组件便可供使用。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_security">Security</h2>
+<h2 id="_安全">安全</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Set up the TLS</strong>: This Quick Start automatically sets up Elastic Load Balancing (ELB) to support the critical services of a KubeSphere container platform cluster. We recommend that you set up the TLS for you Network Load Balancer to establish a secure connection between the client and server. This helps to ensure that all data passed between the client and your load balancer is private, for more information, see <a href="file:///Users/zhoupengfei/Downloads/TLS%20listeners%20for%20your%20Network%20Load%20Balancer" target="_blank" rel="noopener">TLS listeners for your Network Load Balancer</a>.</p>
+<p><strong>设置 TLS</strong>：此快速入门自动设置弹性负载均衡 (ELB)，支持 KubeSphere 容器平台集群的关键服务。建议您为您的网络负载均衡器设置 TLS，在客户端和服务器之间建立安全连接。这有助于确保客户端和负载均衡器之间传递的所有数据的私密性。有关更多信息，请参见https://docs.aws.amazon.com/zh_cn/elasticloadbalancing/latest/network/create-tls-listener.html[网络负载均衡器的 TLS 侦听器^]。</p>
 </div>
 <div class="paragraph">
-<p><strong>Keep the secret private</strong>: KubeSphere supports multicluster management in a unified control plane. Save the secrets used to connect to the external cluster. For more information, see <a href="https://kubesphere.io/docs/multicluster-management/enable-multicluster/direct-connection/" target="_blank" rel="noopener">Direct Connection</a>.</p>
+<p><strong>保持密钥私密性</strong>：KubeSphere 在统一的控制平面支持多集群管理。保存用来连接外部集群的密钥。有关更多信息，请参见https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/[直接连接^]。</p>
 </div>
 <div class="paragraph">
-<p><strong>Create proper multitenant management policies:</strong> KubeSphere is a multitenant platform. Multitenancy in KubeSphere refers to one or more clusters that are shared between tenants. Ensure that you set the proper roles, permissions, and projects for tenants. For more information, see <a href="https://kubesphere.io/docs/quick-start/create-workspace-and-project/" target="_blank" rel="noopener">Create Workspace, Project, Account and Role</a>.</p>
+<p><strong>创建合适的多租户管理策略</strong>：KubeSphere 是一个多租户平台，KubeSphere 中的多租户架构是指租户之间共享一个或多个集群。请确保为租户设置合适的角色、权限以及项目。有关更多信息，请参见https://kubesphere.io/docs/quick-start/create-workspace-and-project/[创建企业空间、项目、帐户和角色^]。</p>
 </div>
 <div class="paragraph">
-<p><strong>Create proper network policies:</strong> KubeSphere allows administrators to set network policies for different projects (namespaces) and workspaces. To control network communication between pods in each cluster&#8217;s projects and workspaces, create <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank" rel="noopener">network policies</a> based on your tenants' requirements. We recommend that you block traffic among projects that host different tenant applications. Also, deny all
-incoming traffic to avoid pods from one project mistakenly sending traffic to another project&#8217;s services or databases.</p>
+<p><strong>创建合适的网络策略</strong>：KubeSphere 中的管理员可以为不同的项目（命名空间）和企业空间设置网络策略。若要控制每个集群的项目和企业空间中 Pod 之间的网络通信，请根据您租户的要求创建 <a href="https://kubesphere.com.cn/docs/pluggable-components/network-policy/" target="_blank" rel="noopener">网络策略</a>。建议您屏蔽托管不同租户应用程序的项目之间的流量。同时，拒绝所有入站流量，避免一个项目的 Pod 向另一个项目的服务或数据库误发流量。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_get_started_with_kubesphere">Get started with KubeSphere</h2>
+<h2 id="_上手_kubesphere">上手 KubeSphere</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you finish deploying this Quick Start, refer to the</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>https://kubesphere.io/docs/quick-start/create-workspace-and-project/[KubeSphere Getting Started Guide^]. It has hands-on labs and tutorials that can help you get started with KubeSphere.</pre>
-</div>
+<p>当您部署完此快速入门，请参考
+ <a href="https://kubesphere.com.cn/docs/quick-start/create-workspace-and-project/" target="_blank" rel="noopener">KubeSphere 上手指南</a>。这里有动手实验和教程，能帮助您快速上手 KubeSphere。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_central_control_plane_for_multicloud_and_multicluster_management">Central control plane for multicloud and multicluster management</h2>
+<h2 id="_用于多云和多集群管理的中央控制平面">用于多云和多集群管理的中央控制平面</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to build a hybrid cloud for multicloud and multicluster management, enable Kubernetes federation to set up a central control plane using KubeSphere. KubeSphere supports application distribution across multiple clusters and cloud providers. It also provides disaster recovery and cross-cluster observability. For more information, see
-<a href="file:///Users/ameighta/Documents/Projects/QuickStart-Projects/QingCloud-KubeSphere/How%20to%20Enable%20the%20Multi-cluster%20Feature" target="_blank" rel="noopener">How to enable a multicluster feature</a>.</p>
+<p>如果您想构建一个用于多云和多集群管理的混合云，请启用 Kubernetes 联邦，并使用 KubeSphere 建立一个中央控制平面。KubeSphere 支持跨多个集群和云厂商的应用分发。同时，KubeSphere 也提供灾备功能和多集群可观察性。有关更多信息，请参见
+<a href="https://kubesphere.com.cn/docs/multicluster-management/" target="_blank" rel="noopener">如何启用多集群功能</a>。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_additional_resources">Additional resources</h2>
+<h2 id="_额外资源">额外资源</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>AWS resources</strong></p>
+<p><strong>AWS 资源</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started Resource Center</a></p>
+<p><a href="https://aws.amazon.com/cn/getting-started/" target="_blank" rel="noopener">开始使用资源中心</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/general/latest/gr/" target="_blank" rel="noopener">AWS General Reference</a></p>
+<p><a href="https://docs.aws.amazon.com/general/latest/gr/" target="_blank" rel="noopener">AWS 通用参考</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/general/latest/gr/glos-chap.html" target="_blank" rel="noopener">AWS Glossary</a></p>
+<p><a href="https://docs.aws.amazon.com/general/latest/gr/glos-chap.html" target="_blank" rel="noopener">AWS 词汇表</a></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>AWS services</strong></p>
+<p><strong>AWS 服务</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.aws.amazon.com/cloudformation/" target="_blank" rel="noopener">AWS CloudFormation</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/cloudformation/" target="_blank" rel="noopener">AWS CloudFormation</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/eks/?id=docs_gateway" target="_blank" rel="noopener">Amazon EKS</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/eks/?id=docs_gateway" target="_blank" rel="noopener">Amazon EKS</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html" target="_blank" rel="noopener">Amazon EBS</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AmazonEBS.html" target="_blank" rel="noopener">Amazon EBS</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/ec2/" target="_blank" rel="noopener">Amazon EC2</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/ec2/" target="_blank" rel="noopener">Amazon EC2</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/iam/" target="_blank" rel="noopener">IAM</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/iam/" target="_blank" rel="noopener">IAM</a></p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/vpc/" target="_blank" rel="noopener">Amazon VPC</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/vpc//" target="_blank" rel="noopener">Amazon VPC</a></p>
 </li>
 </ul>
 </div>
@@ -1547,22 +1548,22 @@ incoming traffic to avoid pods from one project mistakenly sending traffic to an
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://kubesphere.io/docs/introduction/what-is-kubesphere/" target="_blank" rel="noopener">What is KubeSphere</a></p>
+<p><a href="https://kubesphere.com.cn/docs/introduction/what-is-kubesphere/" target="_blank" rel="noopener">什么是 KubeSphere</a></p>
 </li>
 <li>
-<p><a href="https://kubesphere.io/docs/pluggable-components/" target="_blank" rel="noopener">Introduction to Pluggable Components</a></p>
+<p><a href="https://kubesphere.com.cn/docs/pluggable-components/" target="_blank" rel="noopener">可插拔组件介绍</a></p>
 </li>
 <li>
-<p><a href="https://kubesphere.io/docs/multicluster-management/introduction/overview/" target="_blank" rel="noopener">Multi-cluster Management</a></p>
+<p><a href="https://kubesphere.com.cn/docs/multicluster-management/" target="_blank" rel="noopener">多集群管理</a></p>
 </li>
 <li>
-<p><a href="https://kubesphere.io/docs/installing-on-kubernetes/" target="_blank" rel="noopener">Installing KubeSphere on Kubernetes</a></p>
+<p><a href="https://kubesphere.com.cn/docs/installing-on-kubernetes/" target="_blank" rel="noopener">在 Kubernetes 上安装 KubeSphere</a></p>
 </li>
 <li>
-<p><a href="https://kubesphere.io/docs/installing-on-linux/" target="_blank" rel="noopener">Installing KubeSphere on Linux</a></p>
+<p><a href="https://kubesphere.com.cn/docs/installing-on-linux/" target="_blank" rel="noopener">在 Linux 上安装 KubeSphere</a></p>
 </li>
 <li>
-<p><a href="https://github.com/kubesphere/" target="_blank" rel="noopener">KubeSphere GitHub</a></p>
+<p><a href="https://github.com/kubesphere" target="_blank" rel="noopener">KubeSphere GitHub</a></p>
 </li>
 </ul>
 </div>
@@ -1572,10 +1573,10 @@ incoming traffic to avoid pods from one project mistakenly sending traffic to an
 <h2 id="_faq">FAQ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
+<p><strong>问：*启动此快速入门时提示 *CREATE_FAILED</strong> 错误。</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. (This setting is under <strong>Advanced</strong> in the AWS CloudFormation console, <strong>Options</strong> page.) With this setting, the stack’s state is retained, and the instance remains running so you can troubleshoot the issue. (For Windows, look at the log files in <code>%ProgramFiles%\Amazon\EC2ConfigService</code> and <code>C:\cfn\log</code>.)</p>
+<p>*答：*如果 AWS CloudFormation 创建堆栈失败，建议您将*失败时回滚*设置为*已禁用*并重启该模板。（此设置在 AWS CloudFormation 控制台*选项*页面的*高级*部分下。）设置后，该堆栈的状态会保留，实例会持续运行以便您解决问题。(对于 Windows 系统, 请查看 <code>%ProgramFiles%\Amazon\EC2ConfigService</code> 和 <code>C:\cfn\log</code> 中的日志文件。）</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1584,34 +1585,22 @@ incoming traffic to avoid pods from one project mistakenly sending traffic to an
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, you continue to incur AWS charges for the stack. Ensure that you delete the stack when you finish troubleshooting. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a>.
+当您将*失败时回滚*设置为*已禁用*时，该堆栈仍然会在 AWS 上持续计费。请确保您在解决问题后删除该堆栈。有关更多信息，请参见 <a href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">AWS CloudFormation 疑难解答</a>。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I encountered a size limitation error when I deployed the AWS CloudFormation templates.</p>
+<p>*问：*部署 AWS CloudFormation 模板时提示大小限制错误。</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer, or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see the <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation quotas</a>.</p>
+<p>*答：*建议您通过此指南中的链接或另一个 S3 存储桶去启动快速入门模板。如果您从本地副本部署模板，或从 S3 存储桶以外的地方部署模板，则可能会发生模板大小限制问题。有关更多信息，请参见 <a href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank" rel="noopener">AWS CloudFormation 配额</a>。</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> How to change the language.</p>
+<p>*问：*如何修改语言？</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Choose the user name from the top-right corner of the console, and choose <strong>User settings</strong> for language options. KubeSphere console supports English, Spanish, simplified Chinese, and traditional Chinese.</p>
-</div>
-<div class="paragraph">
-<p><strong>Q.</strong> Deploying second cluster into a Region causes the "Regional Resource" stack to fail.</p>
-</div>
-<div class="paragraph">
-<p><strong>A.</strong> When deploying a stack into a Region where you already deployed a cluster using the Quick Start. You need to set "PerRegionSharedResources" to "No", this stack once deployed will be used by all subsequent deployments in that Region.</p>
-</div>
-<div class="paragraph">
-<p><strong>Q.</strong> Deploying second cluster into an Account causes the "Account Resource" stack to fail.</p>
-</div>
-<div class="paragraph">
-<p><strong>A.</strong> When deploying a stack into an Account where you already deployed a cluster using the Quick Start. You need to set "PerAccountSharedResources" to "No", this stack once deployed will be used by all subsequent deployments in that Account.</p>
+<p>*答：*从控制台右上角的下拉菜单中选择*个人设置*以切换语言。KubeSphere 控制台支持英文、西班牙文、简体中文和繁体中文。</p>
 </div>
 </div>
 </div>
@@ -2215,21 +2204,16 @@ and to share your customizations with others.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_notices">Notices</h2>
+<h2 id="_版权声明">版权声明</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document is provided for informational purposes only. It represents AWS’s current product offerings and practices as of the date of issue of this document, which are subject to change without notice. Customers are responsible for making their own independent assessment of the information in this document and any use of AWS’s products or services, each of which is provided “as is” without warranty of any kind, whether expressed or implied. This document does not create any warranties, representations, contractual commitments, conditions, or assurances from AWS, its affiliates, suppliers, or licensors. The responsibilities and liabilities of AWS to its customers are controlled by AWS agreements, and this document is not part of, nor does it modify, any agreement between AWS and its customers.</p>
+<p>本文档仅供参考。本文档代表截至其发行之日的 AWS 的当前产品服务和实践，如有变更，恕不另行通知。客户负责对本文档中的信息以及使用 AWS 的任何产品或服务进行独立的评估。每个 AWS 的产品或服务均按“原样”提供，没有任何形式的担保，无论是明示或暗示。AWS 及其附属公司、供应商或授权商对本文档不作出任何担保、声明、合同承诺、条件或保证。AWS 对其客户的责任和义务由 AWS 协议决定，本文档与 AWS 和客户之间签订的任何协议无关，亦不影响任何此类协议。</p>
 </div>
 <div class="paragraph">
-<p>The software included with this paper is licensed under the Apache License, version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at <a href="http://aws.amazon.com/apache2.0/" class="bare">http://aws.amazon.com/apache2.0/</a> or in the accompanying "license" file. This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied. See the License for specific language governing permissions and limitations.</p>
+<p>本文档中所包含的软件使用 Apache License 授权，版本 2.0（即“License”）。仅在符合 License 的前提下您才可以使用此文件。License 的副本链接为 <a href="http://aws.amazon.com/apache2.0/" class="bare">http://aws.amazon.com/apache2.0/</a> 或请参见随附的“license”文件。代码均按“原样”分发，没有任何形式的担保或条件，无论是明示或暗示。请参见 License 查看具体语言的管理权限或限制。</p>
 </div>
 </div>
 </div>
 </div>
-<p class="footer-text">
-<!-- We can use document attributes: -->
-<!-- Generated with Asciidoctor v2.0.10. -->
-<a href="https://aws.amazon.com/privacy/">Privacy</a> | <a href="https://aws.amazon.com/terms/">Site terms</a> | &copy; 2020, Amazon Web Services, Inc. or its affiliates and QingCloud. All rights reserved.
-</p>
 </body>
 </html>
