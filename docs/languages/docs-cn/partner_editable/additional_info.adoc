@@ -49,12 +49,12 @@
 [#KubeSphereLogin1]
 .KubeSphere 登录页面
 [link=images/image4.png]
-image::../../../docs/images/image4.png[Architecture,width=648,height=439]
+image::../../../images/image4.png[Architecture,width=648,height=439]
 
 [#KubeSphereLogin2]
 .KubeSphere 仪表板
 [link=images/image5.png]
-image::../../../docs/images/image5.png[Architecture,width=648,height=439]
+image::../../../images/image5.png[Architecture,width=648,height=439]
 
 
 == 在 AWS 上使用 {partner-product-short-name} 的最佳做法
@@ -67,16 +67,16 @@ image::../../../docs/images/image5.png[Architecture,width=648,height=439]
 使用管理员账户访问*集群管理*。选择 EKS 集群，并从左侧菜单中选择*自定义资源 CRD*，搜索 *ClusterConfiguration*。
 
 
-image::../../../docs/images/image6.png[Architecture,width=648,height=439]
+image::../../../images/image6.png[Architecture,width=648,height=439]
 
 选择 *ClusterConfiguration* 资源页，点击列表右侧的 *···*，选择*编辑配置文件*。
 
-image::../../../docs/images/image7.png[Architecture,width=648,height=439]
+image::../../../images/image7.png[Architecture,width=648,height=439]
 
 
 下拉至 *spec* 部分，将您想要启用的可插拔组件从 *false* 更改为 *true*。最后，选择*更新*来保存您的更改，后端会自动开始安装。
 
-image::../../../docs/images/image8.png[Architecture,width=648,height=439]
+image::../../../images/image8.png[Architecture,width=648,height=439]
 
 从*工具箱*（**右下角**）打开 *Web kubectl*，查看安装日志：
 
