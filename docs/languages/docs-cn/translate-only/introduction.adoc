@@ -31,7 +31,7 @@ TIP: 访问我们的 https://github.com/aws-quickstart/{quickstart-project-name}
 
 ifdef::partner-company-name[]
 [.text-left]
-此快速入门由{partner-company-name} 和 Amazon Web Services (AWS) 共同创建。 http://aws.amazon.com/cn/quickstart/[快速入门^]是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。
+此快速入门由{partner-company-name} 和 Amazon Web Services (AWS) 共同创建。http://aws.amazon.com/cn/quickstart/[快速入门^]是自动化参考部署，使用 AWS CloudFormation 模板根据 AWS 的最佳做法在 AWS 上部署关键技术。
 endif::[]
 
 ifndef::partner-company-name[]

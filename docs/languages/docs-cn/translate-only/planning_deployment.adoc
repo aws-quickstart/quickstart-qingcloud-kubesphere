@@ -1,9 +1,7 @@
 === 专业知识
 
-此部署指南要求使用者对 AWS 的相关服务有一定程度的了解。
-如果您是首次使用 AWS，可访问https://aws.amazon.com/cn/getting-started/[开始使用资源中心^]以及
-https://aws.amazon.com/training/[AWS 培训和认证网站]。
-以上两个网站提供为您提供了相关学习素材，以帮助您在 AWS 云平台之上规划、部署以及运维您的基础设施和应用程序。
+此部署指南要求使用者对 AWS 的相关服务有一定程度的了解。如果您是首次使用 AWS，可访问 https://aws.amazon.com/cn/getting-started/[开始使用资源中心^]以及
+https://aws.amazon.com/training/[AWS 培训和认证网站]。以上两个网站提供为您提供了相关学习素材，以帮助您在 AWS 云平台之上规划、部署以及运维您的基础设施和应用程序。
 
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/specialized_knowledge.adoc`**_
@@ -29,7 +27,7 @@ ifndef::disable_requirements[]
 endif::disable_requirements[]
 
 ==== 资源配额
-如有必要，请为以下资源申请https://amazonaws-china.com/cn/getting-started/hands-on/request-service-quota-increase/[服务配额^]。如果您当前使用的一些服务已经消耗了以下的配额资源，而部署此快速入门会导致资源超出默认配额，请提前申请扩大配额。https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/[服务配额控制台^]显示您当前服务的资源用量及配额使用情况。有关更多信息，请参见https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html[什么是服务配额？^]以及 https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html[AWS 服务配额^]。
+如有必要，请为以下资源申请 https://amazonaws-china.com/cn/getting-started/hands-on/request-service-quota-increase/[服务配额^]。如果您当前使用的一些服务已经消耗了以下的配额资源，而部署此快速入门会导致资源超出默认配额，请提前申请扩大配额。https://console.aws.amazon.com/servicequotas/home?region=us-east-2#!/[服务配额控制台^]显示您当前服务的资源用量及配额使用情况。有关更多信息，请参见 https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html[什么是服务配额？^]以及 https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html[AWS 服务配额^]。
 
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/service_limits.adoc`**_
@@ -90,7 +88,7 @@ endif::template_ec2[]
 
 ==== IAM 权限
 //todo: scope of least-privilege
-在部署此快速入门之前，请先通过 IAM 权限登录 AWS 管理控制台并确保当前账户在此区域有相关资源的使用权限。IAM 内的 _AdministratorAccess_ 托管策略提供足够的权限, 也可以按需创建一个自定义权限策略的账户。有关更多信息，请参见https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/access_policies_job-functions.html[工作职能的 AWS 托管策略^]。
+在部署此快速入门之前，请先通过 IAM 权限登录 AWS 管理控制台并确保当前账户在此区域有相关资源的使用权限。IAM 内的 _AdministratorAccess_ 托管策略提供足够的权限，也可以按需创建一个自定义权限策略的账户。有关更多信息，请参见 https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/access_policies_job-functions.html[工作职能的 AWS 托管策略^]。
 
 ifndef::production_build[]
 _**This portion of the deployment guide is located at `docs/{specificdir}/pre-reqs.adoc`**_

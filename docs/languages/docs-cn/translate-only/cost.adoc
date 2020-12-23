@@ -1,10 +1,6 @@
 
-运行此快速入门时，您需要为 AWS 的各项服务付费。
-使用此快速入门无需支付额外费用。
+运行此快速入门时，您需要为 AWS 的各项服务付费。使用此快速入门无需支付额外费用。
 
-快速入门的 AWS CloudFormation 模板包括您可以自定义的配置参数。
-其中的部分设置会影响部署的费用，例如实例类型。
-有关预估费用，请参见您所使用的每个 AWS 服务的价格页面。
-价格可能会变化。
+快速入门的 AWS CloudFormation 模板包括您可以自定义的配置参数。其中的部分设置会影响部署的费用，例如实例类型。有关预估费用，请参见您所使用的每个 AWS 服务的价格页面。价格可能会变化。
 
-TIP: 在部署该快速入门后，您可以https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-gettingstarted-turnonreports.html[创建 AWS 费用和使用率报告^]将账单指标交付至您账户的 Amazon Simple Storage Service (Amazon S3) 存储桶中。这些报告基于每个月整月的使用率提供费用预估，并在月底汇总数据。有关更多信息，请参见https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-costusage.html[什么是 AWS 费用和使用率报告？^]
+TIP: 在部署该快速入门后，您可以 https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-gettingstarted-turnonreports.html[创建 AWS 费用和使用率报告^]将账单指标交付至您账户的 Amazon Simple Storage Service (Amazon S3) 存储桶中。这些报告基于每个月整月的使用率提供费用预估，并在月底汇总数据。有关更多信息，请参见 https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-reports-costusage.html[什么是 AWS 费用和使用率报告？^]
