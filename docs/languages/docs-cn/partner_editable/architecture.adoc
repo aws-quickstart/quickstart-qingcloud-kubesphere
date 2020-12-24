@@ -4,7 +4,7 @@
 [#architecture1]
 .AWS 上 _{partner-product-short-name}_ 快速入门架构
 [link=images/architecture_diagram.png]
-image::../../../docs/images/architecture_diagram.png[Architecture,width=648,height=439]
+image::../../../images/architecture_diagram.png[Architecture,width=648,height=439]
 
 
 如图 1 所示，此快速入门设置以下内容：
