@@ -67,6 +67,7 @@ image::../../../images/image5.png[Architecture,width=648,height=439]
 使用管理员账户访问*集群管理*。选择 EKS 集群，并从左侧菜单中选择*自定义资源 CRD*，搜索 *ClusterConfiguration*。
 
 
+
 image::../../../images/image6.png[Architecture,width=648,height=439]
 
 选择 *ClusterConfiguration* 资源页，点击列表右侧的 *···*，选择*编辑配置文件*。
@@ -87,11 +88,11 @@ image::../../../images/image8.png[Architecture,width=648,height=439]
 == 安全
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
-*设置 TLS*：此快速入门自动设置弹性负载均衡 (ELB)，支持 KubeSphere 容器平台集群的关键服务。建议您为您的网络负载均衡器设置 TLS，在客户端和服务器之间建立安全连接。这有助于确保客户端和负载均衡器之间传递的所有数据的私密性。有关更多信息，请参见https://docs.aws.amazon.com/zh_cn/elasticloadbalancing/latest/network/create-tls-listener.html[网络负载均衡器的 TLS 侦听器^]。
+*设置 TLS*：此快速入门自动设置弹性负载均衡 (ELB)，支持 KubeSphere 容器平台集群的关键服务。建议您为您的网络负载均衡器设置 TLS，在客户端和服务器之间建立安全连接。这有助于确保客户端和负载均衡器之间传递的所有数据的私密性。有关更多信息，请参见 https://docs.aws.amazon.com/zh_cn/elasticloadbalancing/latest/network/create-tls-listener.html[网络负载均衡器的 TLS 侦听器^]。
 
-*保持密钥私密性*：KubeSphere 在统一的控制平面支持多集群管理。保存用来连接外部集群的密钥。有关更多信息，请参见https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/[直接连接^]。
+*保持密钥私密性*：KubeSphere 在统一的控制平面支持多集群管理。保存用来连接外部集群的密钥。有关更多信息，请参见 https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/[直接连接^]。
 
-*创建合适的多租户管理策略*：KubeSphere 是一个多租户平台，KubeSphere 中的多租户架构是指租户之间共享一个或多个集群。请确保为租户设置合适的角色、权限以及项目。有关更多信息，请参见https://kubesphere.io/docs/quick-start/create-workspace-and-project/[创建企业空间、项目、帐户和角色^]。
+*创建合适的多租户管理策略*：KubeSphere 是一个多租户平台，KubeSphere 中的多租户架构是指租户之间共享一个或多个集群。请确保为租户设置合适的角色、权限以及项目。有关更多信息，请参见 https://kubesphere.io/docs/quick-start/create-workspace-and-project/[创建企业空间、项目、帐户和角色^]。
 
 *创建合适的网络策略*：KubeSphere 中的管理员可以为不同的项目（命名空间）和企业空间设置网络策略。若要控制每个集群的项目和企业空间中 Pod 之间的网络通信，请根据您租户的要求创建 https://kubesphere.com.cn/docs/pluggable-components/network-policy/[网络策略^]。建议您屏蔽托管不同租户应用程序的项目之间的流量。同时，拒绝所有入站流量，避免一个项目的 Pod 向另一个项目的服务或数据库误发流量。
 //TODO Replace "ingress" with "receive," "input," "inbound," or "incoming."

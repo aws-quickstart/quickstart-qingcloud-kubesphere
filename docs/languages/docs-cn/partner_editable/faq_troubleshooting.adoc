@@ -4,7 +4,7 @@
 
 *问：*启动此快速入门时提示 *CREATE_FAILED* 错误。
 
-*答：*如果 AWS CloudFormation 创建堆栈失败，建议您将*失败时回滚*设置为*已禁用*并重启该模板。（此设置在 AWS CloudFormation 控制台*选项*页面的*高级*部分下。）设置后，该堆栈的状态会保留，实例会持续运行以便您解决问题。(对于 Windows 系统, 请查看 `%ProgramFiles%\Amazon\EC2ConfigService` 和 `C:\cfn\log` 中的日志文件。）
+*答：*如果 AWS CloudFormation 创建堆栈失败，建议您将*失败时回滚*设置为*已禁用*并重启该模板。（此设置在 AWS CloudFormation 控制台*选项*页面的*高级*部分下。）设置后，该堆栈的状态会保留，实例会持续运行以便您解决问题。（对于 Windows 系统, 请查看 `%ProgramFiles%\Amazon\EC2ConfigService` 和 `C:\cfn\log` 中的日志文件。）
 // If you’re deploying on Linux instances, provide the location for log files on Linux, or omit this sentence.
 
 WARNING: 当您将*失败时回滚*设置为*已禁用*时，该堆栈仍然会在 AWS 上持续计费。请确保您在解决问题后删除该堆栈。有关更多信息，请参见 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/troubleshooting.html[AWS CloudFormation 疑难解答^]。
