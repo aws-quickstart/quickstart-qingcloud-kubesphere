@@ -26,7 +26,7 @@ NOTE: 运行此快速入门参考部署时，您需要为 AWS 的各项服务付
 ^|https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[查看模板^]
 |===
 
-WARNING: 如果您将 {partner-product-short-name} 部署至现有 VPC 中，请确保您的 VPC 在不同可用区为工作负载实例提供三个私有子网，并且子网不共享。此快速入门不支持https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-sharing.html[共享子网^]。为了让实例在下载文件包和软件时不暴露于互联网，子网需要在其路由表中设置 https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-nat-gateway.html[NAT 网关^]。 +
+WARNING: 如果您将 {partner-product-short-name} 部署至现有 VPC 中，请确保您的 VPC 在不同可用区为工作负载实例提供三个私有子网，并且子网不共享。此快速入门不支持 https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-sharing.html[共享子网^]。为了让实例在下载文件包和软件时不暴露于互联网，子网需要在其路由表中设置 https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/vpc-nat-gateway.html[NAT 网关^]。 +
  +
 另外，请根据 https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/VPC_DHCP_Options.html[DHCP 选项集^]，确保 DHCP 选项中的域名已配置好。当您启动快速入门时，请提供您的 VPC 设置。
 
