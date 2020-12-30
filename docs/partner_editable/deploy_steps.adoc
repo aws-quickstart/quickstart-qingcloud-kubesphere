@@ -19,10 +19,12 @@ NOTE: You are responsible for the cost of the AWS services used while running th
 ^|https://fwd.aws/XJaW5[Deploy {partner-product-short-name} into an existing VPC on AWS^]
 ^|https://fwd.aws/X4KMN[View template^]
 
-^|https://fwd.aws/eYPQm[Deploy {partner-product-short-name} into a new VPC on AWS into CN-North-1 Region^]
+^|https://console.amazonaws.cn/cloudformation/home?region=cn-north-1#/stacks/new?stackName=Kubesphere&templateURL=https://aws-quickstart-cn-north-1.s3.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template[Deploy {partner-product-short-name} into a new VPC on AWS into CN-North-1 Region^]
+//^|https://fwd.aws/eYPQm[Deploy {partner-product-short-name} into a new VPC on AWS into CN-North-1 Region^]
 ^|https://aws-quickstart-cn-north-1.s3.cn-north-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[View template^]
 
-^|https://fwd.aws/Ep9b4[Deploy {partner-product-short-name} into an existing VPC on AWS into CN-Northwest-1 Region^]
+^|https://console.amazonaws.cn/cloudformation/home?region=cn-northwest-1#/stacks/new?stackName=Kubesphere&templateURL=https://aws-quickstart-cn-northwest-1.s3.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template[Deploy {partner-product-short-name} into an existing VPC on AWS into CN-Northwest-1 Region^]
+//^|https://fwd.aws/Ep9b4[Deploy {partner-product-short-name} into an existing VPC on AWS into CN-Northwest-1 Region^]
 ^|https://aws-quickstart-cn-northwest-1.s3.cn-northwest-1.amazonaws.com.cn/quickstart-qingcloud-kubesphere/templates/kubesphere-entrypoint-new-vpc.template.yaml[View template^]
 |===
 
