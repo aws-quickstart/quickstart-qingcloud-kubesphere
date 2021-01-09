@@ -150,26 +150,26 @@ Parameters:
     Description: Enter the key pair you created in your preferred AWS Region. For more information, see the "Technical requirements" section of the deployment guide.
     Type: AWS::EC2::KeyPair::KeyName
   PublicSubnet1ID:
-    Type: String
+    Type: "AWS::EC2::Subnet::Id"
     Description: ID of the public subnet in Availability Zone 1 of your existing VPC (e.g., subnet-a0246dcd).
     Default: ""
   PublicSubnet2ID:
-    Type: String
+    Type: "AWS::EC2::Subnet::Id"
     Description: ID of the public subnet in Availability Zone 2 of your existing VPC (e.g., subnet-b1236eea).
     Default: ""
   PublicSubnet3ID:
-    Type: String
+    Type: "AWS::EC2::Subnet::Id"
     Description: ID of the public subnet in Availability Zone 3 of your existing VPC (e.g., subnet-c3456aba).
     Default: ""
   PrivateSubnet1ID:
     Type: "AWS::EC2::Subnet::Id"
     Description: ID of the private subnet in Availability Zone 1 of your existing VPC (e.g., subnet-fe9a8b32).
   PrivateSubnet2ID:
-    Type: String
+    Type: "AWS::EC2::Subnet::Id"
     Description: ID of the private subnet in Availability Zone 2 of your existing VPC (e.g., subnet-be8b01ea).
     Default: ""
   PrivateSubnet3ID:
-    Type: String
+    Type: "AWS::EC2::Subnet::Id"
     Description: ID of the private subnet in Availability Zone 3 of your existing VPC (e.g., subnet-abd39039).
     Default: ""
   QSS3BucketName:
