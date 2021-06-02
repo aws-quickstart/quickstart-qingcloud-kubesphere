@@ -14,7 +14,7 @@ Parameters:
     Type: String
   Servicemesh:
     Type: String
-  Notification:
+  Kubeedge:
     Type: String
   Alerting:
     Type: String
@@ -77,7 +77,7 @@ Resources:
         kind: Namespace
         metadata:
           name: kubesphere-system
-  KubeSphereServiceAccount:
+  KSInstallerServiceAccount:
     DependsOn: KubeSphereNamespace
     Type: "Custom::KubeManifest"
     Version: '1.0'
@@ -95,7 +95,7 @@ Resources:
         metadata:
           name: ks-installer
           namespace: kubesphere-system
-  KubeSphereClusterRole:
+  KSInstallerClusterRole:
     DependsOn: KubeSphereNamespace
     Type: "Custom::KubeManifest"
     Version: '1.0'
@@ -268,10 +268,46 @@ Resources:
           resources:
           - '*'
           verbs:
-          - '*'  
-      
-  KubeSphereClusterRoleBinding:
-    DependsOn: KubeSphereClusterRole
+          - '*'
+        - apiGroups:
+            - security.istio.io
+          resources:
+            - '*'
+          verbs:
+            - '*'
+        - apiGroups:
+            - monitoring.kiali.io
+          resources:
+            - '*'
+          verbs:
+            - '*'
+        - apiGroups:
+            - kiali.io
+          resources:
+            - '*'
+          verbs:
+            - '*'
+        - apiGroups:
+            - networking.k8s.io
+          resources:
+            - '*'
+          verbs:
+            - '*'
+        - apiGroups:
+            - kubeedge.kubesphere.io
+          resources:
+            - '*'
+          verbs:
+            - '*'
+        - apiGroups:
+            - types.kubefed.io
+          resources:
+            - '*'
+          verbs:
+            - '*'
+
+  KSInstallerClusterRoleBinding:
+    DependsOn: KSInstallerClusterRole
     Type: "Custom::KubeManifest"
     Version: '1.0'
     Properties:
@@ -328,7 +364,7 @@ Resources:
               serviceAccountName: ks-installer
               containers:
               - name: installer
-                image: kubesphere/ks-installer:v3.0.0
+                image: kubesphere/ks-installer:v3.1.0
                 imagePullPolicy: "Always"   
                 volumeMounts:
                 - mountPath: /etc/localtime
@@ -357,30 +393,41 @@ Resources:
           name: ks-installer
           namespace: kubesphere-system
           labels:
-            version: v3.0.0
+            version: v3.1.0
         spec:
           persistence:
             storageClass: ""
           authentication:
-            jwtSecret: "" 
+            jwtSecret: ""
+          local_registry: ""
           etcd:
             monitoring: false
             endpointIps: localhost
             port: 2379
             tlsEnable: true
           common:
-            mysqlVolumeSize: 20Gi
+            redis:
+              enabled: false
+            openldap:
+              enabled: false
             minioVolumeSize: 20Gi
-            etcdVolumeSize: 20Gi
             openldapVolumeSize: 2Gi
             redisVolumSize: 2Gi
+            monitoring:
+              endpoint: http://prometheus-operated.kubesphere-monitoring-system.svc:9090
             es:   # Storage backend for logging, events and auditing.
               elasticsearchMasterReplicas: 1   # total number of master nodes, it's not allowed to use even number
               elasticsearchDataReplicas: 1     # total number of data nodes.
               elasticsearchMasterVolumeSize: 4Gi   # Volume size of Elasticsearch master nodes.
               elasticsearchDataVolumeSize: 20Gi    # Volume size of Elasticsearch data nodes.
               logMaxAge: 7                     # Log retention time in built-in Elasticsearch, it is 7 days by default.
-              elkPrefix: logstash 
+              elkPrefix: logstash
+              basicAuth:
+                enabled: false
+                username: ""
+                password: ""
+              externalElasticsearchUrl: ""
+              externalElasticsearchPort: ""
           console:
             enableMultiLogin: true  # enable/disable multi login
             port: 30880
@@ -403,24 +450,58 @@ Resources:
               replicas: 2
           logging:
             enabled: ${Logging}
-            logsidecarReplicas: 2
+            logsidecar:
+              enabled: true
+              replicas: 2
           metrics_server:
             enabled: ${MetricsServer}
           monitoring:
+            storageClass: ""
             prometheusReplicas: 1
             prometheusMemoryRequest: 400Mi
             prometheusVolumeSize: 20Gi
             alertmanagerReplicas: 1
           multicluster:
             clusterRole: ${Multicluster}  # host | member | none
-          networkpolicy:
-            enabled: ${Networkpolicy}
-          notification:
-            enabled: ${Notification}
+          network:
+            networkpolicy:
+              enabled: ${Networkpolicy}
+            ippool:
+              type: none
+            topology:
+              type: none
           openpitrix:
-            enabled: ${Openpitrix}
+            store:
+              enabled: ${Openpitrix}
           servicemesh:
             enabled: ${Servicemesh}
+          kubeedge:
+            enabled: ${Kubeedge}
+            cloudCore:
+              nodeSelector: {"node-role.kubernetes.io/worker": ""}
+              tolerations: []
+              cloudhubPort: "10000"
+              cloudhubQuicPort: "10001"
+              cloudhubHttpsPort: "10002"
+              cloudstreamPort: "10003"
+              tunnelPort: "10004"
+              cloudHub:
+                advertiseAddress: # At least a public IP Address or an IP which can be accessed by edge nodes must be provided
+                  - ""            # Causion!: Leave this entry to empty will cause CloudCore to exit abnormally once KubeEdge is enabled.
+                nodeLimit: "100"
+              service:
+                cloudhubNodePort: "30000"
+                cloudhubQuicNodePort: "30001"
+                cloudhubHttpsNodePort: "30002"
+                cloudstreamNodePort: "30003"
+                tunnelNodePort: "30004"
+            edgeWatcher:
+              nodeSelector: {"node-role.kubernetes.io/worker": ""}
+              tolerations: []
+              edgeWatcherAgent:
+                nodeSelector: {"node-role.kubernetes.io/worker": ""}
+                tolerations: []
+
   KubeSphereService:
     DependsOn: KubesphereClusterConfiguration
     Type: "Custom::KubeManifest"
@@ -440,7 +521,7 @@ Resources:
           labels:
             app: ks-console
             tier: frontend
-            version: v3.0.0
+            version: v3.1.0
           name: ks-console
           namespace: kubesphere-system
         spec:
@@ -456,7 +537,7 @@ Resources:
           selector:
             app: ks-console
             tier: frontend
-            version: v3.0.0
+            version: v3.1.0
           sessionAffinity: None
           type: LoadBalancer
   KubeSphereConsole:
@@ -598,6 +679,169 @@ Resources:
         spec:
           email: admin@kubesphere.io
           password: ${KubeSphereConsolePassword}
+  GlobalRoleBinding:
+    DependsOn: KubeSphereUser
+    Type: "Custom::KubeManifest"
+    Version: '1.0'
+    Properties:
+      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
+      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
+      # context for KMS to use when decrypting the file
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      ClusterName: !Ref KubeClusterName
+      # Kubernetes manifest
+      Manifest: !Sub |
+        apiVersion: apiextensions.k8s.io/v1
+        kind: CustomResourceDefinition
+        metadata:
+          annotations:
+            controller-gen.kubebuilder.io/version: (devel)
+          creationTimestamp: null
+          name: globalrolebindings.iam.kubesphere.io
+        spec:
+          group: iam.kubesphere.io
+          names:
+            categories:
+              - iam
+            kind: GlobalRoleBinding
+            listKind: GlobalRoleBindingList
+            plural: globalrolebindings
+            singular: globalrolebinding
+          scope: Cluster
+          versions:
+            - name: v1alpha2
+              schema:
+                openAPIV3Schema:
+                  description: GlobalRoleBinding is the Schema for the globalrolebindings API
+                  properties:
+                    apiVersion:
+                      description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+                      type: string
+                    kind:
+                      description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+                      type: string
+                    metadata:
+                      type: object
+                    roleRef:
+                      description: RoleRef can only reference a GlobalRole. If the RoleRef cannot be resolved, the Authorizer must return an error.
+                      properties:
+                        apiGroup:
+                          description: APIGroup is the group for the resource being referenced
+                          type: string
+                        kind:
+                          description: Kind is the type of resource being referenced
+                          type: string
+                        name:
+                          description: Name is the name of resource being referenced
+                          type: string
+                      required:
+                        - apiGroup
+                        - kind
+                        - name
+                      type: object
+                    subjects:
+                      description: Subjects holds references to the objects the role applies to.
+                      items:
+                        description: Subject contains a reference to the object or user identities a role binding applies to.  This can either hold a direct API object reference, or a value for non-objects such as user and group names.
+                        properties:
+                          apiGroup:
+                            description: APIGroup holds the API group of the referenced subject. Defaults to "" for ServiceAccount subjects. Defaults to "rbac.authorization.k8s.io" for User and Group subjects.
+                            type: string
+                          kind:
+                            description: Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount". If the Authorizer does not recognized the kind value, the Authorizer should report an error.
+                            type: string
+                          name:
+                            description: Name of the object being referenced.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty the Authorizer should report an error.
+                            type: string
+                        required:
+                          - kind
+                          - name
+                        type: object
+                      type: array
+                  required:
+                    - roleRef
+                  type: object
+              served: true
+              storage: true
+        status:
+          acceptedNames:
+            kind: ""
+            plural: ""
+          conditions: []
+          storedVersions: []
+
+  KubeSphereServiceAccount:
+    DependsOn: KubeSphereUser
+    Type: "Custom::KubeManifest"
+    Version: '1.0'
+    Properties:
+      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
+      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
+      # context for KMS to use when decrypting the file
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      ClusterName: !Ref KubeClusterName
+      # Kubernetes manifest
+      Manifest:
+        apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: kubesphere
+          namespace: kubesphere-system
+  KubeSphereClusterRoleBinding:
+    DependsOn: KubeSphereUser
+    Type: "Custom::KubeManifest"
+    Version: '1.0'
+    Properties:
+      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
+      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
+      # context for KMS to use when decrypting the file
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      ClusterName: !Ref KubeClusterName
+      # Kubernetes manifest
+      Manifest:
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        metadata:
+          name: kubesphere
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: cluster-admin
+        subjects:
+          - kind: ServiceAccount
+            name: kubesphere
+            namespace: kubesphere-system
+  KubeSphereGlobalRoleBinding:
+    DependsOn: GlobalRoleBinding
+    Type: "Custom::KubeManifest"
+    Version: '1.0'
+    Properties:
+      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
+      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
+      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
+      # context for KMS to use when decrypting the file
+      KubeConfigKmsContext: !Ref KubeConfigKmsContext
+      ClusterName: !Ref KubeClusterName
+      # Kubernetes manifest
+      Manifest:
+        apiVersion: iam.kubesphere.io/v1alpha2
+        kind: GlobalRoleBinding
+        metadata:
+          name: pre-registration
+        roleRef:
+          apiGroup: iam.kubesphere.io
+          kind: GlobalRole
+          name: pre-registration
+        subjects:
+          - apiGroup: rbac.authorization.k8s.io
+            kind: Group
+            name: pre-registration
 Outputs:
   KubeSphereConsole:
     Value: !Sub "http://${KubeSphereConsole}"
