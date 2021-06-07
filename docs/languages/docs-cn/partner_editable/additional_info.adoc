@@ -4,7 +4,7 @@
 == 测试部署
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
-. 使用您配置好的密钥对和用户名 `ec2-user` 登录堡垒主机。您可以从 AWS CloudFormation 控制台的*输出*选项卡中获取堡垒主机的 IP 地址。
+. 使用您配置好的密钥对和用户名 `ec2-user` 登录堡垒主机。您可以从 AWS CloudFormation 控制台的 *输出*选项卡中获取堡垒主机的 IP 地址。
 
  ssh -i "~/.ssh/cap.pem" ec2-user@12.23.34.45
 
@@ -19,18 +19,6 @@
 
  $ helm version
 
-* AWS CLI 版本：
-
- $ aws -version
-
-* Cf 版本：
-
- $ cf -version
-
-* Git 版本：
-
- $ git version
-
 [start=3]
 . 通过堡垒主机确认 Amazon EKS 集群的健康状况。使用安装好的 `kubectl` 和 `helm` 命令来确认对环境的访问以及集群和软件包的运行状态。如果日志中输出欢迎信息，则说明安装成功。 
 
@@ -38,12 +26,12 @@
 
     $ kubectl get nodes
 
-    $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
+    $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
 
-    $ kubectl get pod –all-namespaces
+    $ kubectl get pods --all-namespaces
 
 [start=4]
-. 在输出列表中检索生成的 KubeSphere 控制台 URL。在浏览器中访问 KubeSphere 控制台，并使用 `KubeSphereConsolePassword` 定义的管理员账户和密码登录 KubeSphere 控制台。
+. 在堆栈的 *输出*列表中检索生成的 KubeSphere 控制台 URL。在浏览器中访问 KubeSphere 控制台，并使用 `KubeSphereConsolePassword` 定义的管理员账户和密码登录 KubeSphere 控制台。
 
 
 [#KubeSphereLogin1]
@@ -64,24 +52,24 @@ image::../images/image5.png[Architecture,width=648,height=439]
 
 在 Amazon EKS 集群上运行 KubeSphere 容器平台的最佳配置要求至少有一个工作节点，该节点至少有 16GiB RAM 和 4 个 CPU。建议您启用这些可插拔组件，以体验 KubeSphere 提供的全栈特性和功能。如果 KubeSphere 以最小化安装，您仍然可以通过编辑集群配置来启用可插拔组件，如下所示：
 
-使用管理员账户访问*集群管理*。选择 EKS 集群，并从左侧菜单中选择*自定义资源 CRD*，搜索 *ClusterConfiguration*。
+使用管理员账户访问 *集群管理*。选择 EKS 集群，并从左侧菜单中选择 *自定义资源 CRD*，搜索 *ClusterConfiguration*。
 
 
 
 image::../images/image6.png[Architecture,width=648,height=439]
 
-选择 *ClusterConfiguration* 资源页，点击列表右侧的 *···*，选择*编辑配置文件*。
+选择 *ClusterConfiguration* 资源页，点击列表右侧的 *···*，选择 *编辑配置文件*。
 
 image::../images/image7.png[Architecture,width=648,height=439]
 
 
-下拉至 *spec* 部分，将您想要启用的可插拔组件从 *false* 更改为 *true*。最后，选择*更新*来保存您的更改，后端会自动开始安装。
+下拉至 *spec* 部分，将您想要启用的可插拔组件从 *false* 更改为 *true*。最后，选择 *更新*来保存您的更改，后端会自动开始安装。
 
 image::../images/image8.png[Architecture,width=648,height=439]
 
-从*工具箱*（**右下角**）打开 *Web kubectl*，查看安装日志：
+从 *工具箱*（**右下角**）打开 *Web kubectl*，查看安装日志：
 
- $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
+ $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
 
 如果您在输出日志中看到欢迎信息，可插拔组件便可供使用。
 

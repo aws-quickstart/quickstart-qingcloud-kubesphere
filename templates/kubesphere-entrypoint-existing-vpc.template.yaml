@@ -331,7 +331,7 @@ Parameters:
   ConfigSetName:
     Type: String
     Default: ""
-    Description: 'Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter.'
+    Description: 'Name for the configuration set. This applies if you launched the advanced configuration stack. The name must match the "ConfigSetName" parameter. The parameter will be used to create EKS resources. Default: t2.micro.'
   PerAccountSharedResources:
     Type: String
     AllowedValues: ['AutoDetect', 'Yes', 'No']

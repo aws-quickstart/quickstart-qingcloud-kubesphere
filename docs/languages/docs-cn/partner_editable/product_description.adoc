@@ -11,6 +11,7 @@ KubeSphere 是一个多租户企业级容器平台，拥有全栈的自动化运
 * DevOps（基于 https://www.jenkins.io/[Jenkins^] 的持续集成和持续交付）
 * 应用程序生命周期管理
 * 应用商店
+* 边缘计算（基于 https://kubeedge.io/zh/[KubeEdge^]）
 * 丰富的可观察性功能，包括监控、日志、审计、告警和通知
 * 服务网格（基于 https://istio.io/[Istio^] 和 https://www.jaegertracing.io/[Jaeger^]）
 * 企业级多租户
