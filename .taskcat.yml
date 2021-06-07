@@ -34,6 +34,7 @@ tests:
       Auditing: 'false'
       MetricsServer: 'true'
       Networkpolicy: 'false'
+      Kubeedge: 'false'
     regions:
     - us-east-1
     - us-west-2

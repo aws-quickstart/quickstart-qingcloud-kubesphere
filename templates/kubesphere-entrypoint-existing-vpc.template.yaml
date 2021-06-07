@@ -8,7 +8,7 @@ Metadata:
       - Openpitrix
       - Devops
       - Servicemesh
-      - Notification
+      - Kubeedge
       - Alerting
       - Auditing
       - Logging
@@ -57,7 +57,7 @@ Metadata:
       - Openpitrix
       - Devops
       - Servicemesh
-      - Notification
+      - Kubeedge
       - Alerting
       - Auditing
       - Logging
@@ -112,8 +112,8 @@ Metadata:
         default: Devops
       Servicemesh:
         default: Servicemesh
-      Notification:
-        default: Notification
+      Kubeedge:
+        default: Kubeedge
       Alerting:
         default: Alerting
       Logging:
@@ -275,8 +275,8 @@ Parameters:
     NoEcho: True
   Openpitrix:
     Type: String
-    AllowedValues: ['true', 'false']
-    Default: 'false'
+    AllowedValues: [true, false]
+    Default: false
     Description: '(Optional) An application store to package, deploy, and manage cloud-native applications in a multicloud environment.'
   Devops:
     Type: String
@@ -288,11 +288,11 @@ Parameters:
     AllowedValues: [true, false]
     Default: false
     Description: '(Optional) Provides resource-level management, observability, and tracing for distributed microservice applications. It also provides visualization for traffic topology.'
-  Notification:
+  Kubeedge:
     Type: String
     AllowedValues: [true, false]
     Default: false
-    Description: '(Optional) Sends alert messages to responders via email, Slack, WeChat, etc.'
+    Description: '(Optional) Add edge nodes to your cluster and run workloads on them.'
   Alerting:
     Type: String
     AllowedValues: [true, false]
@@ -416,7 +416,7 @@ Resources:
         Openpitrix: !Ref Openpitrix
         Devops: !Ref Devops
         Servicemesh: !Ref Servicemesh
-        Notification: !Ref Notification
+        Kubeedge: !Ref Kubeedge
         Alerting: !Ref Alerting
         Logging: !Ref Logging
         Auditing: !Ref Auditing
