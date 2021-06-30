@@ -11,6 +11,7 @@ This Quick Start is powered by AWS CloudFormation templates that help IAM users 
 * DevOps (continuous integration and continuous delivery based on https://www.jenkins.io/[Jenkins^])
 * Application lifecycle management
 * An app store
+* Edge computing (based on https://kubeedge.io/en/[KubeEdge^])
 * Rich observability for monitoring, logging, auditing, alerting, and notifying
 * A service mesh for distributed microservices (based on https://istio.io/[Istio^] and https://www.jaegertracing.io/[Jaeger^])
 * Enterprise multitenancy

@@ -38,8 +38,8 @@ WARNING: 如果您将 {partner-product-short-name} 部署至现有 VPC 中，请
 NOTE: 此部署包括 Amazon EFS，目前并非所有 AWS 区域都支持 Amazon EFS。有关当前支持 Amazon EFS 的区域列表，请参见 https://docs.aws.amazon.com/general/latest/gr/elasticfilesystem.html[Amazon Elastic File System endpoints and quotas^]。
 
 [start=3]
-. 在*创建堆栈*页面，保持模板的默认设置，然后选择*下一步*。
-. 在*指定堆栈详细信息*页面，根据需要更改堆栈名称，查看模板的各项参数并为需要输入的参数提供值。对于所有其他参数，查看默认设置，并根据需要进行自定义。
+. 在 *创建堆栈*页面，保持模板的默认设置，然后选择 *下一步*。
+. 在 *指定堆栈详细信息*页面，根据需要更改堆栈名称，查看模板的各项参数并为需要输入的参数提供值。对于所有其他参数，查看默认设置，并根据需要进行自定义。
 
 //In the following tables, parameters are listed by category and described separately for the two deployment options:
 
