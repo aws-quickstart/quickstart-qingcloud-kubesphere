@@ -19,18 +19,6 @@
 
  $ helm version
 
-* AWS CLI version:
-
- $ aws -version
-
-* Cf version:
-
- $ cf -version
-
-* Git version
-
- $ git version
-
 [start=3]
 . Verify the health of the Amazon EKS cluster through the bastion host. Use the installed `kubectl` and `helm` commands to verify access to the environment and the running state of the cluster and packages. The installation was successful if you see the welcome-information outputs in the log.
 
@@ -38,7 +26,9 @@
 
     $ kubectl get nodes
 
-    $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
+    $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
+
+    $ kubectl get pods --all-namespaces
 
 [start=4]
 . Retrieve the generated URL of the KubeSphere console from the outputs list. Access it in your browser, and log in to the KubeSphere console using the administrator account and password defined by `KubeSphereConsolePassword`.
@@ -78,7 +68,7 @@ image::../images/image8.png[Architecture,width=648,height=439]
 
 Open the *Web kubectl* from *Toolbox* (**bottom right**), and inspect the installation logs:
 
- $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='\{.items[0].metadata.name}') -f
+ $ kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
 
 When you see welcome information in the output logs, the pluggable components are ready to use.
 

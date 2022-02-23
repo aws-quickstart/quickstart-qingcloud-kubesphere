@@ -27,12 +27,12 @@ include::../{generateddir}/parameters/index.adoc[]
 endif::parameters_as_appendix[]
 
 [start=5]
-. 在*配置堆栈选项*页面，您可以为堆栈中的资源 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html[指定标签^]（键值对）并 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html[设置高级选项^]。操作完成后，选择*下一步*。
-. 在*审核*页面，审核并确认模板设置。勾选*功能*下的两个复选框，以确认该模板创建 IAM 资源并可能需要自动扩展宏的能力。
-. 选择*创建堆栈*来部署堆栈。
+. 在 *配置堆栈选项*页面，您可以为堆栈中的资源 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html[指定标签^]（键值对）并 https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/cfn-console-add-tags.html[设置高级选项^]。操作完成后，选择*下一步*。
+. 在 *审核*页面，审核并确认模板设置。勾选 *功能*下的两个复选框，以确认该模板创建 IAM 资源并可能需要自动扩展宏的能力。
+. 选择 *创建堆栈*来部署堆栈。
 ifndef::partner-product-short-name[. 监控该堆栈的状态。当状态为 *CREATE_COMPLETE* 时，{partner-product-name} 部署准备就绪。]
 ifdef::partner-product-short-name[. 监控该堆栈的状态。当状态为 *CREATE_COMPLETE* 时，{partner-product-short-name} 部署准备就绪。]
-. 如 <<cfn_outputs>> 所示，使用堆栈*输出*选项卡下显示的值来查看创建好的资源。
+. 如 <<cfn_outputs>> 所示，使用堆栈 *输出*选项卡下显示的值来查看创建好的资源。
 
 :xrefstyle: short
 [#cfn_outputs]

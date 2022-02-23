@@ -6,23 +6,15 @@ Parameters:
     Default: "EKSQuickStart"
   KubeClusterName:
     Type: String
-  KubeSphereConsolePassword:
-    Type: String
-  Openpitrix:
-    Type: String
-  Devops:
-    Type: String
-  Servicemesh:
-    Type: String
-  Kubeedge:
-    Type: String
   Alerting:
-    Type: String
-  Logging:
     Type: String
   Auditing:
     Type: String
+  Devops:
+    Type: String
   Events:
+    Type: String
+  Logging:
     Type: String
   MetricsServer:
     Type: String
@@ -30,6 +22,13 @@ Parameters:
     Type: String
   Networkpolicy:
     Type: String
+  Openpitrix:
+    Type: String
+  Servicemesh:
+    Type: String
+  Kubeedge:
+    Type: String
+
 Resources:
   KubeSphereCRD:
     Type: "Custom::KubeManifest"
@@ -43,7 +42,7 @@ Resources:
       ClusterName: !Ref KubeClusterName
       # Kubernetes manifest
       Manifest:
-        apiVersion: apiextensions.k8s.io/v1beta1
+        apiVersion: apiextensions.k8s.io/v1
         kind: CustomResourceDefinition
         metadata:
           name: clusterconfigurations.installer.kubesphere.io
@@ -53,6 +52,16 @@ Resources:
           - name: v1alpha1
             served: true
             storage: true
+            schema:
+              openAPIV3Schema:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    x-kubernetes-preserve-unknown-fields: true
+                  status:
+                    type: object
+                    x-kubernetes-preserve-unknown-fields: true
           scope: Namespaced
           names:
             plural: clusterconfigurations
@@ -113,199 +122,210 @@ Resources:
         metadata:
           name: ks-installer
         rules:
-        - apiGroups:
-          - ""
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - apps
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - extensions
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - batch
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - rbac.authorization.k8s.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - apiregistration.k8s.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - apiextensions.k8s.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - tenant.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - certificates.k8s.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - devops.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - monitoring.coreos.com
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - logging.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - jaegertracing.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - storage.k8s.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - admissionregistration.k8s.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - policy
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - autoscaling
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - networking.istio.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - config.istio.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - iam.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - notification.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - auditing.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - events.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - core.kubefed.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - installer.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-          - storage.kubesphere.io
-          resources:
-          - '*'
-          verbs:
-          - '*'
-        - apiGroups:
-            - security.istio.io
-          resources:
-            - '*'
-          verbs:
-            - '*'
-        - apiGroups:
-            - monitoring.kiali.io
-          resources:
-            - '*'
-          verbs:
-            - '*'
-        - apiGroups:
-            - kiali.io
-          resources:
-            - '*'
-          verbs:
-            - '*'
-        - apiGroups:
-            - networking.k8s.io
-          resources:
-            - '*'
-          verbs:
-            - '*'
-        - apiGroups:
-            - kubeedge.kubesphere.io
-          resources:
-            - '*'
-          verbs:
-            - '*'
-        - apiGroups:
-            - types.kubefed.io
-          resources:
-            - '*'
-          verbs:
-            - '*'
-
+          - apiGroups:
+              - ""
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - apps
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - extensions
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - batch
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - rbac.authorization.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - apiregistration.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - apiextensions.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - tenant.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - certificates.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - devops.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - monitoring.coreos.com
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - logging.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - jaegertracing.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - storage.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - admissionregistration.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - policy
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - autoscaling
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - networking.istio.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - config.istio.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - iam.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - notification.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - auditing.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - events.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - core.kubefed.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - installer.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - storage.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - security.istio.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - monitoring.kiali.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - kiali.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - networking.k8s.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - kubeedge.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - types.kubefed.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - monitoring.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
+          - apiGroups:
+              - application.kubesphere.io
+            resources:
+              - '*'
+            verbs:
+              - '*'
   KSInstallerClusterRoleBinding:
     DependsOn: KSInstallerClusterRole
     Type: "Custom::KubeManifest"
@@ -330,7 +350,7 @@ Resources:
         roleRef:
           kind: ClusterRole
           name: ks-installer
-          apiGroup: rbac.authorization.k8s.io  
+          apiGroup: rbac.authorization.k8s.io
   KubeSphereDeployment:
     DependsOn: KubeSphereNamespace
     Type: "Custom::KubeManifest"
@@ -363,17 +383,25 @@ Resources:
             spec:
               serviceAccountName: ks-installer
               containers:
-              - name: installer
-                image: kubesphere/ks-installer:v3.1.0
-                imagePullPolicy: "Always"   
-                volumeMounts:
-                - mountPath: /etc/localtime
-                  name: host-time
+                - name: installer
+                  image: kubesphere/ks-installer:v3.2.1
+                  imagePullPolicy: "Always"
+                  resources:
+                    limits:
+                      cpu: "1"
+                      memory: 1Gi
+                    requests:
+                      cpu: 20m
+                      memory: 100Mi
+                  volumeMounts:
+                    - mountPath: /etc/localtime
+                      name: host-time
+                      readOnly: true
               volumes:
-              - hostPath:
-                  path: /etc/localtime
-                  type: ""
-                name: host-time
+                - hostPath:
+                    path: /etc/localtime
+                    type: ""
+                  name: host-time
   KubesphereClusterConfiguration:
     DependsOn: KubeSphereDeployment
     Type: "Custom::KubeManifest"
@@ -386,14 +414,14 @@ Resources:
       KubeConfigKmsContext: !Ref KubeConfigKmsContext
       ClusterName: !Ref KubeClusterName
       # Kubernetes manifest
-      Manifest: !Sub |
+      Manifest:
         apiVersion: installer.kubesphere.io/v1alpha1
         kind: ClusterConfiguration
         metadata:
           name: ks-installer
           namespace: kubesphere-system
           labels:
-            version: v3.1.0
+            version: v3.2.1
         spec:
           persistence:
             storageClass: ""
@@ -406,21 +434,30 @@ Resources:
             port: 2379
             tlsEnable: true
           common:
+            core:
+              console:
+                enableMultiLogin: true
+                port: 30880
+                type: LoadBalancer
             redis:
               enabled: false
+              volumeSize: 2Gi
             openldap:
               enabled: false
-            minioVolumeSize: 20Gi
-            openldapVolumeSize: 2Gi
-            redisVolumSize: 2Gi
+              volumeSize: 2Gi
+            minio:
+              volumeSize: 20Gi
             monitoring:
               endpoint: http://prometheus-operated.kubesphere-monitoring-system.svc:9090
-            es:   # Storage backend for logging, events and auditing.
-              elasticsearchMasterReplicas: 1   # total number of master nodes, it's not allowed to use even number
-              elasticsearchDataReplicas: 1     # total number of data nodes.
-              elasticsearchMasterVolumeSize: 4Gi   # Volume size of Elasticsearch master nodes.
-              elasticsearchDataVolumeSize: 20Gi    # Volume size of Elasticsearch data nodes.
-              logMaxAge: 7                     # Log retention time in built-in Elasticsearch, it is 7 days by default.
+              GPUMonitoring:
+                enabled: false
+            gpu:
+              kinds:
+                - resourceName: "nvidia.com/gpu"
+                  resourceType: "GPU"
+                  default: true
+            es:
+              logMaxAge: 7
               elkPrefix: logstash
               basicAuth:
                 enabled: false
@@ -428,9 +465,6 @@ Resources:
                 password: ""
               externalElasticsearchUrl: ""
               externalElasticsearchPort: ""
-          console:
-            enableMultiLogin: true  # enable/disable multi login
-            port: 30880
           alerting:
             enabled: ${Alerting}
           auditing:
@@ -445,11 +479,9 @@ Resources:
             jenkinsJavaOpts_MaxRAM: 2g
           events:
             enabled: ${Events}
-            ruler:
-              enabled: true
-              replicas: 2
           logging:
             enabled: ${Logging}
+            containerruntime: docker
             logsidecar:
               enabled: true
               replicas: 2
@@ -457,12 +489,11 @@ Resources:
             enabled: ${MetricsServer}
           monitoring:
             storageClass: ""
-            prometheusReplicas: 1
-            prometheusMemoryRequest: 400Mi
-            prometheusVolumeSize: 20Gi
-            alertmanagerReplicas: 1
+            gpu:
+              nvidia_dcgm_exporter:
+                enabled: false
           multicluster:
-            clusterRole: ${Multicluster}  # host | member | none
+            clusterRole: ${Multicluster}
           network:
             networkpolicy:
               enabled: ${Networkpolicy}
@@ -486,8 +517,8 @@ Resources:
               cloudstreamPort: "10003"
               tunnelPort: "10004"
               cloudHub:
-                advertiseAddress: # At least a public IP Address or an IP which can be accessed by edge nodes must be provided
-                  - ""            # Causion!: Leave this entry to empty will cause CloudCore to exit abnormally once KubeEdge is enabled.
+                advertiseAddress:
+                  - ""
                 nodeLimit: "100"
               service:
                 cloudhubNodePort: "30000"
@@ -501,7 +532,6 @@ Resources:
               edgeWatcherAgent:
                 nodeSelector: {"node-role.kubernetes.io/worker": ""}
                 tolerations: []
-
   KubeSphereService:
     DependsOn: KubesphereClusterConfiguration
     Type: "Custom::KubeManifest"
@@ -518,7 +548,11 @@ Resources:
         apiVersion: v1
         kind: Service
         metadata:
+          annotations:
+            meta.helm.sh/release-name: ks-core
+            meta.helm.sh/release-namespace: kubesphere-system
           labels:
+            app.kubernetes.io/managed-by: Helm
             app: ks-console
             tier: frontend
             version: v3.1.0
@@ -526,18 +560,14 @@ Resources:
           namespace: kubesphere-system
         spec:
           ports:
-          - name: nginx
-            port: 80
-            protocol: TCP
-            targetPort: 8000
-          - name: nginx-8000
-            port: 8000
-            protocol: TCP
-            targetPort: 8000
+            - name: nginx
+              port: 80
+              protocol: TCP
+              targetPort: 8000
+              nodePort: 30880
           selector:
             app: ks-console
             tier: frontend
-            version: v3.1.0
           sessionAffinity: None
           type: LoadBalancer
   KubeSphereConsole:
@@ -551,297 +581,7 @@ Resources:
       Namespace: kubesphere-system
       Name: 'svc/ks-console'
       JsonPath: '{.status.loadBalancer.ingress[0].hostname}'  
-  KubeSphereUser:
-    DependsOn: KubeSphereNamespace
-    Type: "Custom::KubeManifest"
-    Version: '1.0'
-    Properties:
-      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      # context for KMS to use when decrypting the file
-      KubeConfigKmsContext: !Ref KubeConfigKmsContext
-      ClusterName: !Ref KubeClusterName
-      Manifest:
-        apiVersion: apiextensions.k8s.io/v1beta1
-        kind: CustomResourceDefinition
-        metadata:
-          annotations:
-            controller-gen.kubebuilder.io/version: (devel)
-          name: users.iam.kubesphere.io
-        spec:
-          additionalPrinterColumns:
-          - JSONPath: .spec.email
-            name: Email
-            type: string
-          - JSONPath: .status.state
-            name: Status
-            type: string
-          group: iam.kubesphere.io
-          names:
-            categories:
-            - iam
-            kind: User
-            listKind: UserList
-            plural: users
-            singular: user
-          scope: Cluster
-          subresources: {}
-          validation:
-            openAPIV3Schema:
-              description: User is the Schema for the users API
-              properties:
-                apiVersion:
-                  description: 'APIVersion defines the versioned schema of this representation
-                    of an object. Servers should convert recognized schemas to the latest
-                    internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-                  type: string
-                kind:
-                  description: 'Kind is a string value representing the REST resource this
-                    object represents. Servers may infer this from the endpoint the client
-                    submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-                  type: string
-                metadata:
-                  description: Standard object's metadata.
-                  type: object
-                spec:
-                  description: UserSpec defines the desired state of User
-                  properties:
-                    description:
-                      description: Description of the user.
-                      type: string
-                    displayName:
-                      type: string
-                    email:
-                      description: Unique email address(https://www.ietf.org/rfc/rfc5322.txt).
-                      type: string
-                    groups:
-                      items:
-                        type: string
-                      type: array
-                    lang:
-                      description: The preferred written or spoken language for the user.
-                      type: string
-                    password:
-                      description: password will be encrypted by mutating admission webhook
-                      type: string
-                  required:
-                  - email
-                  type: object
-                status:
-                  description: UserStatus defines the observed state of User
-                  properties:
-                    lastLoginTime:
-                      description: Last login attempt timestamp
-                      format: date-time
-                      type: string
-                    lastTransitionTime:
-                      format: date-time
-                      type: string
-                    reason:
-                      type: string
-                    state:
-                      description: The user status
-                      type: string
-                  type: object
-              required:
-              - spec
-              type: object
-          version: v1alpha2
-          versions:
-          - name: v1alpha2
-            served: true
-            storage: true
-        status:
-          acceptedNames:
-            kind: ""
-            plural: ""
-          conditions: []
-          storedVersions: []
 
-  KubeSphereUpdatePassword:
-    DependsOn: KubeSphereUser
-    Type: "Custom::KubeManifest"
-    Version: '1.0'
-    Properties:
-      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      # context for KMS to use when decrypting the file
-      KubeConfigKmsContext: !Ref KubeConfigKmsContext
-      ClusterName: !Ref KubeClusterName
-      # Kubernetes manifest
-      Manifest: !Sub |
-        apiVersion: iam.kubesphere.io/v1alpha2
-        kind: User
-        metadata:
-          name: admin
-        spec:
-          email: admin@kubesphere.io
-          password: ${KubeSphereConsolePassword}
-  GlobalRoleBinding:
-    DependsOn: KubeSphereUser
-    Type: "Custom::KubeManifest"
-    Version: '1.0'
-    Properties:
-      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      # context for KMS to use when decrypting the file
-      KubeConfigKmsContext: !Ref KubeConfigKmsContext
-      ClusterName: !Ref KubeClusterName
-      # Kubernetes manifest
-      Manifest: !Sub |
-        apiVersion: apiextensions.k8s.io/v1
-        kind: CustomResourceDefinition
-        metadata:
-          annotations:
-            controller-gen.kubebuilder.io/version: (devel)
-          creationTimestamp: null
-          name: globalrolebindings.iam.kubesphere.io
-        spec:
-          group: iam.kubesphere.io
-          names:
-            categories:
-              - iam
-            kind: GlobalRoleBinding
-            listKind: GlobalRoleBindingList
-            plural: globalrolebindings
-            singular: globalrolebinding
-          scope: Cluster
-          versions:
-            - name: v1alpha2
-              schema:
-                openAPIV3Schema:
-                  description: GlobalRoleBinding is the Schema for the globalrolebindings API
-                  properties:
-                    apiVersion:
-                      description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-                      type: string
-                    kind:
-                      description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-                      type: string
-                    metadata:
-                      type: object
-                    roleRef:
-                      description: RoleRef can only reference a GlobalRole. If the RoleRef cannot be resolved, the Authorizer must return an error.
-                      properties:
-                        apiGroup:
-                          description: APIGroup is the group for the resource being referenced
-                          type: string
-                        kind:
-                          description: Kind is the type of resource being referenced
-                          type: string
-                        name:
-                          description: Name is the name of resource being referenced
-                          type: string
-                      required:
-                        - apiGroup
-                        - kind
-                        - name
-                      type: object
-                    subjects:
-                      description: Subjects holds references to the objects the role applies to.
-                      items:
-                        description: Subject contains a reference to the object or user identities a role binding applies to.  This can either hold a direct API object reference, or a value for non-objects such as user and group names.
-                        properties:
-                          apiGroup:
-                            description: APIGroup holds the API group of the referenced subject. Defaults to "" for ServiceAccount subjects. Defaults to "rbac.authorization.k8s.io" for User and Group subjects.
-                            type: string
-                          kind:
-                            description: Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount". If the Authorizer does not recognized the kind value, the Authorizer should report an error.
-                            type: string
-                          name:
-                            description: Name of the object being referenced.
-                            type: string
-                          namespace:
-                            description: Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty the Authorizer should report an error.
-                            type: string
-                        required:
-                          - kind
-                          - name
-                        type: object
-                      type: array
-                  required:
-                    - roleRef
-                  type: object
-              served: true
-              storage: true
-        status:
-          acceptedNames:
-            kind: ""
-            plural: ""
-          conditions: []
-          storedVersions: []
-
-  KubeSphereServiceAccount:
-    DependsOn: KubeSphereUser
-    Type: "Custom::KubeManifest"
-    Version: '1.0'
-    Properties:
-      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      # context for KMS to use when decrypting the file
-      KubeConfigKmsContext: !Ref KubeConfigKmsContext
-      ClusterName: !Ref KubeClusterName
-      # Kubernetes manifest
-      Manifest:
-        apiVersion: v1
-        kind: ServiceAccount
-        metadata:
-          name: kubesphere
-          namespace: kubesphere-system
-  KubeSphereClusterRoleBinding:
-    DependsOn: KubeSphereUser
-    Type: "Custom::KubeManifest"
-    Version: '1.0'
-    Properties:
-      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      # context for KMS to use when decrypting the file
-      KubeConfigKmsContext: !Ref KubeConfigKmsContext
-      ClusterName: !Ref KubeClusterName
-      # Kubernetes manifest
-      Manifest:
-        apiVersion: rbac.authorization.k8s.io/v1
-        kind: ClusterRoleBinding
-        metadata:
-          name: kubesphere
-        roleRef:
-          apiGroup: rbac.authorization.k8s.io
-          kind: ClusterRole
-          name: cluster-admin
-        subjects:
-          - kind: ServiceAccount
-            name: kubesphere
-            namespace: kubesphere-system
-  KubeSphereGlobalRoleBinding:
-    DependsOn: GlobalRoleBinding
-    Type: "Custom::KubeManifest"
-    Version: '1.0'
-    Properties:
-      # The lambda function that executes the manifest against the cluster. This is created in one of the parent stacks
-      ServiceToken: !Sub "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:EKS-QuickStart-KubeManifest-${KubeClusterName}"
-      # S3 path to the encrypted config file eg. s3://my-bucket/kube/config.encrypted
-      # context for KMS to use when decrypting the file
-      KubeConfigKmsContext: !Ref KubeConfigKmsContext
-      ClusterName: !Ref KubeClusterName
-      # Kubernetes manifest
-      Manifest:
-        apiVersion: iam.kubesphere.io/v1alpha2
-        kind: GlobalRoleBinding
-        metadata:
-          name: pre-registration
-        roleRef:
-          apiGroup: iam.kubesphere.io
-          kind: GlobalRole
-          name: pre-registration
-        subjects:
-          - apiGroup: rbac.authorization.k8s.io
-            kind: Group
-            name: pre-registration
 Outputs:
   KubeSphereConsole:
     Value: !Sub "http://${KubeSphereConsole}"
@@ -849,5 +589,5 @@ Outputs:
     Value: !Sub "http://${KubeSphereConsole}:8000"
   KubeSphereConsoleLoginUser:
     Value: admin
-  KubeSphereConsoleLoginPassword:
-    Value: !Sub ${KubeSphereConsolePassword}
+  KubeSphereConsoleDefaultAdminLoginPassword:
+    Value: "P@88w0rd"
