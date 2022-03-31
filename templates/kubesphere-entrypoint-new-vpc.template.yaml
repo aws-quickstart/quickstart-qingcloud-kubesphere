@@ -333,14 +333,14 @@ Parameters:
     Description: '(Optional) Users can install "MetricsServer" to enable HPA (Horizontal Pod Autoscaler), which automatically scales the number of pods, deployments, or stateful sets based on observed CPU utilization.'
   PerAccountSharedResources:
     Type: String
-    AllowedValues: ['AutoDetect', 'Yes', 'No']
+    AllowedValues: [ 'AutoDetect', 'Yes', 'No' ]
     Default: 'AutoDetect'
-    Description: Choose "No" if you already deployed another EKS Quick Start stack in this AWS account.
+    Description: Choose "No" if you already deployed another EKS Quick Start stack in your AWS account.
   PerRegionSharedResources:
     Type: String
-    AllowedValues: ['AutoDetect', 'Yes', 'No']
+    AllowedValues: [ 'AutoDetect', 'Yes', 'No' ]
     Default: 'AutoDetect'
-    Description: Choose "No" if you already deployed another EKS Quick Start stack in this Region.
+    Description: Choose "No" if you already deployed another EKS Quick Start stack in your Region.
   ProvisionBastionHost:
     Type: String
     AllowedValues: [ "Enabled", "Disabled" ]
