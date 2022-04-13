@@ -39,5 +39,5 @@ tests:
     - us-east-1
     - us-west-2
     - ca-central-1
-    - cn-northwest-1
+    #- cn-northwest-1
     template: templates/kubesphere-entrypoint-new-vpc.template.yaml
